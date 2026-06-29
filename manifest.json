@@ -1,16 +1,24 @@
 {
-  "name": "Kekcoin Temple",
+  "name": "Kekcoin Temple — $KEK on Solana",
   "short_name": "Kek Temple",
-  "description": "The eternal digital temple for $KEK",
+  "description": "The Temple of Kek. Community-owned $KEK memecoin on Solana — born from 4chan's /s4s/ in 2014. Hold, meme, and praise the eternal frog.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0c0805",
   "theme_color": "#e3b34a",
+  "lang": "en",
+  "categories": ["finance", "entertainment"],
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.85em' font-size='80'%3E%F0%93%82%80%3C/text%3E%3C/svg%3E",
-      "sizes": "any",
-      "type": "image/svg+xml"
+      "src": "favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.jpg",
+      "sizes": "400x400",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
     }
   ]
 }

@@ -7,7 +7,6 @@
     { href: 'rituals.html', label: 'Rituals' },
     { href: 'brotherhood.html', label: 'Brotherhood' },
     { href: 'treasury.html', label: 'Treasury' },
-    { href: 'tools.html', label: 'Tools' },
     { href: 'memes.html', label: 'Memes' }
   ];
 

@@ -3,7 +3,31 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rituals — Kekcoin Temple</title>
+<title>Ritual Chambers &amp; Tools — Kekcoin Temple | Buy $KEK on Solana</title>
+<!-- SEO -->
+<meta name="description" content="Enter the sacred ritual chambers of Kekcoin ($KEK). Swap $KEK on Solana via Jupiter, complete your initiation, forge your temple sigil, and use the Ritual Tools of the faithful." />
+<meta name="keywords" content="buy KEK, buy kekcoin, $KEK Solana swap, kek coin ritual, kekcoin initiation, Temple of Kek, Solana memecoin buy, Jupiter swap KEK, kektemple.com" />
+<meta name="author" content="Kekcoin Temple" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#1a1510" />
+<!-- OpenGraph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Kekcoin Temple" />
+<meta property="og:title" content="Ritual Chambers &amp; Tools — Kekcoin Temple" />
+<meta property="og:description" content="Swap $KEK on Solana, complete your initiation, forge your temple sigil, and use the Ritual Tools of the faithful." />
+<meta property="og:url" content="https://kektemple.com/rituals.html" />
+<meta property="og:image" content="https://kektemple.com/favicon.jpg" />
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="400" />
+<meta property="og:image:alt" content="Kekcoin $KEK — Temple of Kek" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@kekcoin69420" />
+<meta name="twitter:creator" content="@kekcoin69420" />
+<meta name="twitter:title" content="Ritual Chambers &amp; Tools — Kekcoin Temple" />
+<meta name="twitter:description" content="Swap $KEK on Solana, complete your initiation, forge your temple sigil, and use the Ritual Tools of the faithful." />
+<meta name="twitter:image" content="https://kektemple.com/favicon.jpg" />
+<link rel="canonical" href="https://kektemple.com/rituals.html" />
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -83,6 +107,62 @@
     </div>
   </div>
 </section>
+
+<!-- ═══ RITUAL TOOLS ═══════════════════════════════════════════ -->
+<section class="band" id="ritual-tools" style="background:linear-gradient(180deg,var(--stone-900),var(--stone-800));">
+  <div class="wrap">
+    <div class="reveal text-center mb-24">
+      <div class="sec-eyebrow">Sacred Instruments</div>
+      <h2 class="sec-title">Ritual Tools</h2>
+      <div class="divider"><span class="line"></span><span class="coin-mini coin-bg" aria-hidden="true"></span><span class="line r"></span></div>
+      <p style="max-width:520px;margin:12px auto 0;color:var(--parchment-dim);">Generators for the faithful. Names, sigils, moon math, and meme frames worthy of the Temple.</p>
+    </div>
+    <div class="tool-grid reveal">
+      <div class="tool-card">
+        <h3>Temple Name Generator</h3>
+        <p style="font-size:14px;color:var(--parchment-dim);">Receive your ordained title.</p>
+        <button class="btn btn-gold mt-24" id="gen-name-btn">Generate Name</button>
+        <div class="tool-output" id="gen-name-out">Click to receive your title</div>
+      </div>
+
+      <div class="tool-card">
+        <h3>Moon Math Oracle</h3>
+        <p style="font-size:14px;color:var(--parchment-dim);">Absurdist calculations. Not financial advice.</p>
+        <button class="btn btn-gold mt-24" id="gen-moon-btn">Calculate</button>
+        <div class="tool-output" id="gen-moon-out">The oracle awaits</div>
+      </div>
+
+      <div class="tool-card">
+        <h3>Sigil Generator</h3>
+        <p style="font-size:14px;color:var(--parchment-dim);">Personal temple sigil from your name or wallet.</p>
+        <input class="oracle-input" id="gen-sigil-input" type="text" placeholder="Your name or wallet..." style="margin-top:12px;" />
+        <button class="btn btn-gold mt-24" id="gen-sigil-btn">Forge Sigil</button>
+        <div class="tool-output" id="gen-sigil-out">—</div>
+      </div>
+
+      <div class="tool-card">
+        <h3>Meme Frame Maker</h3>
+        <p style="font-size:14px;color:var(--parchment-dim);">Overlay the Temple frame on your offering.</p>
+        <input type="file" id="meme-frame-input" accept="image/*" />
+        <div class="canvas-wrap"><canvas id="meme-frame-canvas" width="600" height="600"></canvas></div>
+        <p style="font-size:12px;color:var(--parchment-dim);margin-top:8px;">Right-click canvas to save image</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="oracle-box reveal">
+      <div class="sec-eyebrow">Bonus Oracle</div>
+      <h2 class="sec-title" style="margin-bottom:20px;">Prophecy Reader</h2>
+      <input class="oracle-input" id="oracle-question" type="text" placeholder="Ask anything..." maxlength="200" />
+      <button class="btn btn-gold" id="oracle-btn">Consult</button>
+      <div class="oracle-result mt-24" id="oracle-result">—</div>
+    </div>
+  </div>
+</section>
+
 </main>
 <div id="temple-footer"></div>
 <script src="assets/config.js"></script>
