@@ -388,36 +388,164 @@
       .catch(function() { /* silently keep seed data on error */ });
   }
 
-  /* ---- Sacred memes ---- */
-  function initMemes() {
-    const gallery = document.getElementById('meme-gallery');
-    if (!gallery) return;
-    let votes = load('kek_meme_votes', {});
+  /* ---- Meme database ---- */
+  function initMemeDatabase() {
+    const grid = document.getElementById('meme-db-grid');
+    if (!grid) return;
 
-    function render() {
-      gallery.innerHTML = D.sacredMemes.map((m, i) => {
-        const v = votes[i] !== undefined ? votes[i] : m.votes;
-        return `<div class="meme-card reveal" data-idx="${i}">
-          <div class="thumb">𓂀</div>
-          <h4>${m.title}</h4>
-          <div class="meta">by ${m.author}</div>
-          <div class="votes">𓂀 ${v} offerings</div>
-          <span class="tag">${m.tag}</span>
-          <div class="mt-24"><button class="btn btn-ghost btn-sm vote-btn" data-idx="${i}">Offer Praise</button></div>
+    const ALL = (D.memeDatabase || []);
+    let filtered = ALL.slice();
+    let activeCat = 'all';
+    let activeSort = 'kek';
+    let searchQuery = '';
+
+    const searchInput = document.getElementById('meme-search');
+    const sortSelect  = document.getElementById('meme-sort');
+    const countEl     = document.getElementById('meme-count');
+    const catBtns     = document.querySelectorAll('#mdb-cats .cat-pill');
+    const modal       = document.getElementById('meme-modal');
+    const modalInner  = document.getElementById('meme-modal-inner');
+
+    const CAT_LABELS = { frog:'KEK / Frog', classic:'Classic', wojak:'Wojak', reaction:'Reaction', crypto:'Crypto', '4chan':'4chan', modern:'Modern' };
+    const TIER_CLASS = { Eternal:'tier-eternal', Ancient:'tier-ancient', Legendary:'tier-legendary', Sacred:'tier-sacred', Modern:'tier-modern' };
+
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+    function kekDots(n) {
+      return Array.from({length:5}).map((_,i)=>`<span class="kek-dot${i<n?' on':''}"></span>`).join('');
+    }
+
+    function applyFilters() {
+      filtered = ALL.filter(m => {
+        if (activeCat !== 'all' && m.cat !== activeCat) return false;
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const hay = [m.title, m.summary, m.desc, ...(m.tags||[])].join(' ').toLowerCase();
+          if (hay.indexOf(q) === -1) return false;
+        }
+        return true;
+      });
+      if (activeSort === 'kek')      filtered.sort((a,b) => b.kek - a.kek);
+      else if (activeSort === 'year-old') filtered.sort((a,b) => (parseInt(a.year)||9999) - (parseInt(b.year)||9999));
+      else if (activeSort === 'year-new') filtered.sort((a,b) => (parseInt(b.year)||0) - (parseInt(a.year)||0));
+      else if (activeSort === 'name')     filtered.sort((a,b) => a.title.localeCompare(b.title));
+      renderGrid();
+    }
+
+    function renderGrid() {
+      if (countEl) countEl.textContent = filtered.length + ' of ' + ALL.length;
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="mdb-empty"><span>𓆏</span><p>No memes match. The void is vast.</p></div>';
+        return;
+      }
+      grid.innerHTML = filtered.map(m => {
+        const media = m.img
+          ? `<img class="mc-img" src="${esc(m.img)}" alt="${esc(m.title)}" loading="lazy" />`
+          : `<div class="mc-icon">${esc(m.icon||'𓂀')}</div>`;
+        const tier = TIER_CLASS[m.tier] || 'tier-modern';
+        return `<div class="meme-card-db reveal" data-id="${esc(m.id)}" tabindex="0" role="button" aria-label="${esc(m.title)}">
+          <div class="mc-top">
+            <span class="mc-cat-badge">${esc(CAT_LABELS[m.cat]||m.cat)}</span>
+            <span class="mc-tier-badge ${tier}">${esc(m.tier)}</span>
+          </div>
+          <div class="mc-media">${media}</div>
+          <div class="mc-body">
+            <h3 class="mc-title">${esc(m.title)}</h3>
+            <div class="mc-meta">${esc(String(m.year))}${m.creator ? ' · '+esc(m.creator) : ''}</div>
+            <p class="mc-summary">${esc(m.summary)}</p>
+            <div class="mc-kek-row">${kekDots(m.kek)}<span class="kek-lbl">KEK</span></div>
+          </div>
         </div>`;
       }).join('');
-      gallery.querySelectorAll('.vote-btn').forEach(btn => {
-        btn.addEventListener('click', e => {
-          e.stopPropagation();
-          const idx = parseInt(btn.dataset.idx, 10);
-          votes[idx] = (votes[idx] !== undefined ? votes[idx] : D.sacredMemes[idx].votes) + 1;
-          store('kek_meme_votes', votes);
-          render();
-          if (window.KEK) KEK.toast('Praise offered 𓂀');
-        });
+
+      grid.querySelectorAll('.meme-card-db').forEach(card => {
+        card.addEventListener('click', () => openModal(card.dataset.id));
+        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(card.dataset.id); });
+      });
+      if (window.KEK) KEK.initReveal();
+    }
+
+    function openModal(id) {
+      const m = ALL.find(x => x.id === id);
+      if (!m || !modal) return;
+      const media = m.img
+        ? `<img class="modal-media-img" src="${esc(m.img)}" alt="${esc(m.title)}" />`
+        : `<div class="modal-media-icon">${esc(m.icon||'𓂀')}</div>`;
+      const tier = TIER_CLASS[m.tier] || 'tier-modern';
+      const tagHtml = (m.tags||[]).map(t=>`<span class="modal-tag">#${esc(t)}</span>`).join('');
+      const loreLines = (m.lore||'').split('\n').map(l => l.startsWith('>') ? `<span class="greentext">${esc(l)}</span>` : esc(l)).join('<br>');
+
+      modalInner.innerHTML = `
+        <div class="modal-head">
+          <div class="modal-media-wrap">${media}</div>
+          <div class="modal-title-block">
+            <div class="modal-badges">
+              <span class="mc-cat-badge">${esc(CAT_LABELS[m.cat]||m.cat)}</span>
+              <span class="mc-tier-badge ${tier}">${esc(m.tier)}</span>
+            </div>
+            <h2 class="modal-title">${esc(m.title)}</h2>
+            <div class="modal-meta-row">
+              <span>${esc(String(m.year))}</span>
+              ${m.creator ? `<span>${esc(m.creator)}</span>` : ''}
+              ${m.origin  ? `<span>${esc(m.origin)}</span>`  : ''}
+            </div>
+            <div class="modal-kek-row">
+              ${kekDots(m.kek)}
+              <span class="kek-lbl">KEK Connection ${m.kek}/5</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-section">
+          <div class="modal-sec-label">𓂀 Origin &amp; History</div>
+          <p>${esc(m.desc)}</p>
+        </div>
+        <div class="modal-section modal-lore-section">
+          <div class="modal-sec-label">𓁹 Temple Lore</div>
+          <p class="modal-lore-text">${loreLines}</p>
+        </div>
+        ${tagHtml ? `<div class="modal-tags">${tagHtml}</div>` : ''}
+      `;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      modal.querySelector('.modal-close-btn') && modal.querySelector('.modal-close-btn').focus();
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    if (modal) {
+      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+    }
+    const closeBtn = document.getElementById('modal-close');
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    if (searchInput) {
+      let t;
+      searchInput.addEventListener('input', () => {
+        clearTimeout(t);
+        t = setTimeout(() => { searchQuery = searchInput.value.trim(); applyFilters(); }, 220);
       });
     }
-    render();
+
+    catBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCat = btn.dataset.cat;
+        applyFilters();
+      });
+    });
+
+    if (sortSelect) {
+      sortSelect.addEventListener('change', () => { activeSort = sortSelect.value; applyFilters(); });
+    }
+
+    applyFilters();
   }
 
   /* ---- Meme rotator ---- */
@@ -692,7 +820,7 @@
     initOracle();
     initInitiation();
     initPraiseBoard();
-    initMemes();
+    initMemeDatabase();
     initMemeRotator();
     initFudPurify();
     initGenerators();

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Sacred Memes — Kekcoin Temple</title>
+<title>Sacred Meme Archive — Kekcoin Temple</title>
 <link rel="manifest" href="manifest.json" />
 <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,24 +15,63 @@
 <body>
 <div id="temple-nav"></div>
 <main>
+
 <section class="page-hero">
   <div class="wrap">
-    <h1>Hall of Sacred Memes</h1>
-    <p>Weekly #TempleOffering winners and curated offerings from the faithful. Vote the worthy to canon.</p>
+    <div class="sec-eyebrow">The Living Registry</div>
+    <h1>Sacred Meme Archive</h1>
+    <p>Every meme from the eternal to the modern — origin, lore, and Temple interpretation. The internet's scripture, catalogued.</p>
   </div>
 </section>
 
 <section class="band">
   <div class="wrap">
-    <div class="meme-rotator reveal mb-24" id="meme-rotator" style="max-width:640px;margin:0 auto 32px;"></div>
-    <div class="meme-gallery" id="meme-gallery"></div>
-    <div class="text-center mt-48 reveal">
-      <p style="color:var(--parchment-dim);font-style:italic;margin-bottom:16px;">Create your own offering with the Meme Frame Maker</p>
-      <a class="btn btn-ghost" href="tools.html">Ritual Tools →</a>
+
+    <div class="mdb-controls reveal">
+      <div class="mdb-search-row">
+        <div class="mdb-search-wrap">
+          <span class="mdb-search-icon">𓂀</span>
+          <input id="meme-search" class="mdb-search-input" type="search" placeholder="Search the archive…" autocomplete="off" />
+        </div>
+        <div class="mdb-sort-row">
+          <label class="mdb-sort-label" for="meme-sort">Sort</label>
+          <select id="meme-sort" class="mdb-sort-select">
+            <option value="kek">KEK Connection</option>
+            <option value="year-old">Oldest First</option>
+            <option value="year-new">Newest First</option>
+            <option value="name">A → Z</option>
+          </select>
+          <span class="mdb-count" id="meme-count"></span>
+        </div>
+      </div>
+
+      <div class="mdb-cats" id="mdb-cats">
+        <button class="cat-pill active" data-cat="all">All</button>
+        <button class="cat-pill" data-cat="frog">𓆏 KEK / Frog</button>
+        <button class="cat-pill" data-cat="classic">📜 Classic</button>
+        <button class="cat-pill" data-cat="wojak">😶 Wojak</button>
+        <button class="cat-pill" data-cat="reaction">📸 Reaction</button>
+        <button class="cat-pill" data-cat="crypto">◎ Crypto</button>
+        <button class="cat-pill" data-cat="4chan">🟢 4chan</button>
+        <button class="cat-pill" data-cat="modern">🌐 Modern</button>
+      </div>
     </div>
+
+    <div class="meme-db-grid" id="meme-db-grid"></div>
+
   </div>
 </section>
+
 </main>
+
+<!-- Meme detail modal -->
+<div class="meme-modal" id="meme-modal" role="dialog" aria-modal="true" aria-label="Meme detail">
+  <div class="meme-modal-wrap">
+    <button class="modal-close-btn" id="modal-close" aria-label="Close">✕</button>
+    <div id="meme-modal-inner"></div>
+  </div>
+</div>
+
 <div id="temple-footer"></div>
 <script src="assets/config.js"></script>
 <script src="assets/data.js"></script>
