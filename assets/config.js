@@ -4,7 +4,7 @@ window.KEK_CONFIG = {
   PAIR: 'CBW8oZUhbjSbMigGihC5Lh5g7NQEGxVTZ1ikVjH1HBt9',
   TOTAL_SUPPLY: 973806242,
   /* Set your treasury wallet here when ready */
-  TREASURY: 'TBD_SET_TREASURY_WALLET',
+  TREASURY: 'AVsMwe3bgUkCXwYmuqc16aWq7qdcJgr4M28pvRHRTVq4',
   BURN: '11111111111111111111111111111111',
   RPC: 'https://api.mainnet-beta.solana.com',
   SOCIAL: {
