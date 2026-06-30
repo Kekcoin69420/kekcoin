@@ -1,0 +1,76 @@
+# KYM slug list — one slug per line (from the URL: knowyourmeme.com/memes/<slug>)
+# Optional overrides per line: slug cat=frog kek=5 tier=Eternal
+# Categories: frog, classic, wojak, reaction, crypto, 4chan, modern
+#
+# Example entries to get started:
+
+# --- Frog / Pepe variants ---
+sad-pepe-the-frog cat=frog kek=4 tier=Sacred
+pepe-trump cat=frog
+rare-pepes cat=frog kek=4 tier=Sacred
+smug-pepe cat=frog
+pepe-cry cat=frog
+
+# --- Classic ---
+forever-alone cat=classic kek=4 tier=Ancient
+rage-comics cat=classic kek=4 tier=Ancient
+rick-roll cat=classic kek=5 tier=Eternal
+leeroy-jenkins cat=classic kek=4 tier=Ancient
+shoop-da-whoop cat=classic
+longcat cat=classic kek=3 tier=Ancient
+lolcats cat=classic kek=4 tier=Ancient
+o-rly cat=classic tier=Ancient
+dramatic-chipmunk cat=classic
+over-9000 cat=classic kek=4 tier=Ancient
+do-a-barrel-roll cat=classic
+all-your-base cat=classic kek=4 tier=Eternal
+ytmnd cat=classic tier=Ancient
+
+# --- Wojak / Feels ---
+coomer cat=wojak
+doomer cat=wojak kek=4 tier=Sacred
+bloomer cat=wojak
+chad-vs-virgin cat=wojak kek=4
+virgin-vs-chad cat=wojak kek=4 tier=Legendary
+two-types-of-people cat=wojak
+soyjak cat=wojak kek=3
+crying-cat cat=wojak kek=4 tier=Sacred
+this-is-fine cat=wojak kek=5 tier=Eternal
+le-happy-merchant cat=classic
+
+# --- Reaction ---
+girl-yelling-at-cat cat=reaction kek=5 tier=Eternal
+mocking-spongebob cat=reaction kek=4 tier=Legendary
+surprised-pikachu cat=reaction kek=5 tier=Eternal
+uno-reverse-card cat=reaction
+drake-hotline-bling cat=reaction kek=5 tier=Legendary
+hide-the-pain-harold cat=reaction kek=4 tier=Sacred
+success-kid cat=reaction kek=4 tier=Legendary
+change-my-mind cat=reaction kek=4
+unpopular-opinion-puffin cat=reaction
+good-guy-greg cat=reaction
+scumbag-steve cat=reaction
+
+# --- 4chan ---
+green-text cat=4chan kek=5 tier=Eternal
+anon cat=4chan
+copypasta cat=4chan kek=4 tier=Legendary
+desu cat=4chan tier=Ancient
+pool-is-closed cat=4chan tier=Ancient
+anonymous cat=4chan kek=4
+
+# --- Modern ---
+loss cat=modern kek=4 tier=Legendary
+chad cat=modern kek=5 tier=Eternal
+galaxy-brain cat=modern kek=4
+sigma-male cat=modern kek=3
+gigachad cat=modern kek=5 tier=Legendary
+return-to-monke cat=modern kek=4
+among-us cat=modern kek=3
+giga-chad cat=modern
+brain-worms cat=modern
+based cat=modern kek=4 tier=Sacred
+cope-seethe-mald cat=modern kek=3
+skill-issue cat=modern
+no-cap cat=modern
+the-rock-driving cat=modern kek=4

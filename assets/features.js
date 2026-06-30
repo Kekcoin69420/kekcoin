@@ -393,11 +393,16 @@
     const grid = document.getElementById('meme-db-grid');
     if (!grid) return;
 
-    const ALL = (D.memeDatabase || []);
-    let filtered = ALL.slice();
-    let activeCat = 'all';
-    let activeSort = 'kek';
+    const SB_URL  = 'https://vyrxqrqfznbpxyzhpmyw.supabase.co';
+    const SB_KEY  = 'sb_publishable_dCr2XwJ6ZVP2UYuXwYKmzQ_qcJiBOft';
+    const PAGE    = 48;
+
+    let activeCat   = 'all';
+    let activeSort  = 'kek';
     let searchQuery = '';
+    let offset      = 0;
+    let totalCount  = 0;
+    let cache       = [];   /* all rows loaded so far, for modal lookup */
 
     const searchInput = document.getElementById('meme-search');
     const sortSelect  = document.getElementById('meme-sort');
@@ -408,43 +413,79 @@
 
     const CAT_LABELS = { frog:'KEK / Frog', classic:'Classic', wojak:'Wojak', reaction:'Reaction', crypto:'Crypto', '4chan':'4chan', modern:'Modern' };
     const TIER_CLASS = { Eternal:'tier-eternal', Ancient:'tier-ancient', Legendary:'tier-legendary', Sacred:'tier-sacred', Modern:'tier-modern' };
+    const SORT_MAP   = { kek:'kek.desc', 'year-old':'year.asc', 'year-new':'year.desc', name:'title.asc' };
 
+    /* All dynamic values pass through esc() before innerHTML insertion — XSS safe */
     function esc(s) {
-      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
     }
     function kekDots(n) {
       return Array.from({length:5}).map((_,i)=>`<span class="kek-dot${i<n?' on':''}"></span>`).join('');
     }
 
-    function applyFilters() {
-      filtered = ALL.filter(m => {
-        if (activeCat !== 'all' && m.cat !== activeCat) return false;
-        if (searchQuery) {
-          const q = searchQuery.toLowerCase();
-          const hay = [m.title, m.summary, m.desc, ...(m.tags||[])].join(' ').toLowerCase();
-          if (hay.indexOf(q) === -1) return false;
-        }
-        return true;
+    function buildUrl(off) {
+      const p = new URLSearchParams({
+        select: '*',
+        limit:  String(PAGE),
+        offset: String(off),
+        order:  SORT_MAP[activeSort] || 'kek.desc',
       });
-      if (activeSort === 'kek')      filtered.sort((a,b) => b.kek - a.kek);
-      else if (activeSort === 'year-old') filtered.sort((a,b) => (parseInt(a.year)||9999) - (parseInt(b.year)||9999));
-      else if (activeSort === 'year-new') filtered.sort((a,b) => (parseInt(b.year)||0) - (parseInt(a.year)||0));
-      else if (activeSort === 'name')     filtered.sort((a,b) => a.title.localeCompare(b.title));
-      renderGrid();
+      if (activeCat !== 'all') p.set('cat', 'eq.' + activeCat);
+      if (searchQuery)         p.set('search_vector', 'plfts.' + searchQuery);
+      return `${SB_URL}/rest/v1/memes?${p}`;
     }
 
-    function renderGrid() {
-      if (countEl) countEl.textContent = filtered.length + ' of ' + ALL.length;
-      if (!filtered.length) {
+    async function fetchPage(off, append) {
+      const res = await fetch(buildUrl(off), {
+        headers: {
+          'apikey':        SB_KEY,
+          'Authorization': 'Bearer ' + SB_KEY,
+          'Prefer':        'count=exact',
+        },
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+
+      /* Total count lives in the Content-Range header: "0-47/1234" */
+      const range = res.headers.get('Content-Range');
+      if (range) {
+        const t = range.match(/\/(\d+)$/);
+        if (t) totalCount = parseInt(t[1], 10);
+      }
+
+      const rows = await res.json();
+      if (append) {
+        cache = cache.concat(rows);
+        appendCards(rows);
+      } else {
+        cache = rows;
+        renderGrid(rows);
+      }
+      updateControls();
+    }
+
+    function renderGrid(rows) {
+      grid.innerHTML = '';
+      if (!rows.length) {
         grid.innerHTML = '<div class="mdb-empty"><span>𓆏</span><p>No memes match. The void is vast.</p></div>';
         return;
       }
-      grid.innerHTML = filtered.map(m => {
+      appendCards(rows);
+    }
+
+    function appendCards(rows) {
+      const frag = document.createDocumentFragment();
+      rows.forEach(m => {
+        const div  = document.createElement('div');
+        div.className = 'meme-card-db reveal';
+        div.dataset.id = m.id;
+        div.tabIndex   = 0;
+        div.setAttribute('role', 'button');
+        div.setAttribute('aria-label', m.title);
         const media = m.img
-          ? `<img class="mc-img" src="${esc(m.img)}" alt="${esc(m.title)}" loading="lazy" />`
+          ? `<img class="mc-img" src="${esc(m.img)}" alt="${esc(m.title)}" loading="lazy">`
           : `<div class="mc-icon">${esc(m.icon||'𓂀')}</div>`;
         const tier = TIER_CLASS[m.tier] || 'tier-modern';
-        return `<div class="meme-card-db reveal" data-id="${esc(m.id)}" tabindex="0" role="button" aria-label="${esc(m.title)}">
+        div.innerHTML = `
           <div class="mc-top">
             <span class="mc-cat-badge">${esc(CAT_LABELS[m.cat]||m.cat)}</span>
             <span class="mc-tier-badge ${tier}">${esc(m.tier)}</span>
@@ -452,30 +493,69 @@
           <div class="mc-media">${media}</div>
           <div class="mc-body">
             <h3 class="mc-title">${esc(m.title)}</h3>
-            <div class="mc-meta">${esc(String(m.year))}${m.creator ? ' · '+esc(m.creator) : ''}</div>
+            <div class="mc-meta">${esc(String(m.year||''))}${m.creator?' · '+esc(m.creator):''}</div>
             <p class="mc-summary">${esc(m.summary)}</p>
             <div class="mc-kek-row">${kekDots(m.kek)}<span class="kek-lbl">KEK</span></div>
-          </div>
-        </div>`;
-      }).join('');
-
-      grid.querySelectorAll('.meme-card-db').forEach(card => {
-        card.addEventListener('click', () => openModal(card.dataset.id));
-        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(card.dataset.id); });
+          </div>`;
+        div.addEventListener('click', () => openModal(m.id));
+        div.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') openModal(m.id); });
+        frag.appendChild(div);
       });
+      grid.appendChild(frag);
       if (window.KEK) KEK.initReveal();
     }
 
+    function updateControls() {
+      if (countEl) {
+        const showing = cache.length;
+        const total   = totalCount || showing;
+        countEl.textContent = showing + ' of ' + total;
+      }
+      /* Load More button */
+      let btn = document.getElementById('meme-load-more');
+      if (cache.length >= totalCount && totalCount > 0) {
+        if (btn) btn.remove();
+        return;
+      }
+      if (!btn && totalCount > PAGE) {
+        btn = document.createElement('div');
+        btn.id        = 'meme-load-more';
+        btn.className = 'meme-load-more-wrap';
+        btn.innerHTML = '<button class="btn btn-ghost meme-load-more-btn">Load More Memes</button>';
+        grid.after(btn);
+        btn.querySelector('button').addEventListener('click', () => {
+          offset += PAGE;
+          btn.querySelector('button').textContent = 'Loading…';
+          btn.querySelector('button').disabled = true;
+          fetchPage(offset, true).catch(() => {
+            btn.querySelector('button').textContent = 'Load More Memes';
+            btn.querySelector('button').disabled = false;
+          });
+        });
+      }
+    }
+
+    function reset() {
+      offset = 0;
+      cache  = [];
+      totalCount = 0;
+      const btn = document.getElementById('meme-load-more');
+      if (btn) btn.remove();
+      grid.innerHTML = '<div class="mdb-loading"><span class="mdb-loading-glyph">𓂀</span><p>Loading the archive…</p></div>';
+      fetchPage(0, false).catch(() => {
+        grid.innerHTML = '<div class="mdb-empty"><span>𓆏</span><p>Could not reach the archive. Check your connection.</p></div>';
+      });
+    }
+
     function openModal(id) {
-      const m = ALL.find(x => x.id === id);
+      const m = cache.find(x => x.id === id);
       if (!m || !modal) return;
       const media = m.img
-        ? `<img class="modal-media-img" src="${esc(m.img)}" alt="${esc(m.title)}" />`
+        ? `<img class="modal-media-img" src="${esc(m.img)}" alt="${esc(m.title)}">`
         : `<div class="modal-media-icon">${esc(m.icon||'𓂀')}</div>`;
-      const tier = TIER_CLASS[m.tier] || 'tier-modern';
-      const tagHtml = (m.tags||[]).map(t=>`<span class="modal-tag">#${esc(t)}</span>`).join('');
+      const tier     = TIER_CLASS[m.tier] || 'tier-modern';
+      const tagHtml  = (m.tags||[]).map(t=>`<span class="modal-tag">#${esc(t)}</span>`).join('');
       const loreLines = (m.lore||'').split('\n').map(l => l.startsWith('>') ? `<span class="greentext">${esc(l)}</span>` : esc(l)).join('<br>');
-
       modalInner.innerHTML = `
         <div class="modal-head">
           <div class="modal-media-wrap">${media}</div>
@@ -486,9 +566,9 @@
             </div>
             <h2 class="modal-title">${esc(m.title)}</h2>
             <div class="modal-meta-row">
-              <span>${esc(String(m.year))}</span>
-              ${m.creator ? `<span>${esc(m.creator)}</span>` : ''}
-              ${m.origin  ? `<span>${esc(m.origin)}</span>`  : ''}
+              <span>${esc(String(m.year||''))}</span>
+              ${m.creator?`<span>${esc(m.creator)}</span>`:''}
+              ${m.origin ?`<span>${esc(m.origin)}</span>` :''}
             </div>
             <div class="modal-kek-row">
               ${kekDots(m.kek)}
@@ -498,17 +578,18 @@
         </div>
         <div class="modal-section">
           <div class="modal-sec-label">𓂀 Origin &amp; History</div>
-          <p>${esc(m.desc)}</p>
+          <p>${esc(m.description||'')}</p>
         </div>
         <div class="modal-section modal-lore-section">
           <div class="modal-sec-label">𓁹 Temple Lore</div>
-          <p class="modal-lore-text">${loreLines}</p>
+          <p class="modal-lore-text">${loreLines||'The lore is yet to be inscribed.'}</p>
         </div>
-        ${tagHtml ? `<div class="modal-tags">${tagHtml}</div>` : ''}
+        ${tagHtml?`<div class="modal-tags">${tagHtml}</div>`:''}
       `;
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
-      modal.querySelector('.modal-close-btn') && modal.querySelector('.modal-close-btn').focus();
+      const closeBtn = modal.querySelector('.modal-close-btn');
+      if (closeBtn) closeBtn.focus();
     }
 
     function closeModal() {
@@ -518,17 +599,17 @@
     }
 
     if (modal) {
-      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+      modal.addEventListener('click', e => { if (e.target===modal) closeModal(); });
+      document.addEventListener('keydown', e => { if (e.key==='Escape' && modal.classList.contains('open')) closeModal(); });
     }
     const closeBtn = document.getElementById('modal-close');
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
+    let searchTimer;
     if (searchInput) {
-      let t;
       searchInput.addEventListener('input', () => {
-        clearTimeout(t);
-        t = setTimeout(() => { searchQuery = searchInput.value.trim(); applyFilters(); }, 220);
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => { searchQuery = searchInput.value.trim(); reset(); }, 350);
       });
     }
 
@@ -537,15 +618,15 @@
         catBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         activeCat = btn.dataset.cat;
-        applyFilters();
+        reset();
       });
     });
 
     if (sortSelect) {
-      sortSelect.addEventListener('change', () => { activeSort = sortSelect.value; applyFilters(); });
+      sortSelect.addEventListener('change', () => { activeSort = sortSelect.value; reset(); });
     }
 
-    applyFilters();
+    reset();
   }
 
   /* ---- Meme rotator ---- */
