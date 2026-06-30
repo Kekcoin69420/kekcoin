@@ -333,6 +333,19 @@ body.ritual-active .ritual-banner{display:block;}
 .btn-sm{padding:10px 18px;font-size:12px;}
 main{position:relative;z-index:3;min-height:50vh;}
 
+
+/* Join CTA */
+.join-cta{max-width:640px;margin:0 auto;padding:36px 32px;text-align:center;
+  background:linear-gradient(160deg,rgba(40,26,8,.85),rgba(18,12,7,.95));
+  border:1px solid rgba(227,179,74,.35);border-radius:8px;
+  box-shadow:0 0 40px rgba(227,179,74,.12);}
+.join-steps{display:grid;gap:12px;margin:24px 0;text-align:left;max-width:420px;margin-left:auto;margin-right:auto;}
+.join-step{display:flex;align-items:center;gap:14px;padding:12px 16px;
+  background:rgba(12,8,5,.6);border:1px solid rgba(227,179,74,.18);border-radius:6px;font-size:15px;}
+.join-num{font-family:'Cinzel Decorative',serif;color:var(--gold);min-width:28px;}
+.join-step code{font-family:ui-monospace,monospace;color:var(--gold-bright);font-size:14px;}
+.join-board-count{font-family:'Cinzel',serif;color:var(--kek-bright);margin:16px 0 24px;letter-spacing:1px;}
+
 /* ═══════════════════════════════════════════════════════════════
    INNER SANCTUM — IMMERSIVE PARALLAX CHAMBER
    Replaces the old CSS 3D box with photographic depth layers.
