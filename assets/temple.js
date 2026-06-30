@@ -2,17 +2,17 @@
   'use strict';
   const C = window.KEK_CONFIG;
   const PAGES = [
-    { href: 'lore.html', label: 'Lore' },
-    { href: 'memes.html', label: 'Memes' },
-    { href: 'index.html', label: 'Gates' },
-    { href: 'rituals.html', label: 'Rituals' },
-    { href: 'brotherhood.html', label: 'Brotherhood' },
-    { href: 'treasury.html', label: 'Treasury' }
+    { href: '/lore/', slug: 'lore', label: 'Lore' },
+    { href: '/memes/', slug: 'memes', label: 'Memes' },
+    { href: '/', slug: 'index', label: 'Gates' },
+    { href: '/rituals/', slug: 'rituals', label: 'Rituals' },
+    { href: '/brotherhood/', slug: 'brotherhood', label: 'Brotherhood' },
+    { href: '/treasury/', slug: 'treasury', label: 'Treasury' }
   ];
 
   function currentPage() {
-    const p = location.pathname.split('/').pop() || 'index.html';
-    return p === 'temple.html' ? 'index.html' : p;
+    const parts = location.pathname.split('/').filter(Boolean);
+    return parts[0] || 'index';
   }
 
   function navHtml() {
@@ -20,15 +20,15 @@
     const main = PAGES.slice(0, 5);
     const more = PAGES.slice(5);
     const links = main.map(p =>
-      `<a href="${p.href}" class="${cur === p.href ? 'active' : ''}">${p.label}</a>`
+      `<a href="${p.href}" class="${cur === p.slug ? 'active' : ''}">${p.label}</a>`
     ).join('');
     const moreLinks = more.map(p =>
-      `<a href="${p.href}" class="${cur === p.href ? 'active' : ''}">${p.label}</a>`
+      `<a href="${p.href}" class="${cur === p.slug ? 'active' : ''}">${p.label}</a>`
     ).join('');
     return `
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="brand"><span class="brand-coin coin-bg" aria-hidden="true"></span>KEKCOIN</a>
+    <a href="/" class="brand"><span class="brand-coin coin-bg" aria-hidden="true"></span>KEKCOIN</a>
     <div class="nav-links">${links}
       <div class="nav-more"><a href="#">Chambers ▾</a><div class="nav-more-menu">${moreLinks}</div></div>
     </div>
@@ -37,14 +37,14 @@
       <span class="nav-price-chg chg-neutral" id="nav-price-chg"></span>
     </div>
     <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
-    <a href="rituals.html" class="nav-cta">Buy $KEK</a>
+    <a href="/rituals/" class="nav-cta">Buy $KEK</a>
   </div>
 </nav>
 <div class="ritual-banner" id="ritual-banner">𓂀 THE ALTAR IS OPEN — LIVE RITUAL IN PROGRESS 𓂀</div>
 <div class="ritual-particles" aria-hidden="true"></div>
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigation">
   ${PAGES.map(p => `<a href="${p.href}">${p.label}</a>`).join('')}
-  <a href="rituals.html" class="btn btn-gold" style="margin-top:8px;justify-content:center;font-size:14px;">⚡ Buy $KEK</a>
+  <a href="/rituals/" class="btn btn-gold" style="margin-top:8px;justify-content:center;font-size:14px;">⚡ Buy $KEK</a>
 </div>`;
   }
 
@@ -269,7 +269,7 @@
 
   KEK.registerSW = function () {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(() => {});
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
     }
   };
 
