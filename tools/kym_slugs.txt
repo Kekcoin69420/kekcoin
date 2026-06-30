@@ -1,76 +1,91 @@
-# KYM slug list — one slug per line (from the URL: knowyourmeme.com/memes/<slug>)
-# Optional overrides per line: slug cat=frog kek=5 tier=Eternal
-# Categories: frog, classic, wojak, reaction, crypto, 4chan, modern
-#
-# Example entries to get started:
+# KYM slug list — one slug per line (from knowyourmeme.com/memes/<slug>)
+# Optional overrides: slug cat=frog kek=5 tier=Eternal
 
 # --- Frog / Pepe variants ---
-sad-pepe-the-frog cat=frog kek=4 tier=Sacred
-pepe-trump cat=frog
-rare-pepes cat=frog kek=4 tier=Sacred
-smug-pepe cat=frog
-pepe-cry cat=frog
+sad-frog cat=frog kek=4 tier=Sacred
+smug-frog cat=frog
+pepe-hands cat=frog kek=3
+well-meme cat=frog kek=3
 
 # --- Classic ---
 forever-alone cat=classic kek=4 tier=Ancient
 rage-comics cat=classic kek=4 tier=Ancient
-rick-roll cat=classic kek=5 tier=Eternal
+rickrolling cat=classic kek=5 tier=Eternal
 leeroy-jenkins cat=classic kek=4 tier=Ancient
 shoop-da-whoop cat=classic
 longcat cat=classic kek=3 tier=Ancient
 lolcats cat=classic kek=4 tier=Ancient
 o-rly cat=classic tier=Ancient
 dramatic-chipmunk cat=classic
-over-9000 cat=classic kek=4 tier=Ancient
-do-a-barrel-roll cat=classic
-all-your-base cat=classic kek=4 tier=Eternal
+barrel-roll cat=classic
 ytmnd cat=classic tier=Ancient
+nyan-cat cat=classic kek=4 tier=Legendary
+keyboard-cat cat=classic kek=3 tier=Ancient
+numa-numa cat=classic kek=3 tier=Ancient
+peanut-butter-jelly-time cat=classic tier=Ancient
+hampster-dance cat=classic tier=Ancient
+star-wars-kid cat=classic tier=Ancient
 
 # --- Wojak / Feels ---
 coomer cat=wojak
 doomer cat=wojak kek=4 tier=Sacred
 bloomer cat=wojak
-chad-vs-virgin cat=wojak kek=4
 virgin-vs-chad cat=wojak kek=4 tier=Legendary
-two-types-of-people cat=wojak
-soyjak cat=wojak kek=3
 crying-cat cat=wojak kek=4 tier=Sacred
 this-is-fine cat=wojak kek=5 tier=Eternal
-le-happy-merchant cat=classic
+its-okay-to-be-white cat=wojak
+average-fan-vs-average-enjoyer cat=wojak kek=3
+soy-face cat=wojak kek=3
+npc cat=wojak kek=4 tier=Sacred
+the-no-no-square cat=wojak
 
 # --- Reaction ---
-girl-yelling-at-cat cat=reaction kek=5 tier=Eternal
+woman-yelling-at-cat cat=reaction kek=5 tier=Eternal
 mocking-spongebob cat=reaction kek=4 tier=Legendary
 surprised-pikachu cat=reaction kek=5 tier=Eternal
 uno-reverse-card cat=reaction
-drake-hotline-bling cat=reaction kek=5 tier=Legendary
 hide-the-pain-harold cat=reaction kek=4 tier=Sacred
-success-kid cat=reaction kek=4 tier=Legendary
-change-my-mind cat=reaction kek=4
 unpopular-opinion-puffin cat=reaction
 good-guy-greg cat=reaction
 scumbag-steve cat=reaction
+distracted-boyfriend cat=reaction kek=5 tier=Eternal
+side-eye-chloe cat=reaction kek=4 tier=Legendary
+evil-kermit cat=reaction kek=4 tier=Sacred
+arthur-fist cat=reaction kek=4
+blinking-white-guy cat=reaction kek=4 tier=Legendary
+two-buttons cat=reaction kek=4 tier=Legendary
+is-this-a-pigeon cat=reaction kek=4 tier=Legendary
+coffin-dance cat=reaction kek=4 tier=Legendary
 
 # --- 4chan ---
-green-text cat=4chan kek=5 tier=Eternal
-anon cat=4chan
 copypasta cat=4chan kek=4 tier=Legendary
 desu cat=4chan tier=Ancient
-pool-is-closed cat=4chan tier=Ancient
 anonymous cat=4chan kek=4
+greentext cat=4chan kek=5 tier=Eternal
+quads cat=4chan kek=4 tier=Sacred
+dubs cat=4chan kek=3
+trips cat=4chan kek=4
+get cat=4chan kek=3
+checked cat=4chan kek=3
 
 # --- Modern ---
 loss cat=modern kek=4 tier=Legendary
 chad cat=modern kek=5 tier=Eternal
 galaxy-brain cat=modern kek=4
-sigma-male cat=modern kek=3
 gigachad cat=modern kek=5 tier=Legendary
 return-to-monke cat=modern kek=4
 among-us cat=modern kek=3
-giga-chad cat=modern
-brain-worms cat=modern
 based cat=modern kek=4 tier=Sacred
-cope-seethe-mald cat=modern kek=3
-skill-issue cat=modern
+cope cat=modern kek=3
 no-cap cat=modern
 the-rock-driving cat=modern kek=4
+imagine cat=modern kek=3
+ok-boomer cat=modern kek=3
+simp cat=modern kek=3
+bruh cat=modern kek=3
+touch-grass cat=modern kek=3
+ratio cat=modern kek=3
+sus cat=modern kek=3
+caught-in-4k cat=modern kek=3
+its-giving cat=modern kek=2
+slay cat=modern kek=2

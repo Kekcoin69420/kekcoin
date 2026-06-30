@@ -1,9 +1,9 @@
 """
-KYM Bulk Meme Importer — knowyourmeme.com → Supabase
+KYM Bulk Meme Importer — knowyourmeme.com -> Supabase
 =====================================================
 Usage:
   1. Add KYM slugs to kym_slugs.txt (one per line, e.g. "distracted-boyfriend")
-  2. Set SUPABASE_SERVICE_KEY env var  (Project Settings → API → service_role)
+  2. Set SUPABASE_SERVICE_KEY env var  (Project Settings -> API -> service_role)
   3. python scraper_kym.py
 
 Optional flags:
@@ -67,20 +67,31 @@ def scrape_kym(slug):
     if not html:
         return None
 
-    # Title
-    title = extract_text_tag(html, 'h1')
+    # Title — use og:title (single or double quoted) and strip "| Know Your Meme" suffix
+    title = None
+    m = re.search(r'<meta\s+property=[\'"]og:title[\'"]\s+content=[\'"]([^\'"]+)[\'"]', html, re.IGNORECASE)
+    if m:
+        title = re.sub(r'\s*\|\s*Know Your Meme.*$', '', m.group(1), flags=re.IGNORECASE).strip()
+    if not title:
+        # Fallback: find first h1 that isn't the site header
+        for h in re.finditer(r'<h1[^>]*>(.*?)</h1>', html, re.DOTALL):
+            t = re.sub(r'<[^>]+>', '', h.group(1)).strip()
+            if t and t.lower() != 'know your meme':
+                title = t
+                break
     if not title:
         return None
     title = re.sub(r'\s+', ' ', title).strip()
 
     # Entry icon image (mobile CDN thumbnail)
     img = None
-    m = re.search(r'<link\s+as="image"\s+href="([^"]+)"\s+rel="preload"', html)
+    m = re.search(r'<link\s+as=[\'"]image[\'"]\s+href=[\'"]([^\'"]+)[\'"]\s+rel=[\'"]preload[\'"]', html)
     if m:
         img = m.group(1)
     else:
-        # Fallback: og:image
-        m = re.search(r'<meta\s+property="og:image"\s+content="([^"]+)"', html)
+        m = re.search(r'<meta\s+property=[\'"]og:image[\'"]\s+content=[\'"]([^\'"]+)[\'"]', html)
+        if not m:
+            m = re.search(r'<meta\s+content=[\'"]([^\'"]+)[\'"]\s+property=[\'"]og:image[\'"]', html)
         if m:
             img = m.group(1)
 
@@ -110,7 +121,7 @@ def scrape_kym(slug):
 
     # Tags from KYM meta keywords
     tags = []
-    m = re.search(r'<meta\s+name="keywords"\s+content="([^"]+)"', html, re.IGNORECASE)
+    m = re.search(r'<meta\s+name=[\'"]keywords[\'"]\s+content=[\'"]([^\'"]+)[\'"]', html, re.IGNORECASE)
     if m:
         raw_tags = [t.strip().lower().replace(' ', '-') for t in m.group(1).split(',')]
         tags = [t for t in raw_tags if t and len(t) < 40][:10]
@@ -213,7 +224,7 @@ def main():
                 # Upsert in batches of 10
                 if len(pending) >= 10:
                     status = upsert_rows(pending, service_key)
-                    print(f'  → Inserted batch of {len(pending)} (HTTP {status})')
+                    print(f'  -> Inserted batch of {len(pending)} (HTTP {status})')
                     pending = []
         except Exception as e:
             print(f'ERROR: {e}')
@@ -221,7 +232,7 @@ def main():
 
     if pending and not args.dry_run:
         status = upsert_rows(pending, service_key)
-        print(f'  → Inserted final batch of {len(pending)} (HTTP {status})')
+        print(f'  -> Inserted final batch of {len(pending)} (HTTP {status})')
 
     print('\nDone.')
 
