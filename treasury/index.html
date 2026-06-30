@@ -13,8 +13,8 @@
 <meta property="og:site_name" content="Kekcoin Temple" />
 <meta property="og:title" content="The Treasury — Kekcoin Temple | $KEK Burns &amp; Offerings" />
 <meta property="og:description" content="Kekcoin treasury, burn records, and offering altar. $KEK token supply and live community burn tracking." />
-<meta property="og:url" content="https://www.kektemple.com/treasury/" />
-<meta property="og:image" content="https://www.kektemple.com/favicon.jpg" />
+<meta property="og:url" content="https://kektemple.com/treasury.html" />
+<meta property="og:image" content="https://kektemple.com/favicon.jpg" />
 <meta property="og:image:width" content="400" />
 <meta property="og:image:height" content="400" />
 <meta property="og:image:alt" content="Kekcoin Treasury — The Temple of Kek" />
@@ -22,77 +22,274 @@
 <meta name="twitter:site" content="@kekcoin69420" />
 <meta name="twitter:title" content="The Treasury — Kekcoin Temple | $KEK Burns" />
 <meta name="twitter:description" content="Kekcoin treasury, burn records, and offering altar for the $KEK Solana community." />
-<meta name="twitter:image" content="https://www.kektemple.com/favicon.jpg" />
-<link rel="canonical" href="https://www.kektemple.com/treasury/" />
-<link rel="manifest" href="../manifest.json" />
-<link rel="icon" type="image/png" sizes="64x64" href="../favicon.png" />
+<meta name="twitter:image" content="https://kektemple.com/favicon.jpg" />
+<link rel="canonical" href="https://kektemple.com/treasury.html" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="../assets/temple.css" />
-<link rel="stylesheet" href="../assets/features.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;800&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/temple.css" />
+<link rel="stylesheet" href="assets/features.css" />
+<style>
+  .treasury-explain {
+    max-width: 680px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+  .treasury-explain p {
+    color: var(--parchment-dim);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .use-of-funds {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin: 40px 0;
+  }
+  .fund-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 10px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .fund-card .fund-icon {
+    font-size: 26px;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .fund-card .fund-title {
+    font-family: Cinzel, serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold-bright);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .fund-card .fund-desc {
+    font-size: 12px;
+    color: var(--parchment-dim);
+    line-height: 1.5;
+  }
+  .treasury-wallet-box {
+    background: rgba(212,175,55,0.05);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 48px;
+  }
+  .treasury-wallet-box .wallet-label {
+    font-family: Cinzel, serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 10px;
+  }
+  .treasury-wallet-box code {
+    display: block;
+    font-size: 12px;
+    color: var(--parchment);
+    word-break: break-all;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .treasury-wallet-box .wallet-note {
+    font-size: 12px;
+    color: var(--parchment-dim);
+    font-style: italic;
+  }
+  .contribute-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 12px;
+    padding: 32px 28px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .contribute-box h3 {
+    font-family: Cinzel, serif;
+    color: var(--gold-bright);
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+  .contribute-box .contrib-sub {
+    text-align: center;
+    font-size: 13px;
+    color: var(--parchment-dim);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .burn-explain {
+    max-width: 600px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+  .burn-explain p {
+    font-size: 14px;
+    color: var(--parchment-dim);
+    line-height: 1.7;
+  }
+  .section-divider {
+    border: none;
+    border-top: 1px solid rgba(212,175,55,0.12);
+    margin: 0;
+  }
+</style>
 </head>
 <body>
 <div id="temple-nav"></div>
 <main>
+
+<!-- HERO -->
 <section class="page-hero">
   <div class="wrap">
-    <h1>The Offering Plate</h1>
-    <p>Transparent treasury. On-chain offerings. The altar remembers every sacrifice.</p>
+    <div class="sec-eyebrow">On-Chain. Transparent. Community-Controlled.</div>
+    <h1>The Temple Treasury</h1>
+    <p>A publicly visible wallet that holds community funds and directs them toward growing $KEK. Every contribution is on-chain — anyone can verify the balance and history at any time.</p>
   </div>
 </section>
 
+<!-- WHAT IS THE TREASURY -->
 <section class="band">
   <div class="wrap">
+    <div class="treasury-explain reveal">
+      <div class="sec-eyebrow">What Is This</div>
+      <h2 style="font-family:Cinzel,serif;color:var(--gold-bright);margin-bottom:16px;">The Sacred Vault</h2>
+      <p>The Treasury is a Solana wallet controlled by the $KEK team. It exists for one purpose: to fund the things that make $KEK grow. There are no hidden wallets, no VC allocations, no team tokens. The address is published here so anyone can verify on-chain what comes in and what goes out.</p>
+      <p>Contributions are entirely voluntary. If you believe in the project and want to help fund its next move — marketing, liquidity, listings, development — this is where that happens.</p>
+    </div>
+
+    <!-- WHAT FUNDS GO TOWARD -->
+    <div class="sec-eyebrow text-center reveal">How Funds Are Used</div>
+    <div class="use-of-funds reveal">
+      <div class="fund-card">
+        <span class="fund-icon">📣</span>
+        <div class="fund-title">Marketing</div>
+        <div class="fund-desc">Twitter spaces, influencer campaigns, raids, and community promotions.</div>
+      </div>
+      <div class="fund-card">
+        <span class="fund-icon">💧</span>
+        <div class="fund-title">Liquidity</div>
+        <div class="fund-desc">Deepening the pool so buys and sells have less price impact.</div>
+      </div>
+      <div class="fund-card">
+        <span class="fund-icon">🏦</span>
+        <div class="fund-title">Listings</div>
+        <div class="fund-desc">CEX listings, CoinGecko/CMC updates, and new trading venue integrations.</div>
+      </div>
+      <div class="fund-card">
+        <span class="fund-icon">⚙️</span>
+        <div class="fund-title">Development</div>
+        <div class="fund-desc">Website, Telegram bot, tools, and new features for the community.</div>
+      </div>
+      <div class="fund-card">
+        <span class="fund-icon">🔥</span>
+        <div class="fund-title">Buybacks &amp; Burns</div>
+        <div class="fund-desc">Buying $KEK from the market and sending it to the burn address permanently.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- LIVE STATS -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-eyebrow text-center reveal">Live Treasury Stats</div>
     <div class="treasury-grid reveal">
-      <div class="treasury-stat"><div class="val" id="treasury-sol">—</div><div class="lbl">Temple Treasury (SOL)</div></div>
+      <div class="treasury-stat"><div class="val" id="treasury-sol">—</div><div class="lbl">Treasury Balance (SOL)</div></div>
       <div class="treasury-stat"><div class="val" id="burn-total">0 $KEK</div><div class="lbl">Total Burned (Canon)</div></div>
       <div class="treasury-stat"><div class="val">973.8M</div><div class="lbl">Total Supply</div></div>
       <div class="treasury-stat"><div class="val">0% / 0%</div><div class="lbl">Buy / Sell Tax</div></div>
     </div>
-    <p class="text-center reveal" style="font-size:13px;color:var(--parchment-dim);font-style:italic;">Set <code>TREASURY</code> in assets/config.js when the temple wallet is consecrated.</p>
+
+    <!-- WALLET ADDRESS -->
+    <div class="treasury-wallet-box reveal">
+      <div class="wallet-label">𓂀 Treasury Wallet Address</div>
+      <code>AVsMwe3bgUkCXwYmuqc16aWq7qdcJgr4M28pvRHRTVq4</code>
+      <div class="wallet-note">Verify on-chain anytime — search this address on <a href="https://solscan.io/account/AVsMwe3bgUkCXwYmuqc16aWq7qdcJgr4M28pvRHRTVq4" target="_blank" rel="noopener" style="color:var(--gold-bright);">Solscan</a> or <a href="https://explorer.solana.com/address/AVsMwe3bgUkCXwYmuqc16aWq7qdcJgr4M28pvRHRTVq4" target="_blank" rel="noopener" style="color:var(--gold-bright);">Solana Explorer</a>.</div>
+    </div>
   </div>
 </section>
 
+<hr class="section-divider" />
+
+<!-- CONTRIBUTE -->
 <section class="band" style="background:linear-gradient(180deg,var(--stone-900),var(--stone-800));">
   <div class="wrap">
-    <div class="offering-box reveal">
-      <h3 style="font-family:Cinzel,serif;color:var(--gold-bright);text-align:center;margin-bottom:12px;">Make an Offering</h3>
-      <p style="text-align:center;font-size:14px;color:var(--parchment-dim);">Send a small tribute to the temple treasury. Optional memo for the Canon.</p>
-      <textarea id="offering-memo" placeholder="For the Kek — your message to the Temple"></textarea>
-      <div class="text-center"><button class="btn btn-gold" id="offering-btn">Open Offering Flow</button></div>
+    <div class="sec-eyebrow text-center reveal">Contribute</div>
+    <h2 style="font-family:Cinzel,serif;color:var(--gold-bright);text-align:center;margin-bottom:8px;" class="reveal">Fund the Next Move</h2>
+    <p style="text-align:center;font-size:14px;color:var(--parchment-dim);max-width:500px;margin:0 auto 36px;line-height:1.7;" class="reveal">Send SOL directly to the treasury. Every contribution goes toward the fund uses listed above. No minimum, no maximum. Optional memo to leave your mark in the Canon.</p>
+
+    <div class="contribute-box reveal">
+      <h3>Send SOL to Treasury</h3>
+      <p class="contrib-sub">Opens in your Solana wallet (Phantom or compatible). You control the amount — this just pre-fills the address.</p>
+      <textarea id="offering-memo" placeholder="Optional: leave a message for the Canon (e.g. 'For the next raid')"></textarea>
+      <div class="text-center"><button class="btn btn-gold" id="offering-btn">Open in Wallet</button></div>
     </div>
 
+    <p style="text-align:center;font-size:12px;color:var(--parchment-dim);margin-top:20px;font-style:italic;" class="reveal">No Phantom? Copy the wallet address above and send directly from any Solana wallet.</p>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+<!-- BURN ALTAR -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-eyebrow text-center reveal">Deflationary Mechanics</div>
+    <h2 style="font-family:Cinzel,serif;color:var(--gold-bright);text-align:center;margin-bottom:16px;" class="reveal">The Burn Altar</h2>
+    <div class="burn-explain reveal">
+      <p>Burning $KEK means sending tokens to a permanently inaccessible address — they are gone from the supply forever. A smaller supply means each remaining token represents a larger share of the total. The Temple records all burns in the Canon.</p>
+      <p>During Great Burn rituals, the community coordinates mass burns. The altar below tracks the cumulative total.</p>
+    </div>
     <div class="burn-box reveal">
-      <h3 style="font-family:Cinzel,serif;color:var(--gold-bright);text-align:center;margin-bottom:12px;">The Burn Altar</h3>
-      <p style="text-align:center;font-size:14px;color:var(--parchment-dim);">During Great Burn rituals, offerings are recorded forever. Activates live ritual mode.</p>
       <div class="text-center mt-24"><button class="btn btn-ghost" id="burn-btn">The Altar Is Open 𓂀</button></div>
       <div class="burn-log text-center" id="burn-log"></div>
     </div>
+  </div>
+</section>
 
+<hr class="section-divider" />
+
+<!-- HODL CHECK -->
+<section class="band" style="background:linear-gradient(180deg,var(--stone-900),var(--stone-800));">
+  <div class="wrap">
+    <div class="sec-eyebrow text-center reveal">Your Standing</div>
+    <h2 style="font-family:Cinzel,serif;color:var(--gold-bright);text-align:center;margin-bottom:16px;" class="reveal">Relic Status</h2>
+    <p style="text-align:center;font-size:14px;color:var(--parchment-dim);max-width:480px;margin:0 auto 32px;line-height:1.7;" class="reveal">Connect your Phantom wallet to see your hold tier. The Temple ranks the faithful by conviction. No wallet wall — this is optional and read-only.</p>
     <div class="hodl-box reveal">
-      <h3 style="font-family:Cinzel,serif;color:var(--gold-bright);text-align:center;margin-bottom:12px;">Relic Status / Hodl Check</h3>
-      <p style="text-align:center;font-size:14px;color:var(--parchment-dim);">Connect Phantom to see your hold tier. Optional — no wallet wall.</p>
-      <div class="text-center mt-24"><button class="btn btn-gold" id="hodl-btn">Check Relic Status</button></div>
+      <div class="text-center"><button class="btn btn-gold" id="hodl-btn">Check Relic Status</button></div>
       <div class="hodl-result" id="hodl-result"></div>
     </div>
   </div>
 </section>
 
+<!-- CONTRACT -->
 <section class="band">
   <div class="wrap text-center reveal">
-    <div class="sec-eyebrow">Contract</div>
+    <div class="sec-eyebrow">Contract Address</div>
     <div class="ca-pill" style="margin:0 auto;">
       <code>BY4ttYDiMWsyBebNNjNoSfA3krvZvUaPaaYdJsWmpump</code>
       <button class="copybtn" onclick="KEK.copyCA()">Copy</button>
     </div>
   </div>
 </section>
+
 </main>
 <div id="temple-footer"></div>
-<script src="../assets/config.js"></script>
-<script src="../assets/data.js"></script>
-<script src="../assets/temple.js"></script>
-<script src="../assets/features.js"></script>
+<script src="assets/config.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/temple.js"></script>
+<script src="assets/features.js"></script>
 </body>
 </html>
