@@ -2,12 +2,12 @@
   'use strict';
   const C = window.KEK_CONFIG;
   const PAGES = [
+    { href: 'memes.html', label: 'Memes' },
+    { href: 'treasury.html', label: 'Treasury' },
     { href: 'index.html', label: 'Gates' },
     { href: 'lore.html', label: 'Lore' },
     { href: 'rituals.html', label: 'Rituals' },
-    { href: 'brotherhood.html', label: 'Brotherhood' },
-    { href: 'treasury.html', label: 'Treasury' },
-    { href: 'memes.html', label: 'Memes' }
+    { href: 'brotherhood.html', label: 'Brotherhood' }
   ];
 
   function currentPage() {
