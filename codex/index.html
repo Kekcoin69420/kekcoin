@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Codex · The Meme Bible · Temple of Kek</title>
+<meta name="description" content="The Meme Bible — the living canon of internet meme history, kept by the Temple of Kek.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cinzel+Decorative:wght@700;900&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#e3b34a; --gold-bright:#ffd874; --gold-deep:#b8893a;
+  --torch:#ff8a3d; --kek:#80b341;
+  --stone-900:#0c0805; --stone-800:#140d07; --stone-700:#1f1610;
+  --parchment:#e8dcc0; --parchment-dim:#bcae90; --muted:#8a7a5c;
+  --rule:rgba(227,179,74,.26);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--stone-900); color:var(--parchment);
+  font-family:'Spectral',Georgia,serif; font-size:1.18rem; line-height:1.72; font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(120% 70% at 50% -10%, rgba(227,179,74,.15), transparent 60%),
+    radial-gradient(80% 50% at 100% 0%, rgba(255,138,61,.06), transparent 55%),
+    linear-gradient(180deg,#160d06 0%, var(--stone-900) 32%, #080503 100%);
+  background-attachment:fixed;
+}
+body::before{
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+}
+a{color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(227,179,74,.25); transition:.2s}
+a:hover{color:var(--torch); border-color:var(--torch)}
+
+/* hero */
+.hero{position:relative;z-index:2;text-align:center;padding:5.5rem 1.5rem 1.6rem}
+.seal{width:84px;height:84px;margin:0 auto 1.4rem;border-radius:50%;
+  background:radial-gradient(circle at 38% 32%, var(--gold-bright), var(--gold) 45%, var(--gold-deep) 78%, #6b4f23 100%);
+  box-shadow:0 0 0 3px var(--stone-900),0 0 0 5px rgba(227,179,74,.5),0 0 34px rgba(227,179,74,.42);
+  display:flex;align-items:center;justify-content:center;font-size:2.4rem;
+  animation:floaty 6s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'Cinzel Decorative','Cinzel',serif;font-weight:900;letter-spacing:.05em;margin:0;
+  font-size:clamp(2rem,5.5vw,3.6rem);line-height:1.05;
+  background:linear-gradient(180deg,var(--gold-bright),var(--gold) 55%,var(--gold-deep));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  text-shadow:0 2px 30px rgba(227,179,74,.22)}
+.hero .tag{font-family:'Cinzel',serif;letter-spacing:.38em;text-transform:uppercase;font-size:.68rem;color:var(--parchment-dim);margin-top:1rem}
+.hero .oneliner{font-style:italic;color:var(--gold-bright);opacity:.92;margin-top:1.1rem;font-size:1.22rem}
+.hero .back{margin-top:1.3rem;font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase}
+.divider{display:flex;align-items:center;justify-content:center;gap:.9rem;margin:1.9rem auto 0;max-width:320px;color:var(--gold)}
+.divider::before,.divider::after{content:'';height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--rule),transparent)}
+
+/* layout */
+.shell{position:relative;z-index:2;display:grid;grid-template-columns:288px 1fr;max-width:1220px;margin:1rem auto 0;padding:0 1.2rem 5rem}
+.sidebar{position:sticky;top:0;align-self:start;max-height:100vh;overflow-y:auto;padding:1.4rem 1.1rem 3rem;border-right:1px solid var(--rule)}
+.sidebar::-webkit-scrollbar{width:7px}.sidebar::-webkit-scrollbar-thumb{background:rgba(227,179,74,.25);border-radius:4px}
+.navgroup{margin-bottom:1.3rem}
+.navgroup-title{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);display:block;margin:0 0 .5rem;padding-bottom:.3rem;border-bottom:1px solid rgba(227,179,74,.14)}
+.sidebar ul{list-style:none;margin:0;padding:0}
+.navlink{display:block;padding:.3rem .5rem .3rem .8rem;color:var(--parchment-dim);border-left:2px solid transparent;font-size:1rem;transition:.18s;border-radius:0 4px 4px 0;cursor:pointer}
+.navlink:hover{color:var(--gold-bright);background:rgba(227,179,74,.06);border-left-color:rgba(227,179,74,.4)}
+.navlink.active{color:var(--gold-bright);background:rgba(227,179,74,.1);border-left-color:var(--gold);font-weight:600}
+
+.content{min-width:0;padding:1rem 0 0 2.4rem}
+.relic{display:none;max-width:740px;animation:rise .5s ease both}
+.relic.show{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.relic .eyebrow{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
+.relic h2{font-family:'Cinzel',serif;font-weight:700;letter-spacing:.04em;font-size:clamp(1.7rem,4vw,2.5rem);color:var(--gold-bright);line-height:1.12;margin:.3rem 0 .2rem;text-shadow:0 2px 22px rgba(227,179,74,.18)}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--parchment-dim);margin:.7rem 0 1.4rem}
+.meta .chip{border:1px solid rgba(227,179,74,.22);border-radius:20px;padding:.12rem .7rem;color:var(--gold)}
+.meta .rating{color:var(--gold-bright);letter-spacing:.1em}
+.scripture{font-size:1.28rem;line-height:1.78}
+.scripture p{margin:.9rem 0}
+.scripture .firstcap::first-letter{font-family:'Cinzel Decorative',serif;font-size:3.1rem;float:left;line-height:.8;padding:.1rem .5rem .1rem 0;color:var(--gold)}
+.relic .links{margin-top:1.8rem;padding-top:1.2rem;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:1.4rem;font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase}
+.footer{position:relative;z-index:2;text-align:center;padding:2.5rem 1rem 4rem;color:var(--gold-deep);font-family:'Cinzel',serif;letter-spacing:.3em;text-transform:uppercase;font-size:.66rem}
+.footer .glyphs{font-size:1.3rem;letter-spacing:.4em;margin-bottom:.7rem;opacity:.85}
+
+.state{grid-column:1 / -1;text-align:center;padding:4rem 1rem;color:var(--parchment-dim);font-style:italic}
+.state .spin{font-size:2rem;display:inline-block;animation:turn 2.2s linear infinite}
+@keyframes turn{to{transform:rotate(360deg)}}
+
+.menubtn{display:none}
+@media(max-width:880px){
+  .shell{grid-template-columns:1fr}
+  .sidebar{position:fixed;inset:0 auto 0 0;z-index:50;background:var(--stone-800);width:82%;max-width:320px;transform:translateX(-105%);transition:transform .3s;max-height:100vh}
+  .sidebar.open{transform:none}
+  .content{padding:1rem .2rem 0}
+  .menubtn{display:inline-flex;align-items:center;gap:.5rem;position:fixed;top:1rem;left:1rem;z-index:60;background:var(--stone-700);color:var(--gold);border:1px solid var(--rule);border-radius:6px;padding:.5rem .8rem;font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.16em;cursor:pointer}
+  .scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40}
+  .scrim.open{display:block}
+  .hero{padding-top:4rem}
+}
+</style>
+</head>
+<body>
+<button class="menubtn" id="menubtn">☰ RELICS</button>
+<div class="scrim" id="scrim"></div>
+
+<header class="hero">
+  <div class="seal">&#128065;</div>
+  <h1>THE&nbsp;CODEX</h1>
+  <div class="tag">The Meme Bible of the Temple of Kek</div>
+  <p class="oneliner">&ldquo;the utility is laughter. the oldest currency online.&rdquo;</p>
+  <div class="back"><a href="/">&#8592; back to the temple</a> &nbsp;·&nbsp; <a href="/memes/">the meme archive &#8594;</a></div>
+  <div class="divider"><span>&#128056;</span></div>
+</header>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="content" id="content">
+    <div class="state" id="state"><span class="spin">&#128065;</span><div style="margin-top:1rem">summoning the canon from the temple vault...</div></div>
+  </main>
+</div>
+
+<footer class="footer">
+  <div class="glyphs">&#128065; &nbsp; &#128056;</div>
+  praise be unto the golden grin
+</footer>
+
+<script>
+// ============================================================================
+// CONFIG — the project URL is already correct. Paste the SAME anon (public) key
+// the /memes/ page already uses. It is safe to expose: it is the public key,
+// protected by the "Public read memes" row-level-security policy.
+// ============================================================================
+const SUPABASE_URL = "https://vyrxqrqfznbpxyzhpmyw.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_dCr2XwJ6ZVP2UYuXwYKmzQ_qcJiBOft";
+
+// Group display names + order (by the `cat` column already used in /memes/)
+const GROUPS = [
+  ["frog",     "The Frog Bloodline"],
+  ["4chan",    "The /s4s/ Roots"],
+  ["classic",  "The Ancients"],
+  ["reaction", "The Reaction Faces"],
+  ["wojak",    "The Wojak Line"],
+  ["modern",   "The Modern Relics"],
+  ["crypto",   "The Crypto Manifestations"]
+];
+
+const content = document.getElementById('content');
+const sidebar = document.getElementById('sidebar');
+const scrim = document.getElementById('scrim');
+
+function esc(s){return (s||"").replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+function relicHTML(r){
+  const sub = [r.tier, r.year].filter(Boolean).join("  ·  ");
+  const rating = r.kek ? "𓂀".repeat(r.kek) : "";
+  const paras = (r.scripture||r.summary||"").split(/\n\n+/).map((p,i)=>
+     `<p class="${i===0?'firstcap':''}">${esc(p)}</p>`).join("");
+  const links = [];
+  links.push(`<a href="/memes/#${r.id}">in the archive &#8594;</a>`);
+  if(r.source_url) links.push(`<a href="${esc(r.source_url)}" target="_blank" rel="noopener">the record &#8594;</a>`);
+  return `<section class="relic" id="${r.id}">
+    <div class="eyebrow">a relic of the codex</div>
+    <h2>${esc(r.title)}</h2>
+    <div class="meta">
+      ${sub?`<span class="chip">${esc(sub)}</span>`:""}
+      ${rating?`<span class="rating">${rating} <span style="color:var(--parchment-dim)">${r.kek}/5</span></span>`:""}
+    </div>
+    <div class="scripture">${paras}</div>
+    <div class="links">${links.join("")}</div>
+  </section>`;
+}
+
+function render(rows){
+  // build sections
+  const byId = {};
+  rows.forEach(r=>byId[r.id]=r);
+  let sectionsHTML = "", navHTML = "";
+  const used = new Set();
+  GROUPS.forEach(([cat,label])=>{
+    const items = rows.filter(r=>(r.cat||"modern")===cat);
+    if(!items.length) return;
+    items.forEach(r=>used.add(r.id));
+    navHTML += `<div class="navgroup"><span class="navgroup-title">${label}</span><ul>` +
+      items.map(r=>`<li><a class="navlink" data-target="${r.id}">${esc(r.title)}</a></li>`).join("") +
+      `</ul></div>`;
+    sectionsHTML += items.map(relicHTML).join("");
+  });
+  // any leftover cats not in GROUPS
+  const rest = rows.filter(r=>!used.has(r.id));
+  if(rest.length){
+    navHTML += `<div class="navgroup"><span class="navgroup-title">More Relics</span><ul>` +
+      rest.map(r=>`<li><a class="navlink" data-target="${r.id}">${esc(r.title)}</a></li>`).join("") + `</ul></div>`;
+    sectionsHTML += rest.map(relicHTML).join("");
+  }
+  sidebar.innerHTML = navHTML;
+  content.innerHTML = sectionsHTML;
+  const sections = Array.from(content.querySelectorAll('.relic'));
+  const navlinks = Array.from(sidebar.querySelectorAll('.navlink'));
+  function show(id){
+    let ok=false;
+    sections.forEach(s=>{const on=s.id===id;s.classList.toggle('show',on);if(on)ok=true;});
+    if(!ok && sections[0]){sections[0].classList.add('show');id=sections[0].id;}
+    navlinks.forEach(l=>l.classList.toggle('active',l.dataset.target===id));
+    if(history.replaceState)history.replaceState(null,'','#'+id);
+    content.scrollIntoView({behavior:'smooth',block:'start'});
+    closeMenu();
+  }
+  document.addEventListener('click',e=>{const t=e.target.closest('[data-target]');if(!t)return;e.preventDefault();show(t.dataset.target);});
+  const start=(location.hash||'').replace('#','')|| (sections[0]&&sections[0].id);
+  show(start);
+}
+
+function openMenu(){sidebar.classList.add('open');scrim.classList.add('open');}
+function closeMenu(){sidebar.classList.remove('open');scrim.classList.remove('open');}
+document.getElementById('menubtn').addEventListener('click',openMenu);
+scrim.addEventListener('click',closeMenu);
+
+async function load(){
+  try{
+    const url = `${SUPABASE_URL}/rest/v1/memes?select=id,title,year,tier,cat,kek,summary,scripture,source_url&scripture=not.is.null&order=year.asc.nullsfirst`;
+    const res = await fetch(url,{headers:{apikey:SUPABASE_ANON_KEY,Authorization:`Bearer ${SUPABASE_ANON_KEY}`}});
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const rows = await res.json();
+    if(!rows.length){content.innerHTML='<div class="state">the codex is empty. (no scripture rows found.)</div>';return;}
+    render(rows);
+  }catch(err){
+    content.innerHTML = `<div class="state">the vault did not answer.<br><br>check the SUPABASE_ANON_KEY at the top of this file.<br><span style="font-size:.8rem;opacity:.7">(${esc(String(err))})</span></div>`;
+  }
+}
+load();
+</script>
+</body>
+</html>

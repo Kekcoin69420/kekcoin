@@ -496,6 +496,7 @@
             <div class="mc-meta">${esc(String(m.year||''))}${m.creator?' · '+esc(m.creator):''}</div>
             <p class="mc-summary">${esc(m.summary)}</p>
             <div class="mc-kek-row">${kekDots(m.kek)}<span class="kek-lbl">KEK</span></div>
+            ${m.scripture ? `<a class="mc-scripture-link" href="/codex/#${esc(m.id)}" onclick="event.stopPropagation()">📜 read the scripture</a>` : ''}
           </div>`;
         div.addEventListener('click', () => openModal(m.id));
         div.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') openModal(m.id); });
