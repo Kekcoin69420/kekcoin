@@ -77,7 +77,7 @@ window.KEK_DATA = {
       summary:'The duality of the frog. For every good feel there is a bad feel.',
       desc:'The mirror image of Feels Good Man. Pepe with a melancholy expression, later formalized as Sad Pepe. Spawned the "feels bad man" template and became the universal symbol of internet sadness, disappointment, and the aftermath of a bad trade.',
       lore:'The Sad Frog is what the unfaithful experience when they sell before the pump. The Temple uses it not in mockery but in empathy — we have all been the sad frog. We hold to become the smug frog.',
-      tags:['frog','reaction','feels','sad'], img:'https://i.kym-cdn.com/entries/icons/mobile/000/009/363/feels.jpg' },
+      tags:['frog','reaction','feels','sad'], img:'https://i.kym-cdn.com/entries/icons/mobile/000/002/830/sad_frog.jpg' },
 
     { id:'rare-pepe', title:'Rare Pepe', year:2014, creator:'4chan collective', origin:'4chan /b/', cat:'frog', icon:'💎',
       tier:'Legendary', kek:5,
