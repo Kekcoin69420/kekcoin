@@ -259,6 +259,26 @@
     } catch (e) { return []; }
   }
 
+  const CHAMBER_GLYPHS = {
+    gates: '𓂀', lore: '𓏛', brotherhood: '𓂀', rituals: '𓁹', memes: '𓆏',
+    codex: '𓁿', transmissions: '𓏏', treasury: '𓊃', tools: '𓊝', sanctum: '☥', temple: '𓂀'
+  };
+  const CHAMBER_LABELS = {
+    gates: 'Gates', lore: 'Great Hall', brotherhood: 'Brotherhood', rituals: 'Rituals',
+    memes: 'Sacred Memes', codex: 'Codex', transmissions: 'Transmissions',
+    treasury: 'Treasury', tools: 'Ritual Tools', sanctum: 'Sanctum', temple: 'Temple'
+  };
+
+  function chamberLabel(page) {
+    const pg = (page || 'temple').toLowerCase();
+    return CHAMBER_LABELS[pg] || pg.replace(/-/g, ' ');
+  }
+
+  function chamberGlyph(page) {
+    const pg = (page || 'temple').toLowerCase();
+    return CHAMBER_GLYPHS[pg] || '𓂀';
+  }
+
   function initPresence() {
     const countEl = document.getElementById('presence-count');
     const gridEl = document.getElementById('pilgrim-grid');
@@ -272,19 +292,28 @@
       if (countEl) countEl.textContent = count;
       if (gridEl) {
         if (!rows.length) {
-          gridEl.innerHTML = '<p style="color:var(--parchment-dim);font-style:italic;text-align:center;">The halls are quiet. You are early.</p>';
+          gridEl.innerHTML = '<div class="presence-empty"><span class="seal">𓂀</span>The halls are quiet — you arrived early.<br>Your sigil will appear here as others enter.</div>';
         } else {
-          gridEl.innerHTML = rows.slice(0, 24).map(p =>
-            `<span class="pilgrim-chip" title="${escHtml(p.page || 'temple')}"><span class="sigil">${escHtml(p.sigil || '𓂀')}</span>${escHtml(p.display_name)}</span>`
-          ).join('');
+          gridEl.innerHTML = rows.slice(0, 24).map(p => {
+            const pg = p.page || 'temple';
+            return `<span class="pilgrim-chip" title="Walking ${escHtml(chamberLabel(pg))}">` +
+              `<span class="sigil">${escHtml(p.sigil || '𓂀')}</span>` +
+              `<span class="name">${escHtml(p.display_name)}</span>` +
+              `<span class="hall">· ${escHtml(chamberLabel(pg))}</span></span>`;
+          }).join('');
         }
       }
-      if (chamberEl && rows.length) {
-        const pages = {};
-        rows.forEach(r => { const pg = r.page || 'temple'; pages[pg] = (pages[pg] || 0) + 1; });
-        chamberEl.innerHTML = Object.keys(pages).sort().map(pg =>
-          `<span class="presence-chamber-chip">${escHtml(pg)} <b>${pages[pg]}</b></span>`
-        ).join('');
+      if (chamberEl) {
+        if (!rows.length) {
+          chamberEl.innerHTML = '';
+        } else {
+          const pages = {};
+          rows.forEach(r => { const pg = r.page || 'temple'; pages[pg] = (pages[pg] || 0) + 1; });
+          chamberEl.innerHTML = Object.keys(pages).sort().map(pg =>
+            `<span class="presence-chamber-chip"><span class="ch-glyph">${chamberGlyph(pg)}</span>` +
+            `${escHtml(chamberLabel(pg))} <b>${pages[pg]}</b></span>`
+          ).join('');
+        }
       }
     }
     render();
@@ -700,20 +729,162 @@
   }
 
   /* ---- Meme rotator ---- */
-  function initMemeRotator() {
+  function shuffleArr(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function rotatorSlideHtml(slide, i) {
+    const imgTag = slide.img
+      ? `<img src="${escHtml(slide.img)}" alt="${escHtml(slide.title)}" loading="lazy" onerror="this.style.display='none'">`
+      : '';
+    const visual = `<div class="meme-slide-visual">${imgTag}<span class="glyph">${escHtml(slide.icon || '𓂀')}</span></div>`;
+    const link = slide.id
+      ? `<a class="meme-slide-link" href="/memes/#${escHtml(slide.id)}">View relic →</a>`
+      : '';
+    const summary = slide.summary
+      ? `<p class="meme-slide-summary">${escHtml(slide.summary)}</p>` : '';
+    const kek = slide.kek
+      ? `<span class="kek">𓂀 ${slide.kek}/5</span> · ` : '';
+    return `<div class="meme-slide${i === 0 ? ' active' : ''}" data-idx="${i}">` +
+      `<div class="meme-slide-inner">` +
+        visual +
+        `<div class="meme-slide-copy">` +
+          `<span class="meme-slide-tag">${escHtml(slide.tag || 'relic')}</span>` +
+          `<h3>${escHtml(slide.title)}</h3>` +
+          summary +
+          `<div class="meme-slide-meta">${kek}${escHtml(slide.author || 'Temple archive')}</div>` +
+          link +
+        `</div>` +
+      `</div></div>`;
+  }
+
+  function bindMemeRotator(rotator, total) {
+    if (total < 2) return;
+    const ROTATE_MS = 6000;
+    let cur = 0;
+    let timer = null;
+    let prog = rotator.querySelector('.rotator-progress');
+
+    function go(idx) {
+      const slides = rotator.querySelectorAll('.meme-slide');
+      const dots = rotator.querySelectorAll('.rotator-dot');
+      if (!slides.length) return;
+      slides[cur].classList.remove('active');
+      if (dots[cur]) dots[cur].classList.remove('active');
+      cur = ((idx % total) + total) % total;
+      slides[cur].classList.add('active');
+      if (dots[cur]) dots[cur].classList.add('active');
+      if (prog) {
+        prog.style.transition = 'none';
+        prog.style.width = '0';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            prog.style.transition = 'width ' + ROTATE_MS + 'ms linear';
+            prog.style.width = '100%';
+          });
+        });
+      }
+    }
+
+    function next() { go(cur + 1); }
+    function resetTimer() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(next, ROTATE_MS);
+      if (prog) {
+        prog.style.transition = 'none';
+        prog.style.width = '0';
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            prog.style.transition = 'width ' + ROTATE_MS + 'ms linear';
+            prog.style.width = '100%';
+          });
+        });
+      }
+    }
+
+    rotator.querySelectorAll('.rotator-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.dataset.dir === 'prev') go(cur - 1);
+        else go(cur + 1);
+        resetTimer();
+      });
+    });
+    rotator.querySelectorAll('.rotator-dot').forEach(dot => {
+      dot.addEventListener('click', () => {
+        go(parseInt(dot.dataset.idx, 10));
+        resetTimer();
+      });
+    });
+    resetTimer();
+  }
+
+  async function initMemeRotator() {
     const rotator = document.getElementById('meme-rotator');
     if (!rotator) return;
-    const slides = D.sacredMemes.map((m, i) =>
-      `<div class="meme-slide${i === 0 ? ' active' : ''}"><div class="glyph">𓂀</div><p>${m.title}</p><small style="color:var(--parchment-dim)">— ${m.author}</small></div>`
+
+    let slides = [];
+    if (C.SUPABASE_URL && C.SUPABASE_ANON_KEY) {
+      try {
+        const url = C.SUPABASE_URL + '/rest/v1/memes?select=id,title,img,icon,summary,lore,kek,cat,tags,creator'
+          + '&order=kek.desc&limit=36';
+        const r = await fetch(url, {
+          headers: { apikey: C.SUPABASE_ANON_KEY, Authorization: 'Bearer ' + C.SUPABASE_ANON_KEY }
+        });
+        if (r.ok) {
+          const rows = await r.json();
+          const withImg = rows.filter(m => m.img);
+          const pool = withImg.length >= 6 ? withImg : rows.filter(m => m.title);
+          slides = shuffleArr(pool).slice(0, 8).map(m => ({
+            id: m.id,
+            title: m.title,
+            author: m.creator || m.cat || 'Temple archive',
+            tag: (m.tags && m.tags[0]) || m.cat || 'relic',
+            summary: ((m.summary || m.lore || '') + '').replace(/\s+/g, ' ').trim().slice(0, 140),
+            img: m.img,
+            icon: m.icon || '𓂀',
+            kek: m.kek
+          }));
+        }
+      } catch (e) { /* vault offline */ }
+    }
+
+    if (!slides.length) {
+      slides = D.sacredMemes.map(m => ({
+        id: null,
+        title: m.title,
+        author: m.author,
+        tag: m.tag,
+        summary: '',
+        img: null,
+        icon: '𓂀',
+        kek: null
+      }));
+    }
+
+    const slideHtml = slides.map((s, i) => rotatorSlideHtml(s, i)).join('');
+    const dotsHtml = slides.map((_, i) =>
+      `<button type="button" class="rotator-dot${i === 0 ? ' active' : ''}" data-idx="${i}" aria-label="Slide ${i + 1}"></button>`
     ).join('');
-    rotator.innerHTML = slides;
-    let cur = 0;
-    setInterval(() => {
-      const els = rotator.querySelectorAll('.meme-slide');
-      els[cur].classList.remove('active');
-      cur = (cur + 1) % els.length;
-      els[cur].classList.add('active');
-    }, 5000);
+
+    rotator.innerHTML =
+      '<div class="rotator-shine" aria-hidden="true"></div>' +
+      slideHtml +
+      '<div class="rotator-progress" aria-hidden="true"></div>' +
+      '<div class="rotator-ui">' +
+        '<div class="rotator-nav">' +
+          '<button type="button" class="rotator-btn" data-dir="prev" aria-label="Previous relic">‹</button>' +
+          '<button type="button" class="rotator-btn" data-dir="next" aria-label="Next relic">›</button>' +
+        '</div>' +
+        '<div class="rotator-dots">' + dotsHtml + '</div>' +
+        '<span style="font-family:Cinzel,serif;font-size:10px;letter-spacing:.14em;color:rgba(227,179,74,.5);text-transform:uppercase;">Live vault</span>' +
+      '</div>';
+
+    bindMemeRotator(rotator, slides.length);
   }
 
   /* ---- FUD purification ---- */

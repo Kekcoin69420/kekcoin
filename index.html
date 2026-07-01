@@ -141,29 +141,42 @@
   </div>
 </section>
 
-<section class="band presence-band" style="background:linear-gradient(180deg,var(--stone-800),var(--stone-900));">
+<section class="band presence-band">
   <div class="wrap">
     <div class="reveal text-center">
       <div class="sec-eyebrow">Live Congregation</div>
       <h2 class="sec-title">Pilgrims in the Temple</h2>
-      <p style="max-width:520px;margin:12px auto 0;color:var(--parchment-dim);">Real-time presence — who is walking the halls right now.</p>
+      <p class="sec-lead">Real-time presence — who is walking the halls right now.</p>
+      <div class="divider"><span class="line"></span><span class="coin-mini coin-bg" aria-hidden="true"></span><span class="line r"></span></div>
     </div>
-    <div class="presence-bar reveal">
-      <div class="presence-count" id="presence-count">0</div>
-      <div class="presence-label">faithful present</div>
-      <div class="presence-chambers" id="presence-chambers"></div>
+    <div class="presence-sanctuary reveal">
+      <div class="presence-live" aria-label="Live congregation feed"><span class="presence-pulse"></span>Live</div>
+      <div class="presence-core">
+        <div class="presence-count-wrap">
+          <div class="presence-count" id="presence-count">—</div>
+          <div class="presence-label">faithful present</div>
+        </div>
+        <div class="presence-chambers" id="presence-chambers"></div>
+      </div>
       <div class="pilgrim-grid" id="pilgrim-grid"></div>
+      <p class="presence-foot">Your sigil is broadcast while you walk the halls · updates every few seconds</p>
     </div>
   </div>
 </section>
 
-<section class="band">
+<section class="band rotator-band">
   <div class="wrap">
     <div class="reveal text-center">
       <div class="sec-eyebrow">Sacred Rotator</div>
       <h2 class="sec-title">Memes of the Week</h2>
+      <p class="sec-lead">Relics rotating from the vault — witness images and canon pulled live from the archive.</p>
+      <div class="divider"><span class="line"></span><span class="coin-mini coin-bg" aria-hidden="true"></span><span class="line r"></span></div>
     </div>
-    <div class="meme-rotator reveal" id="meme-rotator"></div>
+    <div class="meme-rotator-shell reveal">
+      <div class="meme-rotator" id="meme-rotator">
+        <div class="rotator-loading">𓂀 inscribing relics…</div>
+      </div>
+    </div>
   </div>
 </section>
 
