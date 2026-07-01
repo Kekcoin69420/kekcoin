@@ -1,4 +1,4 @@
-const CACHE = 'kek-temple-v7';
+const CACHE = 'kek-temple-v8';
 const ASSETS = [
   './',
   './index.html',

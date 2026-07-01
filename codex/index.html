@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Codex · The Meme Bible · Temple of Kek</title>
 <meta name="description" content="The Meme Bible — the living canon of internet meme history, kept by the Temple of Kek.">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#1a1510" />
 <meta property="og:type" content="website" />
@@ -13,428 +14,336 @@
 <meta property="og:description" content="The living canon of internet meme history — scripture, lore, and Temple interpretation." />
 <meta property="og:url" content="https://www.kektemple.com/codex/" />
 <meta property="og:image" content="https://www.kektemple.com/kek-banner.jpg" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@kekcoin69420" />
-<meta name="twitter:image" content="https://www.kektemple.com/kek-banner.jpg" />
 <link rel="canonical" href="https://www.kektemple.com/codex/" />
 <link rel="icon" type="image/png" sizes="64x64" href="../favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cinzel+Decorative:wght@700;900&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/temple.css" />
+<link rel="stylesheet" href="../assets/features.css" />
 <style>
-:root{
-  --gold:#e3b34a; --gold-bright:#ffd874; --gold-deep:#b8893a;
-  --torch:#ff8a3d; --kek:#80b341;
-  --stone-900:#0c0805; --stone-800:#140d07; --stone-700:#1f1610;
-  --parchment:#e8dcc0; --parchment-dim:#bcae90; --muted:#8a7a5c;
-  --rule:rgba(227,179,74,.26);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0; background:var(--stone-900); color:var(--parchment);
-  font-family:'Spectral',Georgia,serif; font-size:1.18rem; line-height:1.72;
-  -webkit-font-smoothing:antialiased;
-  background-image:
-    radial-gradient(120% 70% at 50% -10%, rgba(227,179,74,.15), transparent 60%),
-    radial-gradient(80% 50% at 100% 0%, rgba(255,138,61,.06), transparent 55%),
-    linear-gradient(180deg,#160d06 0%, var(--stone-900) 32%, #080503 100%);
-  background-attachment:fixed;
-}
-body::before{
-  content:''; position:fixed; inset:0; pointer-events:none; z-index:1; opacity:.05;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode:overlay;
-}
-a{color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(227,179,74,.25); transition:.2s}
-a:hover{color:var(--torch); border-color:var(--torch)}
+/* Codex manuscript layout — v2 */
+.codex-page{position:relative;z-index:2}
+.codex-hero{text-align:center;padding:3rem 1.5rem 2rem}
+.codex-hero .seal{font-size:2.4rem;margin-bottom:1rem}
+.codex-hero h1{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5vw,3.2rem);
+  background:linear-gradient(180deg,var(--gold-bright),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:0}
+.codex-hero .tag{font-family:'Cinzel',serif;letter-spacing:.35em;text-transform:uppercase;font-size:.65rem;color:var(--parchment-dim);margin-top:.8rem}
+.codex-hero .stats{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);margin-top:.6rem}
 
-.hero{position:relative;z-index:2;text-align:center;padding:5rem 1.5rem 1.4rem}
-.seal{width:84px;height:84px;margin:0 auto 1.2rem;border-radius:50%;
-  background:radial-gradient(circle at 38% 32%, var(--gold-bright), var(--gold) 45%, var(--gold-deep) 78%, #6b4f23 100%);
-  box-shadow:0 0 0 3px var(--stone-900),0 0 0 5px rgba(227,179,74,.5),0 0 34px rgba(227,179,74,.42);
-  display:flex;align-items:center;justify-content:center;font-size:2.4rem;
-  animation:floaty 6s ease-in-out infinite}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-.hero h1{font-family:'Cinzel Decorative','Cinzel',serif;font-weight:900;letter-spacing:.05em;margin:0;
-  font-size:clamp(2rem,5.5vw,3.6rem);line-height:1.05;
-  background:linear-gradient(180deg,var(--gold-bright),var(--gold) 55%,var(--gold-deep));
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero .tag{font-family:'Cinzel',serif;letter-spacing:.38em;text-transform:uppercase;font-size:.68rem;color:var(--parchment-dim);margin-top:1rem}
-.hero .oneliner{font-style:italic;color:var(--gold-bright);opacity:.92;margin-top:1rem;font-size:1.15rem}
-.hero .stats{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);margin-top:.8rem;letter-spacing:.08em}
-.hero .back{margin-top:1.1rem;font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase}
-.divider{display:flex;align-items:center;justify-content:center;gap:.9rem;margin:1.6rem auto 0;max-width:320px;color:var(--gold)}
-.divider::before,.divider::after{content:'';height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--rule),transparent)}
+.codex-shell{display:grid;grid-template-columns:minmax(240px,280px) 1fr;max-width:1320px;margin:0 auto;padding:0 1.2rem 4rem;gap:0}
+.codex-sidebar{position:sticky;top:72px;align-self:start;max-height:calc(100vh - 88px);overflow-y:auto;
+  padding:1rem .9rem 2rem;border-right:1px solid rgba(227,179,74,.22)}
+.codex-sidebar input{width:100%;padding:.55rem .7rem;margin-bottom:1rem;background:rgba(0,0,0,.35);
+  border:1px solid rgba(227,179,74,.25);border-radius:6px;color:var(--parchment);font-family:'Spectral',serif}
+.codex-navgroup{margin-bottom:1rem}
+.codex-navtitle{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold-deep);display:block;margin-bottom:.4rem;padding-bottom:.25rem;border-bottom:1px solid rgba(227,179,74,.12)}
+.codex-navlink{display:block;padding:.3rem .5rem .3rem .7rem;color:var(--parchment-dim);font-size:.92rem;
+  border-left:2px solid transparent;cursor:pointer;border-radius:0 4px 4px 0}
+.codex-navlink:hover,.codex-navlink.active{color:var(--gold-bright);background:rgba(227,179,74,.08);border-left-color:var(--gold)}
+.codex-navlink.hidden{display:none}
 
-.shell{position:relative;z-index:2;display:grid;grid-template-columns:300px 1fr;max-width:1280px;margin:.5rem auto 0;padding:0 1.2rem 5rem;gap:0}
-.sidebar{position:sticky;top:0;align-self:start;max-height:100vh;overflow-y:auto;padding:1.2rem 1rem 3rem;border-right:1px solid var(--rule)}
-.sidebar::-webkit-scrollbar{width:7px}.sidebar::-webkit-scrollbar-thumb{background:rgba(227,179,74,.25);border-radius:4px}
-.codex-search{width:100%;padding:.55rem .75rem;margin-bottom:1rem;background:rgba(0,0,0,.35);
-  border:1px solid var(--rule);border-radius:6px;color:var(--parchment);font-family:'Spectral',serif;font-size:.95rem}
-.codex-search::placeholder{color:var(--muted)}
-.codex-search:focus{outline:none;border-color:var(--gold)}
-.navgroup{margin-bottom:1.1rem}
-.navgroup-title{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);
-  display:block;margin:0 0 .45rem;padding-bottom:.3rem;border-bottom:1px solid rgba(227,179,74,.14)}
-.sidebar ul{list-style:none;margin:0;padding:0}
-.navlink{display:block;padding:.28rem .5rem .28rem .75rem;color:var(--parchment-dim);border-left:2px solid transparent;
-  font-size:.95rem;transition:.18s;border-radius:0 4px 4px 0;cursor:pointer}
-.navlink:hover{color:var(--gold-bright);background:rgba(227,179,74,.06);border-left-color:rgba(227,179,74,.4)}
-.navlink.active{color:var(--gold-bright);background:rgba(227,179,74,.1);border-left-color:var(--gold);font-weight:600}
-.navlink.hidden{display:none}
+.codex-main{min-width:0;padding:0 0 3rem 2rem}
+.codex-preface{max-width:860px;padding-bottom:1.5rem;margin-bottom:1rem;border-bottom:1px solid rgba(227,179,74,.2)}
+.codex-preface .lead{font-size:1.2rem;font-style:italic;color:var(--gold-bright)}
 
-.content{min-width:0;padding:.8rem 0 0 2.2rem}
-.relic{display:none;max-width:820px;animation:rise .45s ease both;padding-bottom:3rem}
-.relic.show{display:block}
-@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.codex-relic{display:none;max-width:860px;animation:codexIn .4s ease}
+.codex-relic.show{display:block}
+@keyframes codexIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-.relic-hero{display:grid;grid-template-columns:140px 1fr;gap:1.4rem;align-items:start;margin-bottom:1.8rem;
-  padding-bottom:1.6rem;border-bottom:1px solid var(--rule)}
-.relic-visual{width:140px;height:140px;border-radius:8px;overflow:hidden;
-  border:2px solid rgba(227,179,74,.35);background:linear-gradient(160deg,rgba(40,26,8,.9),rgba(12,8,5,.95));
-  display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(0,0,0,.45)}
-.relic-visual img{width:100%;height:100%;object-fit:cover;display:block}
-.relic-visual .glyph{font-size:3.2rem;filter:drop-shadow(0 0 12px rgba(227,179,74,.4))}
-.relic .eyebrow{font-family:'Cinzel',serif;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
-.relic h2{font-family:'Cinzel',serif;font-weight:700;letter-spacing:.04em;font-size:clamp(1.6rem,3.5vw,2.35rem);
-  color:var(--gold-bright);line-height:1.12;margin:.25rem 0 .5rem}
-.meta{display:flex;flex-wrap:wrap;gap:.4rem .65rem;align-items:center;font-family:'JetBrains Mono',monospace;
-  font-size:.7rem;color:var(--parchment-dim);margin:.4rem 0 0}
-.meta .chip{border:1px solid rgba(227,179,74,.22);border-radius:20px;padding:.1rem .65rem;color:var(--gold)}
-.meta .rating{color:var(--gold-bright);letter-spacing:.08em}
-.meta .cat{color:var(--kek)}
+/* Full-width relic banner */
+.relic-banner{position:relative;height:min(42vw,320px);min-height:200px;border-radius:10px;overflow:hidden;
+  margin-bottom:1.6rem;border:1px solid rgba(227,179,74,.3);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.relic-banner img{width:100%;height:100%;object-fit:cover;display:block}
+.relic-banner.no-img{background:linear-gradient(135deg,#2a1a08,#0c0805 60%);display:flex;align-items:center;justify-content:center}
+.relic-banner .banner-glyph{font-size:5rem;opacity:.5;filter:drop-shadow(0 0 24px rgba(227,179,74,.4))}
+.relic-banner-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,8,5,.92) 0%,rgba(12,8,5,.2) 55%,transparent 100%)}
+.relic-banner-caption{position:absolute;left:0;right:0;bottom:0;padding:1.4rem 1.6rem}
+.relic-banner-caption .eyebrow{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep)}
+.relic-banner-caption h2{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4vw,2.4rem);color:var(--gold-bright);margin:.2rem 0 0;line-height:1.1}
 
-.codex-block{margin:1.5rem 0;padding:1.2rem 1.3rem;background:rgba(20,13,7,.55);
-  border:1px solid rgba(227,179,74,.14);border-radius:6px;border-left:3px solid rgba(227,179,74,.35)}
-.codex-block h3{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--gold);margin:0 0 .75rem;font-weight:600}
-.codex-block p{margin:.65rem 0;line-height:1.78}
-.codex-block p:first-of-type{margin-top:0}
-.codex-block .firstcap::first-letter{font-family:'Cinzel Decorative',serif;font-size:2.8rem;float:left;
-  line-height:.82;padding:.08rem .45rem .05rem 0;color:var(--gold)}
-.codex-block.lore-block{border-left-color:var(--kek)}
-.codex-block.record-block{border-left-color:var(--torch)}
-.codex-block.brief-block{background:rgba(227,179,74,.06);border-left-color:var(--gold-bright)}
-.codex-block.brief-block p{font-style:italic;color:var(--gold-bright);font-size:1.12rem}
-.greentext{color:#8fbc8f;font-style:italic}
+.relic-epigraph{margin:0 0 1.6rem;padding:1.1rem 1.4rem;border-left:4px solid var(--gold);
+  background:rgba(227,179,74,.07);font-size:1.28rem;font-style:italic;color:var(--gold-bright);line-height:1.55}
 
-.codex-tags{display:flex;flex-wrap:wrap;gap:.45rem;margin:1.2rem 0}
-.codex-tag{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
-  padding:.25rem .65rem;border:1px solid rgba(227,179,74,.28);border-radius:20px;color:var(--parchment-dim)}
+.relic-manifest{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem;margin-bottom:1.6rem}
+.manifest-cell{padding:.65rem .8rem;background:rgba(0,0,0,.3);border:1px solid rgba(227,179,74,.15);border-radius:6px}
+.manifest-cell .lbl{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.2rem}
+.manifest-cell .val{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--parchment)}
+.manifest-cell .val.gold{color:var(--gold-bright)}
+.kek-meter{display:flex;gap:3px;margin-top:.15rem}
+.kek-meter span{font-size:.85rem;color:var(--gold-bright)}
 
-.relic-foot{margin-top:2rem;padding-top:1.2rem;border-top:1px solid var(--rule);
+.codex-section{margin:1.35rem 0;padding:1.25rem 1.35rem;background:linear-gradient(160deg,rgba(30,20,8,.75),rgba(12,8,5,.9));
+  border:1px solid rgba(227,179,74,.16);border-radius:8px}
+.codex-section h3{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin:0 0 .85rem;padding-bottom:.5rem;border-bottom:1px solid rgba(227,179,74,.12)}
+.codex-section p{margin:.7rem 0;line-height:1.82;color:var(--parchment)}
+.codex-section .firstcap::first-letter{font-family:'Cinzel Decorative',serif;font-size:3rem;float:left;line-height:.78;
+  padding:.05rem .45rem 0 0;color:var(--gold)}
+.codex-section.lore{border-left:4px solid var(--kek)}
+.codex-section.record{border-left:4px solid var(--torch)}
+.codex-section.scripture{border-left:4px solid var(--gold-bright)}
+
+.codex-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0}
+.codex-tag{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.22rem .6rem;border:1px solid rgba(227,179,74,.25);border-radius:20px;color:var(--parchment-dim)}
+
+.codex-related{margin:1.8rem 0;padding-top:1.2rem;border-top:1px solid rgba(227,179,74,.18)}
+.codex-related h4{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin:0 0 .8rem}
+.related-row{display:flex;flex-wrap:wrap;gap:.5rem}
+.related-chip{font-family:'Cinzel',serif;font-size:.62rem;padding:.4rem .75rem;border:1px solid rgba(227,179,74,.22);
+  border-radius:20px;color:var(--parchment-dim);cursor:pointer;background:rgba(0,0,0,.2)}
+.related-chip:hover{border-color:var(--gold);color:var(--gold-bright)}
+
+.codex-foot{margin-top:2rem;padding-top:1.2rem;border-top:1px solid rgba(227,179,74,.2);
   display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
-.relic-foot .links{display:flex;flex-wrap:wrap;gap:1.2rem;font-family:'Cinzel',serif;font-size:.64rem;
-  letter-spacing:.14em;text-transform:uppercase}
-.relic-pager{display:flex;gap:.6rem}
-.pager-btn{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
-  padding:.45rem .85rem;border:1px solid var(--rule);border-radius:4px;background:rgba(0,0,0,.25);
-  color:var(--parchment-dim);cursor:pointer;transition:.2s}
-.pager-btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold-bright)}
-.pager-btn:disabled{opacity:.35;cursor:default}
+.codex-foot a{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase}
+.codex-pager{display:flex;gap:.5rem}
+.codex-pager button{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.45rem .8rem;border:1px solid rgba(227,179,74,.25);border-radius:4px;background:rgba(0,0,0,.25);
+  color:var(--parchment-dim);cursor:pointer}
+.codex-pager button:hover:not(:disabled){border-color:var(--gold);color:var(--gold-bright)}
+.codex-pager button:disabled{opacity:.3;cursor:default}
 
-.preface{max-width:820px;padding:1.5rem 0 2rem;border-bottom:1px solid var(--rule);margin-bottom:1rem}
-.preface p{color:var(--parchment-dim);font-size:1.05rem}
-.preface .lead{font-size:1.22rem;color:var(--parchment);font-style:italic}
-
-.footer{position:relative;z-index:2;text-align:center;padding:2.5rem 1rem 4rem;color:var(--gold-deep);
-  font-family:'Cinzel',serif;letter-spacing:.3em;text-transform:uppercase;font-size:.66rem}
-.footer .glyphs{font-size:1.3rem;letter-spacing:.4em;margin-bottom:.7rem;opacity:.85}
-
-.state{grid-column:1 / -1;text-align:center;padding:4rem 1rem;color:var(--parchment-dim);font-style:italic}
-.state .spin{font-size:2rem;display:inline-block;animation:turn 2.2s linear infinite}
-@keyframes turn{to{transform:rotate(360deg)}}
-
-.menubtn{display:none}
-@media(max-width:900px){
-  .shell{grid-template-columns:1fr}
-  .sidebar{position:fixed;inset:0 auto 0 0;z-index:50;background:var(--stone-800);width:85%;max-width:320px;
-    transform:translateX(-105%);transition:transform .3s;max-height:100vh}
-  .sidebar.open{transform:none}
-  .content{padding:1rem .1rem 0}
-  .relic-hero{grid-template-columns:1fr;text-align:center}
-  .relic-visual{margin:0 auto}
-  .menubtn{display:inline-flex;align-items:center;gap:.5rem;position:fixed;top:1rem;left:1rem;z-index:60;
-    background:var(--stone-700);color:var(--gold);border:1px solid var(--rule);border-radius:6px;
-    padding:.5rem .8rem;font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.16em;cursor:pointer}
-  .scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:40}
-  .scrim.open{display:block}
-  .hero{padding-top:3.5rem}
+.codex-state{text-align:center;padding:4rem;color:var(--parchment-dim);font-style:italic}
+.codex-menubtn{display:none}
+@media(max-width:920px){
+  .codex-shell{grid-template-columns:1fr}
+  .codex-sidebar{position:fixed;inset:0 auto 0 0;z-index:200;width:85%;max-width:300px;background:var(--stone-800);
+    transform:translateX(-105%);transition:transform .3s;max-height:100vh;top:0}
+  .codex-sidebar.open{transform:none}
+  .codex-main{padding:0}
+  .codex-menubtn{display:inline-flex;position:fixed;top:5rem;left:1rem;z-index:210;padding:.45rem .75rem;
+    background:var(--stone-700);border:1px solid rgba(227,179,74,.3);color:var(--gold);font-family:'Cinzel',serif;
+    font-size:.62rem;letter-spacing:.14em;cursor:pointer;border-radius:6px}
+  .codex-scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:190}
+  .codex-scrim.open{display:block}
 }
 </style>
 </head>
 <body>
-<button class="menubtn" id="menubtn">☰ RELICS</button>
-<div class="scrim" id="scrim"></div>
+<div id="temple-nav"></div>
+<button class="codex-menubtn" id="codex-menubtn">☰ RELICS</button>
+<div class="codex-scrim" id="codex-scrim"></div>
 
-<header class="hero">
-  <div class="seal">𓂀</div>
-  <h1>THE&nbsp;CODEX</h1>
-  <div class="tag">The Meme Bible of the Temple of Kek</div>
-  <p class="oneliner">&ldquo;Every meme is a scripture. Every hold is a vow.&rdquo;</p>
-  <div class="stats" id="codex-stats"></div>
-  <div class="back"><a href="/">← the temple</a> &nbsp;·&nbsp; <a href="/memes/">the archive →</a></div>
-  <div class="divider"><span>𓆏</span></div>
-</header>
+<div class="codex-page">
+  <header class="codex-hero">
+    <div class="breathing-seal seal">𓂀</div>
+    <h1>THE CODEX</h1>
+    <div class="tag">The Meme Bible · Temple of Kek</div>
+    <p class="stats" id="codex-stats"></p>
+  </header>
 
-<div class="shell">
-  <nav class="sidebar" id="sidebar">
-    <input type="search" class="codex-search" id="codex-search" placeholder="Search relics…" autocomplete="off" />
-  </nav>
-  <main class="content" id="content">
-    <div class="state" id="state"><span class="spin">𓂀</span><div style="margin-top:1rem">opening the vault…</div></div>
-  </main>
+  <div class="codex-shell">
+    <nav class="codex-sidebar" id="codex-sidebar">
+      <input type="search" id="codex-search" placeholder="Search relics…" autocomplete="off" />
+    </nav>
+    <main class="codex-main" id="codex-main">
+      <div class="codex-state" id="codex-state"><span class="breathing-seal">𓂀</span><div style="margin-top:1rem">opening the vault…</div></div>
+    </main>
+  </div>
 </div>
 
-<footer class="footer">
-  <div class="glyphs">𓂀 &nbsp; 𓆏</div>
-  praise be unto the golden grin
-</footer>
+<div id="temple-footer"></div>
 
 <script src="../assets/config.js"></script>
+<script src="../assets/temple.js"></script>
 <script>
-const C = window.KEK_CONFIG || {};
-const SB_URL = C.SUPABASE_URL || 'https://vyrxqrqfznbpxyzhpmyw.supabase.co';
-const SB_KEY = C.SUPABASE_ANON_KEY || '';
+(function(){
+  const C = window.KEK_CONFIG || {};
+  const SB = C.SUPABASE_URL;
+  const KEY = C.SUPABASE_ANON_KEY;
 
-const GROUPS = [
-  ['frog',     '𓆏 The Frog Bloodline'],
-  ['4chan',    'The /s4s/ Roots'],
-  ['classic',  'The Ancients'],
-  ['reaction', 'The Reaction Faces'],
-  ['wojak',    'The Wojak Line'],
-  ['modern',   'The Modern Relics'],
-  ['crypto',   'The Crypto Manifestations']
-];
+  const GROUPS = [
+    ['frog','𓆏 Frog Bloodline'],['4chan','/s4s/ Roots'],['classic','The Ancients'],
+    ['reaction','Reaction Faces'],['wojak','Wojak Line'],['modern','Modern Relics'],['crypto','Crypto Manifestations']
+  ];
+  const CAT = {frog:'KEK/Frog',classic:'Classic',wojak:'Wojak',reaction:'Reaction',crypto:'Crypto','4chan':'4chan',modern:'Modern'};
 
-const CAT_LABELS = {
-  frog:'KEK / Frog', classic:'Classic', wojak:'Wojak', reaction:'Reaction',
-  crypto:'Crypto', '4chan':'4chan', modern:'Modern'
-};
+  const main = document.getElementById('codex-main');
+  const sidebar = document.getElementById('codex-sidebar');
+  const search = document.getElementById('codex-search');
+  let rows = [], order = [];
 
-const content = document.getElementById('content');
-const sidebar = document.getElementById('sidebar');
-const scrim = document.getElementById('scrim');
-const searchInput = document.getElementById('codex-search');
+  function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]});}
 
-let allRows = [];
-let flatOrder = [];
-
-function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-
-function formatParas(text, firstCap){
-  if(!text) return '';
-  return text.split(/\n+/).filter(Boolean).map((line,i)=>{
-    const gre = line.trim().startsWith('>');
-    const cls = (firstCap && i===0 ? 'firstcap ' : '') + (gre ? 'greentext' : '');
-    return `<p class="${cls.trim()}">${esc(gre ? line : line)}</p>`;
-  }).join('');
-}
-
-function hasContent(r){
-  return [r.scripture,r.lore,r.description,r.summary].some(t => (t||'').trim().length > 20);
-}
-
-function scriptureMain(r){
-  if(r.scripture && r.scripture.trim()) return r.scripture.trim();
-  if(r.lore && r.lore.trim()) return r.lore.trim();
-  if(r.description && r.description.trim()) return r.description.trim();
-  return r.summary || '';
-}
-
-function isDuplicate(short, long){
-  if(!short || !long) return false;
-  const a = short.trim().toLowerCase();
-  const b = long.trim().toLowerCase();
-  return b.includes(a) || a === b.slice(0, a.length);
-}
-
-function visualHTML(r){
-  if(r.img){
-    return `<img src="${esc(r.img)}" alt="${esc(r.title)}" loading="lazy" onerror="this.parentElement.innerHTML='<span class=glyph>${esc(r.icon||'𓂀')}</span>'">`;
-  }
-  return `<span class="glyph">${esc(r.icon||'𓂀')}</span>`;
-}
-
-function relicHTML(r, idx){
-  const scr = scriptureMain(r);
-  const lore = (r.lore||'').trim();
-  const desc = (r.description||'').trim();
-  const summary = (r.summary||'').trim();
-  const showLore = lore && !isDuplicate(lore, scr);
-  const showDesc = desc && !isDuplicate(desc, scr) && desc !== lore;
-  const showBrief = summary && !isDuplicate(summary, scr);
-
-  let blocks = '';
-  if(scr){
-    blocks += `<div class="codex-block scripture-block"><h3>𓂀 Scripture</h3>${formatParas(scr, true)}</div>`;
-  }
-  if(showLore){
-    blocks += `<div class="codex-block lore-block"><h3>𓁹 Temple Lore</h3>${formatParas(lore, false)}</div>`;
-  }
-  if(showDesc){
-    blocks += `<div class="codex-block record-block"><h3>Origin &amp; Record</h3>${formatParas(desc, false)}</div>`;
-  }
-  if(showBrief){
-    blocks += `<div class="codex-block brief-block"><h3>In Brief</h3><p>${esc(summary)}</p></div>`;
+  function splitReadable(text){
+    if(!text) return [];
+    if(text.includes('\n')) return text.split(/\n+/).filter(Boolean);
+    return text.replace(/([.!?])\s+(?=[A-Z])/g,'$1\n').split(/\n+/).filter(t=>t.trim().length>8);
   }
 
-  const tags = (r.tags||[]).filter(Boolean);
-  const tagHtml = tags.length
-    ? `<div class="codex-tags">${tags.map(t=>`<span class="codex-tag">#${esc(t)}</span>`).join('')}</div>` : '';
-
-  const witness = [];
-  if(r.creator) witness.push(`Creator: ${esc(r.creator)}`);
-  if(r.origin) witness.push(`Origin: ${esc(r.origin)}`);
-  const witnessHtml = witness.length
-    ? `<div class="meta" style="margin-top:.6rem">${witness.map(w=>`<span class="chip">${w}</span>`).join('')}</div>` : '';
-
-  const links = [`<a href="/memes/#${r.id}">full archive entry →</a>`];
-  if(r.source_url) links.push(`<a href="${esc(r.source_url)}" target="_blank" rel="noopener">know your meme →</a>`);
-
-  const prev = idx > 0 ? flatOrder[idx-1] : null;
-  const next = idx < flatOrder.length-1 ? flatOrder[idx+1] : null;
-
-  return `<section class="relic" id="${r.id}" data-idx="${idx}">
-    <div class="relic-hero">
-      <div class="relic-visual">${visualHTML(r)}</div>
-      <div>
-        <div class="eyebrow">relic ${String(idx+1).padStart(3,'0')} of ${flatOrder.length}</div>
-        <h2>${esc(r.title)}</h2>
-        <div class="meta">
-          ${r.tier?`<span class="chip">${esc(r.tier)}</span>`:''}
-          ${r.year?`<span class="chip">${r.year}</span>`:''}
-          ${r.cat?`<span class="chip cat">${esc(CAT_LABELS[r.cat]||r.cat)}</span>`:''}
-          ${r.kek?`<span class="rating">${'𓂀'.repeat(r.kek)} <span style="color:var(--parchment-dim)">${r.kek}/5</span></span>`:''}
-        </div>
-        ${witnessHtml}
-      </div>
-    </div>
-    ${blocks}
-    ${tagHtml}
-    <div class="relic-foot">
-      <div class="links">${links.join('')}</div>
-      <div class="relic-pager">
-        <button class="pager-btn" data-goto="${prev?prev.id:''}" ${prev?'':'disabled'}>← prior</button>
-        <button class="pager-btn" data-goto="${next?next.id:''}" ${next?'':'disabled'}>next →</button>
-      </div>
-    </div>
-  </section>`;
-}
-
-function prefaceHTML(){
-  return `<div class="preface" id="codex-preface">
-    <p class="lead">The Codex is the Meme Bible — every relic inscribed with Temple lore, historical record, and the KEK connection.</p>
-    <p>Select a relic from the sidebar, or search by name. Each entry carries scripture (the canon voice), temple interpretation, origin notes, and tags. What the archive stores, the Codex teaches.</p>
-    <p style="font-size:.95rem;margin-top:1rem;color:var(--muted)">Offer new relics via Telegram <code style="color:var(--gold)">/meme Title | lore</code> — moderators inscribe what earns a place here.</p>
-  </div>`;
-}
-
-function render(rows){
-  allRows = rows;
-  flatOrder = rows.slice();
-  document.getElementById('codex-stats').textContent =
-    `${rows.length} relics inscribed · ${rows.filter(r=>r.img).length} with witness images`;
-
-  const used = new Set();
-  let sectionsHTML = prefaceHTML(), navHTML = '';
-  GROUPS.forEach(([cat,label])=>{
-    const items = rows.filter(r=>(r.cat||'modern')===cat);
-    if(!items.length) return;
-    items.forEach(r=>used.add(r.id));
-    navHTML += `<div class="navgroup" data-cat="${cat}"><span class="navgroup-title">${label}</span><ul>` +
-      items.map(r=>`<li><a class="navlink" data-target="${r.id}" data-title="${esc(r.title.toLowerCase())}">${esc(r.title)}</a></li>`).join('') +
-      `</ul></div>`;
-    items.forEach((r,i)=>{
-      const idx = flatOrder.findIndex(x=>x.id===r.id);
-      sectionsHTML += relicHTML(r, idx);
-    });
-  });
-  const rest = rows.filter(r=>!used.has(r.id));
-  if(rest.length){
-    navHTML += `<div class="navgroup"><span class="navgroup-title">More Relics</span><ul>` +
-      rest.map(r=>`<li><a class="navlink" data-target="${r.id}" data-title="${esc(r.title.toLowerCase())}">${esc(r.title)}</a></li>`).join('') + `</ul></div>`;
-    rest.forEach(r=>{
-      const idx = flatOrder.findIndex(x=>x.id===r.id);
-      sectionsHTML += relicHTML(r, idx);
-    });
+  function paras(text, cap){
+    const parts = splitReadable(text);
+    return parts.map((p,i)=>`<p class="${cap&&i===0?'firstcap':''}">${esc(p.trim())}</p>`).join('');
   }
 
-  const searchEl = searchInput;
-  sidebar.innerHTML = '';
-  sidebar.appendChild(searchEl);
-  sidebar.insertAdjacentHTML('beforeend', navHTML);
-  content.innerHTML = sectionsHTML;
-
-  const sections = Array.from(content.querySelectorAll('.relic'));
-  const navlinks = Array.from(sidebar.querySelectorAll('.navlink'));
-
-  function show(id){
-    let ok = false;
-    sections.forEach(s=>{
-      const on = s.id === id;
-      s.classList.toggle('show', on);
-      if(on) ok = true;
-    });
-    if(!ok && sections[0]){ id = sections[0].id; sections[0].classList.add('show'); }
-    navlinks.forEach(l=>l.classList.toggle('active', l.dataset.target === id));
-    if(history.replaceState) history.replaceState(null, '', '#' + id);
-    closeMenu();
-  }
-
-  document.addEventListener('click', e=>{
-    const t = e.target.closest('[data-target]');
-    if(t){ e.preventDefault(); show(t.dataset.target); return; }
-    const p = e.target.closest('[data-goto]');
-    if(p && p.dataset.goto){ show(p.dataset.goto); }
-  });
-
-  searchInput.addEventListener('input', ()=>{
-    const q = searchInput.value.trim().toLowerCase();
-    navlinks.forEach(l=>{
-      const match = !q || l.dataset.title.includes(q) || l.dataset.target.includes(q);
-      l.classList.toggle('hidden', !match);
-    });
-    sidebar.querySelectorAll('.navgroup').forEach(g=>{
-      const visible = g.querySelectorAll('.navlink:not(.hidden)').length;
-      g.style.display = visible ? '' : 'none';
-    });
-  });
-
-  const start = (location.hash||'').replace('#','') || (sections[0] && sections[0].id);
-  show(start);
-}
-
-function openMenu(){ sidebar.classList.add('open'); scrim.classList.add('open'); }
-function closeMenu(){ sidebar.classList.remove('open'); scrim.classList.remove('open'); }
-document.getElementById('menubtn').addEventListener('click', openMenu);
-scrim.addEventListener('click', closeMenu);
-
-async function load(){
-  if(!SB_KEY){
-    content.innerHTML = '<div class="state">Supabase key missing in config.js</div>';
-    return;
-  }
-  try{
-    const url = `${SB_URL}/rest/v1/memes?select=id,title,year,tier,cat,kek,summary,scripture,source_url,lore,description,img,creator,origin,tags,icon&order=kek.desc&limit=500`;
-    const res = await fetch(url, { headers: { apikey: SB_KEY, Authorization: 'Bearer '+SB_KEY }});
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    let rows = await res.json();
-    rows = rows.filter(hasContent);
-    if(!rows.length){
-      content.innerHTML = '<div class="state">the codex awaits scripture. run tools/backfill_codex.js with your service key.</div>';
-      return;
+  function banner(r){
+    if(r.img){
+      return `<div class="relic-banner">
+        <img src="${esc(r.img)}" alt="${esc(r.title)}" loading="lazy" onerror="this.closest('.relic-banner').classList.add('no-img');this.remove()">
+        <div class="relic-banner-overlay"></div>
+        <div class="relic-banner-caption">
+          <div class="eyebrow">relic ${String(order.findIndex(x=>x.id===r.id)+1).padStart(3,'0')} of ${order.length} · ${esc(CAT[r.cat]||r.cat||'')}</div>
+          <h2>${esc(r.title)}</h2>
+        </div></div>`;
     }
-    rows.sort((a,b)=>(a.year||9999)-(b.year||9999));
-    render(rows);
-  }catch(err){
-    content.innerHTML = `<div class="state">the vault did not answer.<br><span style="font-size:.85rem;opacity:.7">${esc(String(err))}</span></div>`;
+    return `<div class="relic-banner no-img">
+      <span class="banner-glyph">${esc(r.icon||'𓂀')}</span>
+      <div class="relic-banner-overlay"></div>
+      <div class="relic-banner-caption">
+        <div class="eyebrow">relic ${String(order.findIndex(x=>x.id===r.id)+1).padStart(3,'0')} of ${order.length}</div>
+        <h2>${esc(r.title)}</h2>
+      </div></div>`;
   }
-}
-load();
+
+  function manifest(r){
+    const cells = [];
+    if(r.tier) cells.push(['Tier',`<span class="val gold">${esc(r.tier)}</span>`]);
+    if(r.year) cells.push(['Year',`<span class="val">${r.year}</span>`]);
+    if(r.creator) cells.push(['Creator',`<span class="val">${esc(r.creator)}</span>`]);
+    if(r.origin) cells.push(['Origin',`<span class="val">${esc(r.origin)}</span>`]);
+    if(r.kek) cells.push(['KEK Bond',`<span class="val"><div class="kek-meter">${Array.from({length:5}).map((_,i)=>`<span>${i<r.kek?'𓂀':'○'}</span>`).join('')}</div></span>`]);
+    if(r.cat) cells.push(['Chamber',`<span class="val">${esc(CAT[r.cat]||r.cat)}</span>`]);
+    return `<div class="relic-manifest">${cells.map(([l,v])=>`<div class="manifest-cell"><span class="lbl">${l}</span>${v}</div>`).join('')}</div>`;
+  }
+
+  function section(title, text, cls, cap){
+    if(!text || !text.trim()) return '';
+    return `<div class="codex-section ${cls}"><h3>${title}</h3>${paras(text.trim(), cap)}</div>`;
+  }
+
+  function related(r){
+    const rel = rows.filter(x=>x.cat===r.cat && x.id!==r.id).slice(0,6);
+    if(!rel.length) return '';
+    return `<div class="codex-related"><h4>Related in ${esc(CAT[r.cat]||'this chamber')}</h4>
+      <div class="related-row">${rel.map(x=>`<span class="related-chip" data-goto="${x.id}">${esc(x.title)}</span>`).join('')}</div></div>`;
+  }
+
+  function relicHTML(r){
+    const idx = order.findIndex(x=>x.id===r.id);
+    const prev = idx>0?order[idx-1]:null, next = idx<order.length-1?order[idx+1]:null;
+    const lore = (r.lore||'').trim();
+    const desc = (r.description||'').trim();
+    const scr = (r.scripture||'').trim();
+    const summary = (r.summary||'').trim();
+    const tags = (r.tags||[]).filter(Boolean);
+
+    return `<article class="codex-relic" id="${r.id}">
+      ${banner(r)}
+      ${summary?`<blockquote class="relic-epigraph">&ldquo;${esc(summary)}&rdquo;</blockquote>`:''}
+      ${manifest(r)}
+      ${lore?section('𓁹 Temple Lore',lore,'lore',true):''}
+      ${desc?section('Origin &amp; Historical Record',desc,'record',!lore):''}
+      ${scr?section('𓂀 Full Scripture',scr,'scripture',!lore&&!desc):''}
+      ${tags.length?`<div class="codex-tags">${tags.map(t=>`<span class="codex-tag">#${esc(t)}</span>`).join('')}</div>`:''}
+      ${related(r)}
+      <div class="codex-foot">
+        <div>
+          <a href="/memes/#${r.id}">archive entry →</a>
+          ${r.source_url?` &nbsp;·&nbsp; <a href="${esc(r.source_url)}" target="_blank" rel="noopener">know your meme →</a>`:''}
+        </div>
+        <div class="codex-pager">
+          <button data-goto="${prev?prev.id:''}" ${prev?'':'disabled'}>← ${prev?esc(prev.title).slice(0,18):'start'}</button>
+          <button data-goto="${next?next.id:''}" ${next?'':'disabled'}>${next?esc(next.title).slice(0,18):'end'} →</button>
+        </div>
+      </div>
+    </article>`;
+  }
+
+  function preface(){
+    return `<div class="codex-preface" id="codex-preface">
+      <p class="lead">The Codex is the Meme Bible — every relic inscribed with Temple lore, historical record, scripture, and the KEK bond.</p>
+      <p style="color:var(--parchment-dim);margin-top:.8rem">Each entry below carries an epigraph, witness image, manifest of origin, temple interpretation, and the full canon text. Select a relic from the sidebar or search by name.</p>
+    </div>`;
+  }
+
+  function render(){
+    document.getElementById('codex-stats').textContent =
+      `${rows.length} relics · ${rows.filter(r=>r.img).length} with witness images · ${GROUPS.length} chambers`;
+
+    const used = new Set();
+    let html = preface(), nav = '';
+    GROUPS.forEach(([cat,label])=>{
+      const items = rows.filter(r=>(r.cat||'modern')===cat);
+      if(!items.length) return;
+      items.forEach(r=>used.add(r.id));
+      nav += `<div class="codex-navgroup" data-cat="${cat}"><span class="codex-navtitle">${label} (${items.length})</span>` +
+        items.map(r=>`<a class="codex-navlink" data-target="${r.id}" data-q="${esc(r.title.toLowerCase())}">${esc(r.title)}</a>`).join('') + `</div>`;
+      html += items.map(relicHTML).join('');
+    });
+    const rest = rows.filter(r=>!used.has(r.id));
+    if(rest.length){
+      nav += `<div class="codex-navgroup"><span class="codex-navtitle">More (${rest.length})</span>` +
+        rest.map(r=>`<a class="codex-navlink" data-target="${r.id}" data-q="${esc(r.title.toLowerCase())}">${esc(r.title)}</a>`).join('') + `</div>`;
+      html += rest.map(relicHTML).join('');
+    }
+
+    const s = search;
+    sidebar.innerHTML = '';
+    sidebar.appendChild(s);
+    sidebar.insertAdjacentHTML('beforeend', nav);
+    main.innerHTML = html;
+
+    const relics = [...main.querySelectorAll('.codex-relic')];
+    const links = [...sidebar.querySelectorAll('.codex-navlink')];
+
+    function show(id){
+      let ok = false;
+      relics.forEach(el=>{const on=el.id===id;el.classList.toggle('show',on);if(on)ok=true;});
+      if(!ok&&relics[0]){id=relics[0].id;relics[0].classList.add('show');}
+      links.forEach(l=>l.classList.toggle('active',l.dataset.target===id));
+      const pre=document.getElementById('codex-preface');
+      if(pre) pre.style.display = id ? 'none' : 'block';
+      history.replaceState(null,'','#'+id);
+      main.scrollIntoView({behavior:'smooth',block:'start'});
+      closeSb();
+    }
+
+    main.addEventListener('click',e=>{
+      const t=e.target.closest('[data-target]');
+      if(t){e.preventDefault();show(t.dataset.target);return;}
+      const g=e.target.closest('[data-goto]');
+      if(g&&g.dataset.goto) show(g.dataset.goto);
+    });
+    sidebar.addEventListener('click',e=>{
+      const t=e.target.closest('[data-target]');
+      if(t){e.preventDefault();show(t.dataset.target);}
+    });
+
+    search.addEventListener('input',()=>{
+      const q=search.value.trim().toLowerCase();
+      links.forEach(l=>l.classList.toggle('hidden',q&&!l.dataset.q.includes(q)&&!l.dataset.target.includes(q)));
+      sidebar.querySelectorAll('.codex-navgroup').forEach(g=>{
+        g.style.display=g.querySelectorAll('.codex-navlink:not(.hidden)').length?'':'none';
+      });
+    });
+
+    show((location.hash||'').replace('#','')||relics[0]?.id);
+  }
+
+  function openSb(){sidebar.classList.add('open');document.getElementById('codex-scrim').classList.add('open');}
+  function closeSb(){sidebar.classList.remove('open');document.getElementById('codex-scrim').classList.remove('open');}
+  document.getElementById('codex-menubtn').addEventListener('click',openSb);
+  document.getElementById('codex-scrim').addEventListener('click',closeSb);
+
+  async function load(){
+    if(!KEY){main.innerHTML='<div class="codex-state">config.js missing Supabase key</div>';return;}
+    try{
+      const res=await fetch(`${SB}/rest/v1/memes?select=*&order=kek.desc&limit=500`,{headers:{apikey:KEY,Authorization:'Bearer '+KEY}});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      rows=(await res.json()).filter(r=>[r.scripture,r.lore,r.description,r.summary].some(t=>(t||'').trim().length>15));
+      if(!rows.length){main.innerHTML='<div class="codex-state">Codex empty — run tools/backfill_codex.js</div>';return;}
+      rows.sort((a,b)=>(a.year||9999)-(b.year||9999));
+      order=rows.slice();
+      render();
+    }catch(e){main.innerHTML=`<div class="codex-state">Vault error: ${esc(e.message)}</div>`;}
+  }
+  load();
+})();
 </script>
 </body>
 </html>
