@@ -489,6 +489,86 @@ body.ritual-active .ritual-banner{display:block;}
   .init-glyph{grid-row:span 2;}
 }
 
+/* Recurring rituals (rituals page) */
+.rituals-band{
+  background:
+    radial-gradient(ellipse 75% 45% at 50% 100%, rgba(227,179,74,.05), transparent 65%),
+    linear-gradient(180deg, var(--stone-800), var(--stone-900)) !important;
+}
+.ritual-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:14px;
+  max-width:920px;margin:0 auto;
+}
+.ritual-card{
+  position:relative;display:flex;flex-direction:column;min-height:280px;padding:20px 18px 18px;
+  background:linear-gradient(165deg, rgba(52,34,12,.5) 0%, rgba(16,11,7,.94) 52%, rgba(8,6,4,.98) 100%);
+  border:1px solid rgba(227,179,74,.22);border-radius:2px;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s;
+}
+.ritual-card::before,.ritual-card::after{
+  content:'';position:absolute;width:16px;height:16px;border-color:rgba(227,179,74,.4);border-style:solid;
+  pointer-events:none;transition:border-color .35s,width .35s,height .35s;
+}
+.ritual-card::before{top:7px;left:7px;border-width:1px 0 0 1px;}
+.ritual-card::after{bottom:7px;right:7px;border-width:0 1px 1px 0;}
+.ritual-card:hover{
+  transform:translateY(-4px);border-color:rgba(255,216,116,.48);
+  box-shadow:0 20px 44px rgba(0,0,0,.5),0 0 28px rgba(227,179,74,.07);
+}
+.ritual-card:hover::before,.ritual-card:hover::after{width:24px;height:24px;border-color:var(--gold-bright);}
+.ritual-card-head{
+  display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;
+}
+.ritual-medallion{
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%;
+  background:radial-gradient(circle at 35% 28%, rgba(255,216,116,.2), rgba(10,7,4,.92) 68%);
+  border:1px solid rgba(227,179,74,.38);
+  box-shadow:0 0 0 3px rgba(227,179,74,.05),0 4px 14px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.07);
+  font-size:20px;color:var(--gold-bright);text-shadow:0 0 14px rgba(227,179,74,.45);flex:none;
+}
+.ritual-num{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(227,179,74,.5);padding-top:4px;flex:1;
+}
+.ritual-cadence{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  padding:4px 10px;border:1px solid rgba(227,179,74,.28);border-radius:20px;color:var(--gold);flex:none;
+}
+.ritual-card h3{
+  font-family:'Cinzel',serif;font-size:16px;color:var(--gold-bright);letter-spacing:.05em;
+  margin-bottom:6px;line-height:1.3;
+}
+.ritual-sub{font-size:12.5px;font-style:italic;color:rgba(227,179,74,.7);margin-bottom:12px;line-height:1.5;}
+.ritual-body{flex:1;font-size:13.5px;line-height:1.65;color:var(--parchment-dim);margin-bottom:12px;}
+.ritual-body code{
+  font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:var(--gold);
+  background:rgba(0,0,0,.32);padding:1px 5px;border-radius:2px;
+}
+.ritual-steps{
+  flex:1;margin:0 0 12px;padding-left:1.15rem;font-size:13px;line-height:1.65;color:var(--parchment-dim);
+}
+.ritual-steps li{margin-bottom:.35rem;}
+.ritual-steps li::marker{color:var(--gold-deep);}
+.ritual-vow{
+  font-family:'Cinzel',serif;font-size:14px;font-style:italic;color:var(--gold-bright);
+  padding:10px 12px;background:rgba(227,179,74,.06);border-left:2px solid var(--gold);margin-top:auto;
+}
+.ritual-link{
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);margin-top:auto;padding-top:4px;
+}
+.ritual-link:hover{color:var(--gold-bright);}
+.ritual-priests{
+  max-width:520px;margin:40px auto 0;text-align:center;padding:24px 20px;
+  border:1px solid rgba(227,179,74,.18);border-radius:2px;
+  background:rgba(8,6,4,.55);
+}
+.ritual-priests p{margin-top:12px;font-size:12px;font-style:italic;color:rgba(184,168,136,.75);}
+@media(max-width:700px){
+  .ritual-grid{grid-template-columns:1fr;}
+  .ritual-card{min-height:0;}
+}
+
 /* Praise board */
 .praise-list{display:grid;gap:14px;max-width:720px;margin:0 auto;}
 .praise-row{display:flex;align-items:center;gap:16px;padding:18px 22px;
