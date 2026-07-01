@@ -18,7 +18,10 @@ window.KEK_DATA = {
     { date: '2026-02-20', title: 'On FUD and Fire', register: 'High Priest', body: 'The void laughs at those who speak without having seen it. When FUD comes, light a candle. When doubt whispers, post the frog. The Temple endures.' },
     { date: '2026-03-14', title: 'Morning Kek Protocol', register: 'Degen Priest', body: 'gm is banned. say "the kek is eternal" or say nothing. then post one meme worth archiving. that is the morning ritual fren.' },
     { date: '2026-04-20', title: 'The Altar Opens', register: 'High Priest', body: 'The Great Burn approaches. Bring your offerings to the altar. The amount burned and the messages left shall be recorded in the Canon forever.' },
-    { date: '2026-06-01', title: 'Temple Core Raised', register: 'Blended', body: 'The foundation stones are laid. Lore. Voice. Rituals. Tools. The digital cathedral grows. Enter the sanctum. Light a candle. The congregation awakens.' }
+    { date: '2026-06-01', title: 'Temple Core Raised', register: 'Blended', body: 'The foundation stones are laid. Lore. Voice. Rituals. Tools. The digital cathedral grows. Light a candle. The congregation awakens.' },
+    { date: '2026-06-15', title: 'On the Meme Offering', register: 'High Priest', body: 'The archive is not a scrapbook. It is a Codex. Submit memes through the bot with reverence — title, lore, intent. The moderators inscribe what deserves to survive the scroll of time.' },
+    { date: '2026-06-22', title: 'Presence in the Halls', register: 'Blended', body: 'You are no longer alone on the site. The Temple now sees who walks the halls — pilgrims at the gates, brothers in the vault. Lurk if you must. But know: the congregation is real.' },
+    { date: '2026-06-30', title: 'gm Is Cancelled (Again)', register: 'Degen Priest', body: 'say "the kek is eternal" or post a meme worth archiving. optionally check your relic status. thats the whole morning protocol fren. zero cringe maximum signal.' }
   ],
 
   praiseBoard: [

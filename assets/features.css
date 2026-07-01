@@ -400,6 +400,16 @@ body.ritual-active .ritual-banner{display:block;}
 .meme-card .tag{display:inline-block;font-size:10px;letter-spacing:2px;text-transform:uppercase;
   padding:3px 8px;border:1px solid rgba(227,179,74,.3);border-radius:2px;color:var(--gold);margin-top:8px;}
 
+/* Meme offering CTA */
+.meme-offering{margin-top:48px;padding:32px 28px;
+  background:linear-gradient(160deg,rgba(40,26,8,.85),rgba(18,12,7,.95));
+  border:1px solid rgba(227,179,74,.28);border-radius:8px;text-align:center;}
+.meme-offering h3{font-family:'Cinzel',serif;color:var(--gold-bright);font-size:22px;margin:12px 0;}
+.meme-offering p{color:var(--parchment-dim);max-width:560px;margin:0 auto 12px;}
+.meme-offering-cmd code{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--gold);
+  background:rgba(0,0,0,.35);padding:8px 14px;border-radius:4px;display:inline-block;}
+.meme-offering-hint{font-size:14px;font-style:italic;}
+
 /* Transmissions */
 .tx-list{max-width:800px;margin:0 auto;}
 .tx-item{padding:28px 0;border-bottom:1px solid rgba(227,179,74,.15);}

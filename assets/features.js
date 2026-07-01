@@ -592,7 +592,7 @@
       const btn = document.getElementById('meme-load-more');
       if (btn) btn.remove();
       grid.innerHTML = '<div class="mdb-loading"><span class="mdb-loading-glyph">𓂀</span><p>Loading the archive…</p></div>';
-      fetchPage(0, false).catch(() => {
+      return fetchPage(0, false).catch(() => {
         grid.innerHTML = '<div class="mdb-empty"><span>𓆏</span><p>Could not reach the archive. Check your connection.</p></div>';
       });
     }
@@ -676,7 +676,27 @@
       sortSelect.addEventListener('change', () => { activeSort = sortSelect.value; reset(); });
     }
 
-    reset();
+    async function tryHashOpen() {
+      const id = (location.hash || '').replace(/^#/, '').trim();
+      if (!id) return;
+      let row = cache.find(m => m.id === id);
+      if (!row) {
+        try {
+          const r = await fetch(
+            `${SB_URL}/rest/v1/memes?select=*&id=eq.${encodeURIComponent(id)}`,
+            { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } }
+          );
+          if (r.ok) {
+            const rows = await r.json();
+            if (rows[0]) { row = rows[0]; cache.push(row); }
+          }
+        } catch (e) { /* ignore */ }
+      }
+      if (row) openModal(row.id);
+    }
+
+    reset().then(tryHashOpen);
+    window.addEventListener('hashchange', tryHashOpen);
   }
 
   /* ---- Meme rotator ---- */
@@ -920,7 +940,7 @@
   /* ---- Transmissions filter ---- */
   function initTransmissions() {
     const list = document.getElementById('tx-list');
-    const filters = document.querySelectorAll('.tx-filter');
+    const filters = document.querySelectorAll('.tx-filter, .filter-pill[data-filter]');
     if (!list) return;
 
     function render(reg) {
