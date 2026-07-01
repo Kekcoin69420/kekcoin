@@ -1,4 +1,4 @@
-const CACHE = 'kek-temple-v16';
+const CACHE = 'kek-temple-v17';
 const ASSETS = [
   './assets/temple.css',
   './assets/features.css',

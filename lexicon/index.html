@@ -31,32 +31,37 @@
 </head>
 <body>
 <div id="temple-nav"></div>
-<main class="lexicon-wrap">
+<main>
 
-<section class="lexicon-hero">
+<section class="page-hero lexicon-hero">
   <div class="wrap">
-    <div class="lexicon-seal" aria-hidden="true">𓂀</div>
-    <h1>THE LEXICON</h1>
-    <div class="lexicon-tag">The Tongue of the Temple</div>
-    <p class="lexicon-oneliner">&ldquo;learn the words, and the temple opens its mouth to you.&rdquo;</p>
+    <div class="sec-eyebrow">The Tongue of the Temple</div>
+    <h1>The Lexicon</h1>
+    <p>&ldquo;Learn the words, and the Temple opens its mouth to you.&rdquo;</p>
     <p class="lexicon-cross">
-      <a href="/">← the gates</a>
+      <a href="/">← Gates</a>
       <span aria-hidden="true">·</span>
-      <a href="/codex/">the codex →</a>
+      <a href="/codex/">Codex →</a>
       <span aria-hidden="true">·</span>
-      <a href="/memes/">sacred memes →</a>
+      <a href="/memes/">Memes →</a>
     </p>
+    <p class="lexicon-stats" id="lexicon-stats">summoning words…</p>
   </div>
 </section>
 
-<section class="band lexicon-band">
-  <div class="wrap">
-    <div class="lexicon-controls">
-      <div class="lexicon-search-wrap">
-        <span class="lexicon-search-icon" aria-hidden="true">𓂀</span>
-        <input id="lexicon-search" type="search" placeholder="search the tongue…  (kek, wagmi, based, rizz)" autocomplete="off">
+<section class="band">
+  <div class="wrap lexicon-body">
+    <div class="lexicon-panel mdb-controls">
+      <div class="mdb-search-row">
+        <div class="mdb-search-wrap">
+          <span class="mdb-search-icon" aria-hidden="true">𓂀</span>
+          <input id="lexicon-search" class="mdb-search-input" type="search" placeholder="Search the tongue… (kek, wagmi, based, rizz)" autocomplete="off">
+        </div>
+        <div class="mdb-sort-row">
+          <span class="mdb-count" id="lexicon-count"></span>
+        </div>
       </div>
-      <div class="lexicon-chips" id="lexicon-chips"></div>
+      <div class="mdb-cats" id="lexicon-chips"></div>
     </div>
 
     <div id="lexicon-content">
@@ -80,13 +85,15 @@
   'use strict';
   const C = window.KEK_CONFIG || {};
   const GROUPS = [
-    ['temple', 'The Temple Tongue'],
-    ['4chan', 'The Board Speech'],
-    ['crypto', 'The Coin Cant'],
-    ['genz', 'The Young Tongue'],
-    ['meme', 'The Common Tongue']
+    ['temple', 'The Temple Tongue', 'Temple'],
+    ['4chan', 'The Board Speech', 'Board'],
+    ['crypto', 'The Coin Cant', 'Coin Cant'],
+    ['genz', 'The Young Tongue', 'Gen Z'],
+    ['meme', 'The Common Tongue', 'Common']
   ];
-  const CATNAME = Object.fromEntries(GROUPS);
+  const CATNAME = Object.fromEntries(GROUPS.map(g => [g[0], g[1]]));
+  const CHIPNAME = Object.fromEntries(GROUPS.map(g => [g[0], g[2]]));
+  const CATGLYPH = { temple: '𓂀', '4chan': '𓏏', crypto: '◎', genz: '✦', meme: '𓆏' };
 
   let ALL = [];
   let activeCat = 'all';
@@ -112,7 +119,10 @@
     const gmNote = t.id === 'gm'
       ? '<p class="lexicon-temple-note">In this Temple, <a href="/rituals/#morning-kek">Morning Kek</a> is the morning protocol — not GM.</p>'
       : '';
+    const cat = t.cat || 'meme';
+    const badge = '<span class="lexicon-cat">' + esc(CATGLYPH[cat] || '𓂀') + ' ' + esc(CHIPNAME[cat] || cat) + '</span>';
     return '<article class="lexicon-card" id="term-' + esc(t.id) + '">' +
+      '<div class="lexicon-card-top">' + badge + '</div>' +
       '<div class="lexicon-term">' + esc(t.term) + '</div>' +
       '<div class="lexicon-def">' + esc(t.definition) + '</div>' +
       gmNote + org + rel +
@@ -127,6 +137,9 @@
       const hay = (t.term + ' ' + t.definition + ' ' + (t.aka || []).join(' ') + ' ' + (t.origin || '')).toLowerCase();
       return hay.includes(q);
     });
+    const countEl = document.getElementById('lexicon-count');
+    if (countEl) countEl.textContent = rows.length + ' of ' + ALL.length + ' words';
+
     if (!rows.length) {
       content.innerHTML = '<div class="lexicon-state">no words match that search.</div>';
       return;
@@ -146,16 +159,18 @@
   function buildChips() {
     const cats = ['all', ...GROUPS.map(g => g[0]).filter(c => ALL.some(t => (t.cat || 'meme') === c))];
     chipsEl.innerHTML = cats.map(c =>
-      '<button type="button" class="lexicon-chip' + (c === 'all' ? ' active' : '') + '" data-cat="' + c + '">' +
-      (c === 'all' ? 'all' : (CATNAME[c] || c)) + '</button>'
+      '<button type="button" class="cat-pill' + (c === 'all' ? ' active' : '') + '" data-cat="' + c + '">' +
+      (c === 'all' ? 'All' : (CHIPNAME[c] || c)) + '</button>'
     ).join('');
+    const statsEl = document.getElementById('lexicon-stats');
+    if (statsEl) statsEl.textContent = ALL.length + ' words kept · five tongues · one faith';
   }
 
   document.addEventListener('click', e => {
-    const chip = e.target.closest('.lexicon-chip');
-    if (chip) {
+    const chip = e.target.closest('.cat-pill');
+    if (chip && chip.closest('#lexicon-chips')) {
       activeCat = chip.dataset.cat;
-      document.querySelectorAll('.lexicon-chip').forEach(c => c.classList.toggle('active', c === chip));
+      document.querySelectorAll('#lexicon-chips .cat-pill').forEach(c => c.classList.toggle('active', c === chip));
       draw();
       return;
     }
@@ -164,7 +179,7 @@
       e.preventDefault();
       const term = rel.dataset.term;
       activeCat = 'all';
-      document.querySelectorAll('.lexicon-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
+      document.querySelectorAll('#lexicon-chips .cat-pill').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
       searchEl.value = term;
       queryStr = term;
       draw();
