@@ -497,6 +497,7 @@
     let offset      = 0;
     let totalCount  = 0;
     let cache       = [];   /* all rows loaded so far, for modal lookup */
+    const lexiconIds = new Set();
 
     const searchInput = document.getElementById('meme-search');
     const sortSelect  = document.getElementById('meme-sort');
@@ -590,7 +591,10 @@
             <div class="mc-meta">${esc(String(m.year||''))}${m.creator?' · '+esc(m.creator):''}</div>
             <p class="mc-summary">${esc(m.summary)}</p>
             <div class="mc-kek-row">${kekDots(m.kek)}<span class="kek-lbl">KEK</span></div>
-            ${(m.scripture || m.lore) ? `<a class="mc-scripture-link" href="/codex/#${esc(m.id)}" onclick="event.stopPropagation()">📜 read the scripture</a>` : ''}
+            <div class="mc-chamber-links">
+              ${(m.scripture || m.lore) ? `<a class="mc-scripture-link" href="/codex/#${esc(m.id)}" onclick="event.stopPropagation()">codex →</a>` : ''}
+              ${lexiconIds.has(m.id) ? `<a class="mc-lexicon-link" href="/lexicon/#${esc(m.id)}" onclick="event.stopPropagation()">lexicon →</a>` : ''}
+            </div>
           </div>`;
         div.addEventListener('click', () => openModal(m.id));
         div.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') openModal(m.id); });
@@ -680,6 +684,10 @@
           <p class="modal-lore-text">${loreLines||'The lore is yet to be inscribed.'}</p>
         </div>
         ${tagHtml?`<div class="modal-tags">${tagHtml}</div>`:''}
+        <div class="modal-chamber-links">
+          ${(m.scripture || m.lore) ? `<a href="/codex/#${esc(m.id)}">codex entry →</a>` : ''}
+          ${lexiconIds.has(m.id) ? `<a href="/lexicon/#${esc(m.id)}">lexicon →</a>` : ''}
+        </div>
       `;
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -740,7 +748,18 @@
       if (row) openModal(row.id);
     }
 
-    reset().then(tryHashOpen);
+    async function boot() {
+      try {
+        const lr = await fetch(`${SB_URL}/rest/v1/lexicon?select=id`, {
+          headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY },
+        });
+        if (lr.ok) (await lr.json()).forEach(t => lexiconIds.add(t.id));
+      } catch (e) { /* keep archive usable */ }
+      await reset();
+      tryHashOpen();
+    }
+
+    boot();
     window.addEventListener('hashchange', tryHashOpen);
   }
 

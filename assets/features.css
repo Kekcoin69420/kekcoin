@@ -1414,6 +1414,30 @@ main{position:relative;z-index:3;min-height:50vh;}
   color: var(--parchment-dim);
   margin-left: 4px;
 }
+.mc-chamber-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(193,150,84,0.12);
+}
+.mc-scripture-link,
+.mc-lexicon-link {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(193,150,84,0.3);
+  transition: color 0.2s, border-color 0.2s;
+}
+.mc-scripture-link:hover,
+.mc-lexicon-link:hover {
+  color: var(--torch);
+  border-color: var(--torch);
+}
 
 /* ── Modal ───────────────────────────────────────────── */
 .meme-modal {
@@ -1576,6 +1600,27 @@ main{position:relative;z-index:3;min-height:50vh;}
   color: var(--parchment-dim);
   letter-spacing: 0.5px;
 }
+.modal-chamber-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(193,150,84,0.15);
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.modal-chamber-links a {
+  color: var(--gold-bright);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(193,150,84,0.35);
+}
+.modal-chamber-links a:hover {
+  color: var(--torch);
+  border-color: var(--torch);
+}
 
 @media (max-width: 560px) {
   .meme-modal-wrap { padding: 24px 18px; }
@@ -1679,6 +1724,15 @@ main{position:relative;z-index:3;min-height:50vh;}
   color:var(--gold-deep);font-style:normal;font-family:'JetBrains Mono',monospace;
   font-size:10px;letter-spacing:.08em;text-transform:uppercase;
 }
+.lexicon-canonical{
+  margin:.85rem 0 0;padding-top:.7rem;border-top:1px solid rgba(227,179,74,.12);
+  font-family:'Cinzel',serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+}
+.lexicon-canonical a{
+  color:var(--gold-bright);text-decoration:none;border-bottom:1px solid rgba(227,179,74,.3);
+  transition:color .2s,border-color .2s;
+}
+.lexicon-canonical a:hover{color:var(--torch);border-color:var(--torch);}
 .lexicon-see{margin:.75rem 0 0;font-size:12px;color:var(--muted);}
 .lexicon-see a{
   font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);

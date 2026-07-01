@@ -97,6 +97,8 @@
 
   let ALL = [];
   let idMap = {};
+  let memeIds = new Set();
+  let codexIds = new Set();
   let activeCat = 'all';
   let queryStr = '';
   let pendingHash = '';
@@ -146,11 +148,18 @@
       : '';
     const cat = t.cat || 'meme';
     const badge = '<span class="lexicon-cat">' + esc(CATGLYPH[cat] || '𓂀') + ' ' + esc(CHIPNAME[cat] || cat) + '</span>';
+    let canon = '';
+    if (codexIds.has(t.id) || memeIds.has(t.id)) {
+      const links = [];
+      if (codexIds.has(t.id)) links.push('<a href="/codex/#' + esc(t.id) + '">codex entry →</a>');
+      if (memeIds.has(t.id)) links.push('<a href="/memes/#' + esc(t.id) + '">archive relic →</a>');
+      canon = '<div class="lexicon-canonical">' + links.join(' · ') + '</div>';
+    }
     return '<article class="lexicon-card" id="term-' + esc(t.id) + '">' +
       '<div class="lexicon-card-top">' + badge + '</div>' +
       '<div class="lexicon-term">' + esc(t.term) + '</div>' +
       '<div class="lexicon-def">' + esc(t.definition) + '</div>' +
-      org + rel +
+      org + rel + canon +
       '</article>';
   }
 
@@ -254,15 +263,23 @@
       return;
     }
     try {
-      const url = C.SUPABASE_URL + '/rest/v1/lexicon?select=id,term,aka,cat,definition,origin,related&order=term.asc';
-      const res = await fetch(url, {
-        headers: {
-          apikey: C.SUPABASE_ANON_KEY,
-          Authorization: 'Bearer ' + C.SUPABASE_ANON_KEY
-        }
-      });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      ALL = await res.json();
+      const headers = {
+        apikey: C.SUPABASE_ANON_KEY,
+        Authorization: 'Bearer ' + C.SUPABASE_ANON_KEY
+      };
+      const [lexRes, memeRes] = await Promise.all([
+        fetch(C.SUPABASE_URL + '/rest/v1/lexicon?select=id,term,aka,cat,definition,origin,related&order=term.asc', { headers }),
+        fetch(C.SUPABASE_URL + '/rest/v1/memes?select=id,scripture,lore', { headers })
+      ]);
+      if (!lexRes.ok) throw new Error('HTTP ' + lexRes.status);
+      ALL = await lexRes.json();
+      if (memeRes.ok) {
+        const memes = await memeRes.json();
+        memes.forEach(m => {
+          memeIds.add(m.id);
+          if ((m.scripture || '').trim() || (m.lore || '').trim()) codexIds.add(m.id);
+        });
+      }
       if (!ALL.length) {
         content.innerHTML = '<div class="lexicon-state">the lexicon is empty.</div>';
         return;

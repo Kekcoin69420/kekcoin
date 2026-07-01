@@ -156,6 +156,7 @@
   var side = document.getElementById('codex-side');
   var rows = [];
   var order = [];
+  var lexiconIds = {};
   var rowMap = {};
 
   function esc(s) {
@@ -248,6 +249,7 @@
       (tags.length ? '<div class="codex-tags">' + tags.map(function (t) { return '<span class="codex-tag">#' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
       '<div class="entry-foot">' +
         '<div><a href="/memes/#' + esc(r.id) + '">archive entry →</a>' +
+        (lexiconIds[r.id] ? ' · <a href="/lexicon/#' + esc(r.id) + '">lexicon →</a>' : '') +
         (r.source_url ? ' · <a href="' + esc(r.source_url) + '" target="_blank" rel="noopener">know your meme →</a>' : '') + '</div>' +
         '<div class="entry-pager">' +
           '<button type="button" data-goto="' + (prev ? esc(prev.id) : '') + '" ' + (prev ? '' : 'disabled') + '>← prior</button>' +
@@ -360,12 +362,15 @@
 
   async function load() {
     try {
-      var url = SB_URL + '/rest/v1/memes?select=id,title,year,tier,cat,kek,summary,scripture,source_url,lore,description,img,creator,origin,tags,icon&order=kek.desc&limit=500';
-      var res = await fetch(url, {
-        cache: 'no-store',
-        headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY }
-      });
+      var headers = { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY };
+      var memeUrl = SB_URL + '/rest/v1/memes?select=id,title,year,tier,cat,kek,summary,scripture,source_url,lore,description,img,creator,origin,tags,icon&order=kek.desc&limit=500';
+      var lexUrl = SB_URL + '/rest/v1/lexicon?select=id';
+      var res = await fetch(memeUrl, { cache: 'no-store', headers: headers });
+      var lexRes = await fetch(lexUrl, { cache: 'no-store', headers: headers });
       if (!res.ok) throw new Error('HTTP ' + res.status);
+      if (lexRes.ok) {
+        (await lexRes.json()).forEach(function (t) { lexiconIds[t.id] = true; });
+      }
       rows = await res.json();
       rows = rows.filter(function (r) {
         return [r.scripture, r.lore, r.description, r.summary].some(function (t) { return (t || '').trim().length > 12; });
