@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Lexicon · The Tongue of the Temple · Temple of Kek</title>
-<meta name="description" content="The Lexicon — a living glossary of meme and crypto culture, kept by the Temple of Kek. Search kek, wagmi, based, rizz, and forty-one words the faithful speak.">
+<meta name="description" content="The Lexicon — a living glossary of meme and crypto culture, kept by the Temple of Kek. Sixty-plus words the faithful speak — kek, wagmi, Morning Kek, jeet, and the Temple tongue.">
 <meta name="keywords" content="crypto slang, meme glossary, kek definition, wagmi meaning, based definition, temple of kek lexicon, degen dictionary">
 <meta name="author" content="Kekcoin Temple">
 <meta name="robots" content="index, follow">
@@ -96,8 +96,10 @@
   const CATGLYPH = { temple: '𓂀', '4chan': '𓏏', crypto: '◎', genz: '✦', meme: '𓆏' };
 
   let ALL = [];
+  let idMap = {};
   let activeCat = 'all';
   let queryStr = '';
+  let pendingHash = '';
 
   const content = document.getElementById('lexicon-content');
   const chipsEl = document.getElementById('lexicon-chips');
@@ -107,17 +109,40 @@
     return String(s || '').replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
   }
 
+  function buildIdMap() {
+    idMap = {};
+    ALL.forEach(t => {
+      idMap[t.id] = t;
+      idMap[(t.term || '').toLowerCase()] = t;
+      (t.aka || []).forEach(a => { idMap[String(a).toLowerCase()] = t; });
+    });
+  }
+
+  function resolveId(ref) {
+    const raw = String(ref || '').trim();
+    if (!raw) return '';
+    if (idMap[raw]) return idMap[raw].id;
+    const low = raw.toLowerCase();
+    if (idMap[low]) return idMap[low].id;
+    const slug = low.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    if (idMap[slug]) return idMap[slug].id;
+    return slug || raw;
+  }
+
+  function labelForId(id) {
+    const row = idMap[id];
+    return row ? row.term : id;
+  }
+
   function cardHTML(t) {
     const rel = (t.related || []).length
-      ? '<div class="lexicon-see">see also: ' + t.related.map(r =>
-          '<a href="#" data-term="' + esc(r) + '">' + esc(r) + '</a>'
-        ).join(', ') + '</div>'
+      ? '<div class="lexicon-see">see also: ' + t.related.map(r => {
+          const rid = resolveId(r);
+          return '<a href="#' + esc(rid) + '" data-id="' + esc(rid) + '">' + esc(labelForId(rid)) + '</a>';
+        }).join(', ') + '</div>'
       : '';
     const org = t.origin
       ? '<div class="lexicon-origin"><b>origin</b> &nbsp;' + esc(t.origin) + '</div>'
-      : '';
-    const gmNote = t.id === 'gm'
-      ? '<p class="lexicon-temple-note">In this Temple, <a href="/rituals/#morning-kek">Morning Kek</a> is the morning protocol — not GM.</p>'
       : '';
     const cat = t.cat || 'meme';
     const badge = '<span class="lexicon-cat">' + esc(CATGLYPH[cat] || '𓂀') + ' ' + esc(CHIPNAME[cat] || cat) + '</span>';
@@ -125,8 +150,35 @@
       '<div class="lexicon-card-top">' + badge + '</div>' +
       '<div class="lexicon-term">' + esc(t.term) + '</div>' +
       '<div class="lexicon-def">' + esc(t.definition) + '</div>' +
-      gmNote + org + rel +
+      org + rel +
       '</article>';
+  }
+
+  function scrollToTerm(id, highlight) {
+    if (!id) return;
+    const card = document.getElementById('term-' + id);
+    if (!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (highlight) {
+      card.classList.add('lexicon-highlight');
+      setTimeout(() => card.classList.remove('lexicon-highlight'), 2200);
+    }
+  }
+
+  function applyHash() {
+    const id = (location.hash || '').replace(/^#/, '').trim();
+    if (!id) return;
+    pendingHash = id;
+    const row = idMap[id] || idMap[id.toLowerCase()];
+    if (row) {
+      activeCat = 'all';
+      queryStr = '';
+      searchEl.value = '';
+      document.querySelectorAll('#lexicon-chips .cat-pill').forEach(c =>
+        c.classList.toggle('active', c.dataset.cat === 'all')
+      );
+    }
+    draw();
   }
 
   function draw() {
@@ -154,6 +206,11 @@
         '<div class="lexicon-grid">' + items.map(cardHTML).join('') + '</div>';
     });
     content.innerHTML = html;
+    if (pendingHash) {
+      const target = pendingHash;
+      pendingHash = '';
+      requestAnimationFrame(() => scrollToTerm(target, true));
+    }
   }
 
   function buildChips() {
@@ -174,21 +231,22 @@
       draw();
       return;
     }
-    const rel = e.target.closest('[data-term]');
-    if (rel) {
+    const rel = e.target.closest('[data-id]');
+    if (rel && rel.closest('#lexicon-content')) {
       e.preventDefault();
-      const term = rel.dataset.term;
+      const id = rel.dataset.id;
+      history.replaceState(null, '', '#' + id);
       activeCat = 'all';
+      queryStr = '';
+      searchEl.value = '';
       document.querySelectorAll('#lexicon-chips .cat-pill').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
-      searchEl.value = term;
-      queryStr = term;
       draw();
-      const card = document.getElementById('term-' + term);
-      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      requestAnimationFrame(() => scrollToTerm(id, true));
     }
   });
 
-  searchEl.addEventListener('input', () => { queryStr = searchEl.value; draw(); });
+  searchEl.addEventListener('input', () => { queryStr = searchEl.value; pendingHash = ''; draw(); });
+  window.addEventListener('hashchange', applyHash);
 
   async function load() {
     if (!C.SUPABASE_URL || !C.SUPABASE_ANON_KEY) {
@@ -208,6 +266,14 @@
       if (!ALL.length) {
         content.innerHTML = '<div class="lexicon-state">the lexicon is empty.</div>';
         return;
+      }
+      buildIdMap();
+      const qParam = new URLSearchParams(location.search).get('q');
+      if (qParam && !location.hash) {
+        searchEl.value = qParam;
+        queryStr = qParam;
+      } else if (location.hash) {
+        pendingHash = location.hash.replace(/^#/, '').trim();
       }
       buildChips();
       draw();

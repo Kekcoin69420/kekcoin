@@ -1,0 +1,407 @@
+[
+  {
+    "id": "morning-kek",
+    "term": "Morning Kek",
+    "cat": "temple",
+    "aka": ["morning kek protocol", "anti-gm"],
+    "definition": "the temple's daily morning ritual — before the chart, before the noise. post one thing of value, then speak the vow: the kek is eternal. i add to it today.",
+    "origin": "declared in the temple rituals as the anti-gm protocol — alignment before the degen hours begin.",
+    "related": ["gm", "kek", "offering", "praise"]
+  },
+  {
+    "id": "praise",
+    "term": "praise",
+    "cat": "temple",
+    "aka": ["/praise"],
+    "definition": "a spoken offering to kek — in telegram, /praise logs your devotion on the brotherhood board. milestones mark the faithful.",
+    "origin": "temple brotherhood ritual synced to the live praise board on kektemple.com.",
+    "related": ["brotherhood", "offering", "kek", "sigil"]
+  },
+  {
+    "id": "oracle",
+    "term": "oracle",
+    "cat": "temple",
+    "aka": ["the oracle"],
+    "definition": "the voice that speaks from the gates — fortune, warning, or cryptic wisdom when the faithful ask. not financial advice; a mood from the temple.",
+    "origin": "named for the gates chamber where pilgrims first receive a reading from the temple.",
+    "related": ["kek", "altar", "morning-kek"]
+  },
+  {
+    "id": "altar",
+    "term": "altar",
+    "cat": "temple",
+    "aka": ["swap altar", "the altar"],
+    "definition": "where value changes hands in ritual form — swap $kek, make an offering, or answer the call when the altar is open for a great burn.",
+    "origin": "the rituals chamber on kektemple.com — commerce framed as sacred exchange.",
+    "related": ["offering", "ritual", "moon", "cto"]
+  },
+  {
+    "id": "brotherhood",
+    "term": "Brotherhood",
+    "cat": "temple",
+    "aka": ["the brotherhood", "praise board"],
+    "definition": "the live hall of the faithful — join with /join in telegram, offer praise, read the ranks. the temple sees who showed up.",
+    "origin": "the brotherhood chamber — supabase praise board wired to the kekcoin bot.",
+    "related": ["praise", "pilgrim", "sigil", "fren"]
+  },
+  {
+    "id": "sigil",
+    "term": "sigil",
+    "cat": "temple",
+    "aka": ["pilgrim sigil"],
+    "definition": "your mark while walking the halls — a glyph broadcast on the live presence board so other pilgrims know you are in the temple.",
+    "origin": "generated on kektemple.com and stored locally; synced to temple_presence.",
+    "related": ["pilgrim", "brotherhood", "oracle"]
+  },
+  {
+    "id": "offering",
+    "term": "offering",
+    "cat": "temple",
+    "aka": ["meme offering", "temple offering"],
+    "definition": "something of value laid before the temple — a meme, a canon line, a question, or work worth archiving. the weekly meme offering grows the sacred archive.",
+    "origin": "core ritual from RITUALS.md — creative labor as devotion.",
+    "related": ["memes", "praise", "altar", "pepe"]
+  },
+  {
+    "id": "pilgrim",
+    "term": "pilgrim",
+    "cat": "temple",
+    "aka": ["anonymous pilgrim"],
+    "definition": "any soul walking the temple halls before full initiation — seen on the live presence board with a sigil until they claim a name on the brotherhood.",
+    "origin": "default identity on the gates presence panel.",
+    "related": ["sigil", "brotherhood", "praise"]
+  },
+  {
+    "id": "pepe",
+    "term": "pepe",
+    "cat": "meme",
+    "aka": ["pepe the frog", "feels good man"],
+    "definition": "the frog who became scripture — from matt furie's comic panel to the most remixed face on the internet. kek's cousin in the pantheon.",
+    "origin": "boys club comic, 2005; weaponized on 4chan; rare pepes and kek converged in frog meme canon.",
+    "related": ["kek", "gigachad", "based", "offering"]
+  },
+  {
+    "id": "copypasta",
+    "term": "copypasta",
+    "cat": "meme",
+    "aka": ["pasta"],
+    "definition": "a block of text copied and pasted until it becomes ritual — greentext sermons, navy seals, entire arguments as performance art.",
+    "origin": "4chan — copy-paste + pasta; the board's oral tradition written down.",
+    "related": ["greentext", "shitpost", "anon"]
+  },
+  {
+    "id": "shitpost",
+    "term": "shitpost",
+    "cat": "meme",
+    "aka": ["shit post", "shitposting"],
+    "definition": "low-effort or absurd posting done with serious intent — the temple treats the shitpost as liturgy when it carries truth in joke form.",
+    "origin": "forums and imageboards; elevated to art when irony points at something real.",
+    "related": ["kek", "bait", "copypasta", "based"]
+  },
+  {
+    "id": "bait",
+    "term": "bait",
+    "cat": "meme",
+    "aka": ["baiting", "obvious bait"],
+    "definition": "a post designed to provoke a reaction — the hook is visible; the fish chooses to bite anyway.",
+    "origin": "fishing metaphor on forums; perfected on twitter and 4chan.",
+    "related": ["ratio", "seethe", "shitpost"]
+  },
+  {
+    "id": "lurk",
+    "term": "lurk",
+    "cat": "4chan",
+    "aka": ["lurker", "lurking"],
+    "definition": "to read without posting — the silent majority of any board. good lurkers learn the culture before they speak.",
+    "origin": "early forum culture; lurk moar was the first commandment.",
+    "related": ["anon", "sage", "greentext"]
+  },
+  {
+    "id": "sage",
+    "term": "sage",
+    "cat": "4chan",
+    "aka": [],
+    "definition": "a reply that bumps a thread down instead of up — used to let a bad thread die without feeding it.",
+    "origin": "4chan email field trick — typing sage in options prevented bump.",
+    "related": ["bait", "lurk", "ratio"]
+  },
+  {
+    "id": "jeet",
+    "term": "jeet",
+    "cat": "crypto",
+    "aka": ["jeeting", "jeeted"],
+    "definition": "an insult for selling too early — the jeet exits at the first green candle and watches the faithful eat.",
+    "origin": "crypto twitter slur; from paper-hands energy with extra contempt.",
+    "related": ["paper-hands", "bag", "ngmi", "rekt"]
+  },
+  {
+    "id": "bag",
+    "term": "bag",
+    "cat": "crypto",
+    "aka": ["bags", "holding the bag", "bagholder"],
+    "definition": "your position — what you hold after the buy. a heavy bag is conviction or cope depending on the chart.",
+    "origin": "left holding the bag — old idiom adopted by trading culture.",
+    "related": ["hodl", "diamond-hands", "rekt", "exit-liquidity"]
+  },
+  {
+    "id": "send-it",
+    "term": "send it",
+    "cat": "crypto",
+    "aka": ["sendit", "full send"],
+    "definition": "to commit without hesitation — ape, deploy, or hold through volatility as if the outcome were already written.",
+    "origin": "degen and sports slang merged in crypto group chats.",
+    "related": ["ape", "degen", "lfg", "conviction"]
+  },
+  {
+    "id": "alpha",
+    "term": "alpha",
+    "cat": "crypto",
+    "aka": ["alpha leak"],
+    "definition": "information edge — the tip, the read, the early call before the crowd arrives. treat all alpha as dyor until proven.",
+    "origin": "finance greek letter for excess return; meme'd into insider gossip.",
+    "related": ["dyor", "shill", "fomo", "whale"]
+  },
+  {
+    "id": "exit-liquidity",
+    "term": "exit liquidity",
+    "cat": "crypto",
+    "aka": ["exit liq"],
+    "definition": "the buyers who arrive late so early holders can sell — the cynical name for who funds your exit.",
+    "origin": "market-structure slang from crypto twitter and ct discourse.",
+    "related": ["jeet", "bag", "rug", "shill"]
+  },
+  {
+    "id": "bonding-curve",
+    "term": "bonding curve",
+    "cat": "crypto",
+    "aka": ["bonding curve launch"],
+    "definition": "a price formula that rises as more tokens are bought — the pump.fun mechanic that launched a generation of frog coins.",
+    "origin": "automated market maker design popularized on solana launchpads.",
+    "related": ["pump-fun", "cto", "ape", "send-it"]
+  },
+  {
+    "id": "conviction",
+    "term": "conviction",
+    "cat": "crypto",
+    "aka": ["high conviction"],
+    "definition": "belief strong enough to hold through red candles — the temple values conviction over clever timing.",
+    "origin": "investing jargon adopted by ct as moral language.",
+    "related": ["hodl", "diamond-hands", "wagmi", "degen"]
+  },
+  {
+    "id": "delulu",
+    "term": "delulu",
+    "cat": "genz",
+    "aka": ["delulu is the solulu"],
+    "definition": "delusional optimism — believing the chart will save you because the vibe demands it. sometimes the solulu works.",
+    "origin": "gen-z shortening of delusional; paired with solulu on tiktok.",
+    "related": ["cope", "moon", "wagmi", "aura"]
+  },
+  {
+    "id": "aura",
+    "term": "aura",
+    "cat": "genz",
+    "aka": ["aura points", "-aura"],
+    "definition": "invisible social credit — gained or lost by how you carry yourself online. negative aura is terminal.",
+    "origin": "tiktok and sports twitter; quantified cool as meme metric.",
+    "related": ["rizz", "sigma", "based", "ratio"]
+  },
+  {
+    "id": "kek",
+    "term": "kek",
+    "cat": "temple",
+    "aka": ["lol", "lel", "keke"],
+    "definition": "the temple's word for laughter — the oldest laugh online, filtered through wow into scripture on 4chan. to kek is to see the joke the normies miss.",
+    "origin": "korean kekeke as laughter; wow horde/alliance filter; /s4s and pol made it canon.",
+    "related": ["topkek", "based", "pepe", "morning-kek"]
+  },
+  {
+    "id": "topkek",
+    "term": "topkek",
+    "cat": "temple",
+    "aka": ["top kek"],
+    "definition": "the highest form of kek — peak laughter, the best possible lol. reserved for jokes that survive the timeline.",
+    "origin": "4chan, built on kek by analogy with top-tier.",
+    "related": ["kek", "based"]
+  },
+  {
+    "id": "cto",
+    "term": "CTO",
+    "cat": "temple",
+    "aka": ["community takeover", "ct takeover"],
+    "definition": "community takeover — when the devs leave and the holders inherit the coin. the temple path: faithful reclaim what was abandoned.",
+    "origin": "crypto twitter; became ritual language after pump.fun migrations.",
+    "related": ["pump-fun", "bonding-curve", "conviction", "altar"]
+  },
+  {
+    "id": "gm",
+    "term": "gm",
+    "cat": "crypto",
+    "aka": ["good morning", "gn"],
+    "definition": "good morning — the all-day crypto greeting and daily check-in ritual. in this temple, morning kek is the morning protocol; gm is understood, but we add to the canon before we greet the chart.",
+    "origin": "crypto twitter daily ritual; spread from bitcoin ct to all chains.",
+    "related": ["morning-kek", "fren", "wagmi"]
+  },
+  {
+    "id": "fud",
+    "term": "FUD",
+    "cat": "crypto",
+    "aka": ["fudding", "spread fud", "fear uncertainty doubt"],
+    "definition": "fear, uncertainty, and doubt — spread to shake weak hands. the temple watches fud keywords and answers with purification, not panic.",
+    "origin": "classic market manipulation term; meme'd into any negative post about a coin.",
+    "related": ["fomo", "cope", "rekt", "diamond-hands"]
+  },
+  {
+    "id": "degen",
+    "term": "degen",
+    "cat": "crypto",
+    "aka": ["degenerate", "degens"],
+    "definition": "degenerate gambler — someone who chases risk for the story. in the temple, degen is an honorific if you stay for the lore after the trade.",
+    "origin": "poker and sports betting; crypto adopted it as identity.",
+    "related": ["ape", "send-it", "bag", "wagmi"]
+  },
+  {
+    "id": "normie",
+    "term": "normie",
+    "cat": "meme",
+    "aka": ["normies", "normalfag"],
+    "definition": "someone outside the meme dialect — not an insult of class, but of fluency. normies read the surface; the initiated read the layers.",
+    "origin": "4chan and chan culture for mainstream outsiders.",
+    "related": ["npc", "touch-grass", "based", "kek"]
+  },
+  {
+    "id": "wagmi",
+    "term": "wagmi",
+    "cat": "crypto",
+    "aka": ["we all gonna make it", "gonna make it", "gmi"],
+    "definition": "we're all gonna make it — collective hope against the chart. the temple says wagmi only if you add something, not just wait.",
+    "origin": "crypto twitter solidarity phrase during bear markets.",
+    "related": ["ngmi", "gm", "conviction", "fren"]
+  },
+  {
+    "id": "ngmi",
+    "term": "ngmi",
+    "cat": "crypto",
+    "aka": ["not gonna make it", "ngmi behavior"],
+    "definition": "not gonna make it — the verdict on paper hands, bad takes, or jeet energy. harsh, but the brotherhood uses it as tough love.",
+    "origin": "wagmi's shadow; crypto twitter judgment call.",
+    "related": ["wagmi", "jeet", "paper-hands", "cope"]
+  },
+  {
+    "id": "hodl",
+    "term": "hodl",
+    "cat": "crypto",
+    "aka": ["hodling", "hodel", "hold"],
+    "definition": "hold on for dear life — born from a drunk typo, kept as doctrine. the temple treats hodl as ritual, not strategy.",
+    "origin": "bitcointalk 2013 typo in i am hodling post.",
+    "related": ["diamond-hands", "conviction", "bag", "rekt"]
+  },
+  {
+    "id": "rekt",
+    "term": "rekt",
+    "cat": "crypto",
+    "aka": ["wrecked", "got rekt"],
+    "definition": "wrecked — liquidated, rugged, or emotionally destroyed by the chart. every pilgrim gets rekt once; the question is what you post after.",
+    "origin": "gaming wrecked → leetspeak → crypto losses.",
+    "related": ["rug", "bag", "jeet", "cope"]
+  },
+  {
+    "id": "moon",
+    "term": "moon",
+    "cat": "crypto",
+    "aka": ["to the moon", "mooning", "wen moon", "wen lambo"],
+    "definition": "parabolic price — the coin goes up so hard it leaves the atmosphere. moon posting is prayer with extra candles.",
+    "origin": "bitcoin to the moon; doge rocket memes cemented it.",
+    "related": ["lfg", "wagmi", "fomo", "altar"]
+  },
+  {
+    "id": "whale",
+    "term": "whale",
+    "cat": "crypto",
+    "aka": ["whales", "whale alert"],
+    "definition": "a holder large enough to move the pool — watched by the bot, feared by jeets, respected if they stay.",
+    "origin": "casino whale metaphor applied to on-chain wallets.",
+    "related": ["alpha", "bag", "fud", "send-it"]
+  },
+  {
+    "id": "diamond-hands",
+    "term": "diamond hands",
+    "cat": "crypto",
+    "aka": ["diamond hands", "hands", "💎🙌"],
+    "definition": "hands that do not sell the dip — emoji-born conviction symbol. the temple pairs it with morning kek, not panic.",
+    "origin": "wallstreetbets 2021; migrated to all of crypto twitter.",
+    "related": ["paper-hands", "hodl", "conviction", "wagmi"]
+  },
+  {
+    "id": "paper-hands",
+    "term": "paper hands",
+    "cat": "crypto",
+    "aka": ["paper hands", "weak hands"],
+    "definition": "hands that fold at the first red candle — the opposite of diamond. paper is temporary; the chart tests everyone.",
+    "origin": "paired with diamond hands from wsb culture.",
+    "related": ["diamond-hands", "jeet", "ngmi", "fud"]
+  },
+  {
+    "id": "dyor",
+    "term": "DYOR",
+    "cat": "crypto",
+    "aka": ["do your own research", "dyor bro"],
+    "definition": "do your own research — the disclaimer and the commandment. the temple repeats it because nobody else will answer for your bag.",
+    "origin": "crypto twitter standard disclaimer.",
+    "related": ["ape", "alpha", "fud", "shill"]
+  },
+  {
+    "id": "lfg",
+    "term": "LFG",
+    "cat": "crypto",
+    "aka": ["let's fucking go", "lets fucking go", "lfg!!!"],
+    "definition": "let's fucking go — hype at launch, breakout, or when the altar opens. volume as prayer.",
+    "origin": "sports and gaming → crypto pump moments.",
+    "related": ["moon", "send-it", "wagmi", "ape"]
+  },
+  {
+    "id": "fomo",
+    "term": "FOMO",
+    "cat": "crypto",
+    "aka": ["fear of missing out", "fomo in"],
+    "definition": "fear of missing out — buying because the green candles hypnotized you. the temple's cure is dyor and morning kek before the chart.",
+    "origin": "behavioral finance term absorbed by retail crypto.",
+    "related": ["fud", "ape", "rekt", "jeet"]
+  },
+  {
+    "id": "w-l",
+    "term": "W / L",
+    "cat": "meme",
+    "aka": ["w", "l", "win", "loss", "took an l", "taking the w", "dub"],
+    "definition": "win or loss — the scoreboard language of arguments and trades. ratio is the public L.",
+    "origin": "sports and gaming shorthand → twitter discourse.",
+    "related": ["ratio", "based", "cope"]
+  },
+  {
+    "id": "npc",
+    "term": "NPC",
+    "cat": "meme",
+    "aka": ["npc behavior", "non-player character"],
+    "definition": "someone who repeats scripted opinions — the meme that you are background character in someone else's story.",
+    "origin": "gaming npc → 2018 political meme → general insult.",
+    "related": ["touch-grass", "normie", "based", "pepe"]
+  },
+  {
+    "id": "shill",
+    "term": "shill",
+    "cat": "crypto",
+    "aka": ["shilling", "paid shill"],
+    "definition": "to promote a coin for hidden incentive — or accuse someone of it. every shill claims conviction; dyor decides.",
+    "origin": "carnival barker slang → crypto promotion wars.",
+    "related": ["alpha", "exit-liquidity", "dyor", "fud"]
+  },
+  {
+    "id": "ape",
+    "term": "ape",
+    "cat": "crypto",
+    "aka": ["ape in", "aped", "aping"],
+    "definition": "to buy aggressively without finesse — enter the position fast and explain later. aping is degen baptism.",
+    "origin": "wsb apes together strong → all crypto.",
+    "related": ["degen", "send-it", "dyor", "fomo"]
+  }
+]

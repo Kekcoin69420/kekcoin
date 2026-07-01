@@ -1,0 +1,10 @@
+-- Lexicon expansion — run via tools/upsert_lexicon.js (recommended)
+--   node upsert_lexicon.js <SUPABASE_SERVICE_KEY>
+-- Source of truth: lexicon_expand.json (64 terms after 2026-07 expansion)
+--
+-- Adds 23 new entries + rewrites/aliases for core terms.
+-- Temple Tongue: morning-kek, praise, oracle, altar, brotherhood, sigil, offering, pilgrim
+-- Mainstream: pepe, copypasta, shitpost, bait, lurk, sage, jeet, bag, send-it, alpha,
+--              exit-liquidity, bonding-curve, conviction, delulu, aura
+--
+-- Verify: SELECT count(*), cat, count(*) FROM lexicon GROUP BY cat ORDER BY cat;
