@@ -8,6 +8,7 @@
     { href: '/rituals/', slug: 'rituals', label: 'Rituals' },
     { href: '/brotherhood/', slug: 'brotherhood', label: 'Brotherhood' },
     { href: '/codex/', slug: 'codex', label: 'Codex' },
+    { href: '/lexicon/', slug: 'lexicon', label: 'Lexicon' },
     { href: '/transmissions/', slug: 'transmissions', label: 'Transmissions' },
     { href: '/treasury/', slug: 'treasury', label: 'Treasury' }
   ];

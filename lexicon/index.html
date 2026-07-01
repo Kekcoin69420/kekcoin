@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lexicon · The Tongue of the Temple · Temple of Kek</title>
+<meta name="description" content="The Lexicon — a living glossary of meme and crypto culture, kept by the Temple of Kek. Search kek, wagmi, based, rizz, and forty-one words the faithful speak.">
+<meta name="keywords" content="crypto slang, meme glossary, kek definition, wagmi meaning, based definition, temple of kek lexicon, degen dictionary">
+<meta name="author" content="Kekcoin Temple">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1a1510">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kekcoin Temple">
+<meta property="og:title" content="The Lexicon — Temple Glossary | Kekcoin Temple">
+<meta property="og:description" content="Every word meme and crypto culture speaks in — defined, sourced, and kept by the Temple of Kek.">
+<meta property="og:url" content="https://www.kektemple.com/lexicon/">
+<meta property="og:image" content="https://www.kektemple.com/kek-banner.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@kekcoin69420">
+<meta name="twitter:title" content="The Lexicon — Temple Glossary">
+<meta name="twitter:description" content="Meme and crypto slang defined in Temple voice. Search the tongue of the faithful.">
+<meta name="twitter:image" content="https://www.kektemple.com/kek-banner.jpg">
+<link rel="canonical" href="https://www.kektemple.com/lexicon/">
+<link rel="manifest" href="../manifest.json">
+<link rel="icon" type="image/png" sizes="64x64" href="../favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cinzel+Decorative:wght@700;900&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/temple.css">
+<link rel="stylesheet" href="../assets/features.css">
+</head>
+<body>
+<div id="temple-nav"></div>
+<main class="lexicon-wrap">
+
+<section class="lexicon-hero">
+  <div class="wrap">
+    <div class="lexicon-seal" aria-hidden="true">𓂀</div>
+    <h1>THE LEXICON</h1>
+    <div class="lexicon-tag">The Tongue of the Temple</div>
+    <p class="lexicon-oneliner">&ldquo;learn the words, and the temple opens its mouth to you.&rdquo;</p>
+    <p class="lexicon-cross">
+      <a href="/">← the gates</a>
+      <span aria-hidden="true">·</span>
+      <a href="/codex/">the codex →</a>
+      <span aria-hidden="true">·</span>
+      <a href="/memes/">sacred memes →</a>
+    </p>
+  </div>
+</section>
+
+<section class="band lexicon-band">
+  <div class="wrap">
+    <div class="lexicon-controls">
+      <div class="lexicon-search-wrap">
+        <span class="lexicon-search-icon" aria-hidden="true">𓂀</span>
+        <input id="lexicon-search" type="search" placeholder="search the tongue…  (kek, wagmi, based, rizz)" autocomplete="off">
+      </div>
+      <div class="lexicon-chips" id="lexicon-chips"></div>
+    </div>
+
+    <div id="lexicon-content">
+      <div class="lexicon-state"><span class="lexicon-spin" aria-hidden="true">𓂀</span><div>summoning the tongue of the temple…</div></div>
+    </div>
+
+    <footer class="lexicon-foot">
+      <div class="lexicon-glyphs" aria-hidden="true">𓂀 &nbsp; 𓆏</div>
+      speak, and be understood · also try <code>/define</code> in Telegram
+    </footer>
+  </div>
+</section>
+
+</main>
+<div id="temple-footer"></div>
+<script src="../assets/config.js"></script>
+<script src="../assets/temple.js"></script>
+<script src="../assets/features.js"></script>
+<script>
+(function () {
+  'use strict';
+  const C = window.KEK_CONFIG || {};
+  const GROUPS = [
+    ['temple', 'The Temple Tongue'],
+    ['4chan', 'The Board Speech'],
+    ['crypto', 'The Coin Cant'],
+    ['genz', 'The Young Tongue'],
+    ['meme', 'The Common Tongue']
+  ];
+  const CATNAME = Object.fromEntries(GROUPS);
+
+  let ALL = [];
+  let activeCat = 'all';
+  let queryStr = '';
+
+  const content = document.getElementById('lexicon-content');
+  const chipsEl = document.getElementById('lexicon-chips');
+  const searchEl = document.getElementById('lexicon-search');
+
+  function esc(s) {
+    return String(s || '').replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  }
+
+  function cardHTML(t) {
+    const rel = (t.related || []).length
+      ? '<div class="lexicon-see">see also: ' + t.related.map(r =>
+          '<a href="#" data-term="' + esc(r) + '">' + esc(r) + '</a>'
+        ).join(', ') + '</div>'
+      : '';
+    const org = t.origin
+      ? '<div class="lexicon-origin"><b>origin</b> &nbsp;' + esc(t.origin) + '</div>'
+      : '';
+    const gmNote = t.id === 'gm'
+      ? '<p class="lexicon-temple-note">In this Temple, <a href="/rituals/#morning-kek">Morning Kek</a> is the morning protocol — not GM.</p>'
+      : '';
+    return '<article class="lexicon-card" id="term-' + esc(t.id) + '">' +
+      '<div class="lexicon-term">' + esc(t.term) + '</div>' +
+      '<div class="lexicon-def">' + esc(t.definition) + '</div>' +
+      gmNote + org + rel +
+      '</article>';
+  }
+
+  function draw() {
+    const q = queryStr.trim().toLowerCase();
+    const rows = ALL.filter(t => {
+      if (activeCat !== 'all' && (t.cat || 'meme') !== activeCat) return false;
+      if (!q) return true;
+      const hay = (t.term + ' ' + t.definition + ' ' + (t.aka || []).join(' ') + ' ' + (t.origin || '')).toLowerCase();
+      return hay.includes(q);
+    });
+    if (!rows.length) {
+      content.innerHTML = '<div class="lexicon-state">no words match that search.</div>';
+      return;
+    }
+    let html = '';
+    const order = GROUPS.map(g => g[0]);
+    const cats = [...new Set(rows.map(r => r.cat || 'meme'))].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+    cats.forEach(cat => {
+      const items = rows.filter(r => (r.cat || 'meme') === cat);
+      if (!items.length) return;
+      html += '<h2 class="lexicon-group-title">' + (CATNAME[cat] || cat) + '</h2>' +
+        '<div class="lexicon-grid">' + items.map(cardHTML).join('') + '</div>';
+    });
+    content.innerHTML = html;
+  }
+
+  function buildChips() {
+    const cats = ['all', ...GROUPS.map(g => g[0]).filter(c => ALL.some(t => (t.cat || 'meme') === c))];
+    chipsEl.innerHTML = cats.map(c =>
+      '<button type="button" class="lexicon-chip' + (c === 'all' ? ' active' : '') + '" data-cat="' + c + '">' +
+      (c === 'all' ? 'all' : (CATNAME[c] || c)) + '</button>'
+    ).join('');
+  }
+
+  document.addEventListener('click', e => {
+    const chip = e.target.closest('.lexicon-chip');
+    if (chip) {
+      activeCat = chip.dataset.cat;
+      document.querySelectorAll('.lexicon-chip').forEach(c => c.classList.toggle('active', c === chip));
+      draw();
+      return;
+    }
+    const rel = e.target.closest('[data-term]');
+    if (rel) {
+      e.preventDefault();
+      const term = rel.dataset.term;
+      activeCat = 'all';
+      document.querySelectorAll('.lexicon-chip').forEach(c => c.classList.toggle('active', c.dataset.cat === 'all'));
+      searchEl.value = term;
+      queryStr = term;
+      draw();
+      const card = document.getElementById('term-' + term);
+      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+
+  searchEl.addEventListener('input', () => { queryStr = searchEl.value; draw(); });
+
+  async function load() {
+    if (!C.SUPABASE_URL || !C.SUPABASE_ANON_KEY) {
+      content.innerHTML = '<div class="lexicon-state">the vault did not answer.<br><br>config missing.</div>';
+      return;
+    }
+    try {
+      const url = C.SUPABASE_URL + '/rest/v1/lexicon?select=id,term,aka,cat,definition,origin,related&order=term.asc';
+      const res = await fetch(url, {
+        headers: {
+          apikey: C.SUPABASE_ANON_KEY,
+          Authorization: 'Bearer ' + C.SUPABASE_ANON_KEY
+        }
+      });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      ALL = await res.json();
+      if (!ALL.length) {
+        content.innerHTML = '<div class="lexicon-state">the lexicon is empty.</div>';
+        return;
+      }
+      buildChips();
+      draw();
+    } catch (err) {
+      content.innerHTML = '<div class="lexicon-state">the vault did not answer.<br><br>' +
+        '<span style="font-size:.85rem;opacity:.7">(' + esc(String(err)) + ')</span></div>';
+    }
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>

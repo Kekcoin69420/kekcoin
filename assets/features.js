@@ -261,11 +261,11 @@
 
   const CHAMBER_GLYPHS = {
     gates: '𓂀', lore: '𓏛', brotherhood: '𓂀', rituals: '𓁹', memes: '𓆏',
-    codex: '𓁿', transmissions: '𓏏', treasury: '𓊃', tools: '𓊝', sanctum: '☥', temple: '𓂀'
+    codex: '𓁿', lexicon: '𓁹', transmissions: '𓏏', treasury: '𓊃', tools: '𓊝', sanctum: '☥', temple: '𓂀'
   };
   const CHAMBER_LABELS = {
     gates: 'Gates', lore: 'Great Hall', brotherhood: 'Brotherhood', rituals: 'Rituals',
-    memes: 'Sacred Memes', codex: 'Codex', transmissions: 'Transmissions',
+    memes: 'Sacred Memes', codex: 'Codex', lexicon: 'Lexicon', transmissions: 'Transmissions',
     treasury: 'Treasury', tools: 'Ritual Tools', sanctum: 'Sanctum', temple: 'Temple'
   };
 
