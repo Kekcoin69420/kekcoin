@@ -1,0 +1,3 @@
+-- Temple Tongue expansion (12 new + 6 related patches)
+-- Run: node upsert_lexicon.js <SERVICE_KEY> lexicon_temple_expand.json
+-- Source: lexicon_temple_expand.json → 23 temple terms, 76 lexicon total

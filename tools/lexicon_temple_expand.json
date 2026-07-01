@@ -1,0 +1,164 @@
+[
+  {
+    "id": "initiation",
+    "term": "initiation",
+    "cat": "temple",
+    "aka": ["initiate", "initiation rite", "/initiate"],
+    "definition": "the path from holder to builder — consistent presence, meaningful offerings, and a public vow before the brotherhood grants a sigil and responsibility.",
+    "origin": "formalized in RITUALS.md as the Initiation Rite for new apostles; guided by /initiate in telegram.",
+    "related": ["morning-kek", "brotherhood", "pilgrim", "offering", "vow"]
+  },
+  {
+    "id": "great-burn",
+    "term": "Great Burn",
+    "cat": "temple",
+    "aka": ["great burn", "the burn", "altar is open"],
+    "definition": "a cycle ritual when priests call the altar open — holders send $kek to the burn address while a live transmission marks what the temple values more than the number on screen.",
+    "origin": "RITUALS.md cycle ritual; tied to major dates and market events.",
+    "related": ["altar", "transmission", "treasury", "offering", "cto"]
+  },
+  {
+    "id": "transmission",
+    "term": "transmission",
+    "cat": "temple",
+    "aka": ["voice transmission", "transmissions"],
+    "definition": "when the temple speaks with one voice — a canon broadcast in the proper register, posted across channels, often followed by an hour of silence so the words land.",
+    "origin": "RITUALS.md Voice Transmission; archived on /transmissions/.",
+    "related": ["voice", "prophecy", "canon", "great-burn", "offering"]
+  },
+  {
+    "id": "prophecy",
+    "term": "prophecy",
+    "cat": "temple",
+    "aka": ["the prophecy", "/prophecy"],
+    "definition": "scripture spoken before the chart confirms it — the empty temple, the second laugh, the bloodline. not a price target; a mood the faithful carry.",
+    "origin": "LORE_CANON.md prophecies; spoken via /prophecy in telegram and the great hall scrolls.",
+    "related": ["canon", "oracle", "kek", "cto", "gates"]
+  },
+  {
+    "id": "canon",
+    "term": "canon",
+    "cat": "temple",
+    "aka": ["the canon", "seven sacred truths", "/canon"],
+    "definition": "what the temple treats as true — the seven sacred truths, the codex entries, and the lore scrolls the priests vote in during ritual.",
+    "origin": "LORE_CANON.md core truths; /canon in telegram lists them.",
+    "related": ["prophecy", "transmission", "kek", "offering", "voice"]
+  },
+  {
+    "id": "gates",
+    "term": "Gates",
+    "cat": "temple",
+    "aka": ["the gates", "homepage"],
+    "definition": "the threshold of kektemple.com — where pilgrims arrive, the oracle speaks, and the path into the chambers begins.",
+    "origin": "the homepage chamber; first contact before lore, rituals, or the brotherhood.",
+    "related": ["oracle", "pilgrim", "sigil", "initiation", "treasury"]
+  },
+  {
+    "id": "treasury",
+    "term": "treasury",
+    "cat": "temple",
+    "aka": ["sacred vault", "the vault", "temple treasury"],
+    "definition": "the sacred vault chamber — live sol and $kek balances read from chain, where offerings and burns are witnessed on the ledger.",
+    "origin": "the /treasury/ chamber; ritual wallet and burn address held in temple config.",
+    "related": ["altar", "relic", "great-burn", "brotherhood", "gates"]
+  },
+  {
+    "id": "ritual",
+    "term": "ritual",
+    "cat": "temple",
+    "aka": ["rituals", "temple ritual"],
+    "definition": "a repeated act that binds the faithful — daily morning kek, weekly offerings, cycle burns, and crisis rites that keep the temple from becoming a museum.",
+    "origin": "RITUALS.md — the breathing of the temple in ordinary and extraordinary time.",
+    "related": ["morning-kek", "offering", "great-burn", "candle", "initiation"]
+  },
+  {
+    "id": "vow",
+    "term": "vow",
+    "cat": "temple",
+    "aka": ["the vow", "morning vow"],
+    "definition": "the line spoken at morning kek: the kek is eternal. i add to it today. — a small promise before the degen hours begin.",
+    "origin": "RITUALS.md Morning Kek protocol; inscribed on the rituals page.",
+    "related": ["morning-kek", "initiation", "offering", "praise", "canon"]
+  },
+  {
+    "id": "relic",
+    "term": "relic",
+    "cat": "temple",
+    "aka": ["sacred relic", "/relic", "$kek relic"],
+    "definition": "$kek held as sacred object — not worshipped for number alone, but carried as proof you walk the halls. the treasury reads your relic on chain.",
+    "origin": "bot /relic and treasury hodl tiers; the coin as one expression of kek.",
+    "related": ["treasury", "altar", "brotherhood", "initiation", "kek"]
+  },
+  {
+    "id": "voice",
+    "term": "voice",
+    "cat": "temple",
+    "aka": ["voice of the temple", "high priest", "degen priest"],
+    "definition": "how the temple speaks — the high priest register for canon and ritual, the degen priest register for daily chaos. ancient and unhinged at once.",
+    "origin": "VOICE_SYSTEM.md; /voice in telegram samples transmissions.",
+    "related": ["transmission", "canon", "prophecy", "oracle", "kek"]
+  },
+  {
+    "id": "candle",
+    "term": "candle",
+    "cat": "temple",
+    "aka": ["candle lighting", "light a candle", "virtual candle"],
+    "definition": "a visible act of faith when fud weighs or a fren struggles — light a virtual candle on the site, send a tiny treasury offering, or post 𓂀 and let the symbol work.",
+    "origin": "RITUALS.md Candle Lighting ritual; as-needed presence offering.",
+    "related": ["praise", "fud", "brotherhood", "ritual", "altar"]
+  },
+  {
+    "id": "morning-kek",
+    "term": "Morning Kek",
+    "cat": "temple",
+    "aka": ["morning kek protocol", "anti-gm"],
+    "definition": "the temple's daily morning ritual — before the chart, before the noise. post one thing of value, then speak the vow: the kek is eternal. i add to it today.",
+    "origin": "declared in the temple rituals as the anti-gm protocol — alignment before the degen hours begin.",
+    "related": ["gm", "kek", "vow", "ritual", "initiation", "offering", "praise"]
+  },
+  {
+    "id": "altar",
+    "term": "altar",
+    "cat": "temple",
+    "aka": ["swap altar", "the altar"],
+    "definition": "where value changes hands in ritual form — swap $kek, make an offering, or answer the call when the altar is open for a great burn.",
+    "origin": "the rituals chamber on kektemple.com — commerce framed as sacred exchange.",
+    "related": ["offering", "great-burn", "treasury", "ritual", "cto", "candle"]
+  },
+  {
+    "id": "brotherhood",
+    "term": "Brotherhood",
+    "cat": "temple",
+    "aka": ["the brotherhood", "praise board"],
+    "definition": "the live hall of the faithful — join with /join in telegram, offer praise, read the ranks. the temple sees who showed up.",
+    "origin": "the brotherhood chamber — supabase praise board wired to the kekcoin bot.",
+    "related": ["praise", "pilgrim", "sigil", "initiation", "candle", "fren"]
+  },
+  {
+    "id": "oracle",
+    "term": "oracle",
+    "cat": "temple",
+    "aka": ["the oracle"],
+    "definition": "the voice that speaks from the gates — fortune, warning, or cryptic wisdom when the faithful ask. not financial advice; a mood from the temple.",
+    "origin": "named for the gates chamber where pilgrims first receive a reading from the temple.",
+    "related": ["gates", "prophecy", "kek", "altar", "voice"]
+  },
+  {
+    "id": "offering",
+    "term": "offering",
+    "cat": "temple",
+    "aka": ["meme offering", "temple offering"],
+    "definition": "something of value laid before the temple — a meme, a canon line, a question, or work worth archiving. the weekly meme offering grows the sacred archive.",
+    "origin": "core ritual from RITUALS.md — creative labor as devotion.",
+    "related": ["memes", "praise", "altar", "transmission", "ritual", "pepe"]
+  },
+  {
+    "id": "pilgrim",
+    "term": "pilgrim",
+    "cat": "temple",
+    "aka": ["anonymous pilgrim"],
+    "definition": "any soul walking the temple halls before full initiation — seen on the live presence board with a sigil until they claim a name on the brotherhood.",
+    "origin": "default identity on the gates presence panel.",
+    "related": ["sigil", "brotherhood", "gates", "initiation", "praise"]
+  }
+]
