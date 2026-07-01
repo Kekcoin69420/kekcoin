@@ -389,9 +389,37 @@
   function initInitiation() {
     const steps = document.querySelectorAll('.init-step');
     const card = document.getElementById('init-card');
+    const progressFill = document.getElementById('init-progress-fill');
+    const progressLabel = document.getElementById('init-progress-label');
     if (!steps.length) return;
 
     const saved = load('kek_initiation', {});
+
+    function updateProgress() {
+      const done = Array.from(steps).filter(s => s.classList.contains('done')).length;
+      const pct = Math.round((done / steps.length) * 100);
+      if (progressFill) progressFill.style.width = pct + '%';
+      if (progressLabel) {
+        progressLabel.textContent = done + ' of ' + steps.length + ' vows complete';
+      }
+    }
+
+    function checkComplete() {
+      updateProgress();
+      const all = Array.from(steps).every(s => s.classList.contains('done'));
+      if (all && card) {
+        const name = randomTempleName();
+        const sigil = randomSigil();
+        card.querySelector('.title').textContent = name;
+        card.querySelector('.sigil').textContent = sigil;
+        card.classList.add('show');
+        localStorage.setItem('kek_pilgrim_name', name.split(' ').slice(-2).join(' '));
+        if (window.KEK) KEK.playKekSound();
+      } else if (card) {
+        card.classList.remove('show');
+      }
+    }
+
     steps.forEach((step, i) => {
       const key = 'step' + i;
       if (saved[key]) step.classList.add('done');
@@ -403,18 +431,6 @@
       });
     });
 
-    function checkComplete() {
-      const all = Array.from(steps).every(s => s.classList.contains('done'));
-      if (all && card) {
-        const name = randomTempleName();
-        const sigil = randomSigil();
-        card.querySelector('.title').textContent = name;
-        card.querySelector('.sigil').textContent = sigil;
-        card.classList.add('show');
-        localStorage.setItem('kek_pilgrim_name', name.split(' ').slice(-2).join(' '));
-        if (window.KEK) KEK.playKekSound();
-      }
-    }
     checkComplete();
   }
 

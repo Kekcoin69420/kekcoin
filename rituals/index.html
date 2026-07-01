@@ -54,15 +54,38 @@
       <h2 class="sec-title">The Sacred Path</h2>
       <div class="divider"><span class="line"></span><span class="coin-mini coin-bg" aria-hidden="true"></span><span class="line r"></span></div>
     </div>
-    <div class="steps reveal">
-      <div class="step"><div class="num">𓁹</div><h4>Forge a Wallet</h4><p>Install <b>Phantom</b> (or Solflare). Your vessel for the journey.</p></div>
-      <div class="step"><div class="num">◎</div><h4>Offer SOL</h4><p>Fund your wallet with Solana from any exchange.</p></div>
-      <div class="step"><div class="num">𓂀</div><h4>Speak the Address</h4><p>Paste the KEK contract into Pump.fun or Jupiter.</p></div>
-      <div class="step"><div class="num">𓆏</div><h4>Join the Cult</h4><p>Hold, meme, and praise the golden grin.</p></div>
+    <div class="path-steps reveal">
+      <div class="path-step">
+        <div class="path-step-head"><div class="path-medallion"><span>𓁹</span></div><span class="path-num">I</span></div>
+        <h4>Forge a Wallet</h4>
+        <p>Install <b>Phantom</b> (or Solflare). Your vessel for the journey.</p>
+      </div>
+      <div class="path-step">
+        <div class="path-step-head"><div class="path-medallion"><span>◎</span></div><span class="path-num">II</span></div>
+        <h4>Offer SOL</h4>
+        <p>Fund your wallet with Solana from any exchange.</p>
+      </div>
+      <div class="path-step">
+        <div class="path-step-head"><div class="path-medallion"><span>𓂀</span></div><span class="path-num">III</span></div>
+        <h4>Speak the Address</h4>
+        <p>Paste the KEK contract into Pump.fun or Jupiter.</p>
+      </div>
+      <div class="path-step">
+        <div class="path-step-head"><div class="path-medallion"><span>𓆏</span></div><span class="path-num">IV</span></div>
+        <h4>Join the Cult</h4>
+        <p>Hold, meme, and praise the golden grin.</p>
+      </div>
     </div>
     <div class="swap-altar reveal">
+      <div class="altar-crown">
+        <div class="altar-medallion" aria-hidden="true"><span>𓊃</span></div>
+        <div class="altar-crown-text">
+          <h3>The Swap Altar</h3>
+          <p>Connect your wallet and swap SOL → $KEK without leaving the Temple.</p>
+        </div>
+      </div>
       <div class="altar-frame"><div id="jupiter-plugin"></div></div>
-      <p class="altar-note">Connect a Solana wallet and swap straight into $KEK — no site-hopping.</p>
+      <p class="altar-note">Powered by Jupiter · fixed output mint $KEK</p>
     </div>
     <div class="gap-row mt-24 reveal">
       <a class="btn btn-gold" href="https://jup.ag/swap/SOL-BY4ttYDiMWsyBebNNjNoSfA3krvZvUaPaaYdJsWmpump" target="_blank" rel="noopener">Swap on Jupiter</a>
@@ -71,24 +94,64 @@
   </div>
 </section>
 
-<section class="band" style="background:linear-gradient(180deg,var(--stone-900),var(--stone-800));">
+<section class="band init-band">
   <div class="wrap">
     <div class="reveal text-center">
       <div class="sec-eyebrow">Initiation</div>
       <h2 class="sec-title">The Initiation Flow</h2>
-      <p style="max-width:520px;margin:12px auto 28px;color:var(--parchment-dim);">Complete each step to receive your Temple title and sigil.</p>
+      <p class="sec-lead">Complete each vow to receive your Temple title and sigil.</p>
+      <div class="divider"><span class="line"></span><span class="coin-mini coin-bg" aria-hidden="true"></span><span class="line r"></span></div>
     </div>
-    <div class="init-steps reveal">
-      <div class="init-step" data-step="0"><span class="check">✓</span><div><strong>Forge a Wallet</strong><p style="font-size:14px;color:var(--parchment-dim)">Install Phantom or Solflare</p></div></div>
-      <div class="init-step" data-step="1"><span class="check">✓</span><div><strong>Fund with SOL</strong><p style="font-size:14px;color:var(--parchment-dim)">A small tribute for gas</p></div></div>
-      <div class="init-step" data-step="2"><span class="check">✓</span><div><strong>Acquire $KEK</strong><p style="font-size:14px;color:var(--parchment-dim)">Swap on Jupiter or Pump.fun</p></div></div>
-      <div class="init-step" data-step="3"><span class="check">✓</span><div><strong>Speak the Vow</strong><p style="font-size:14px;color:var(--parchment-dim)">"The Kek is eternal. I add to it today."</p></div></div>
+    <div class="init-sanctuary reveal">
+      <div class="init-progress-wrap">
+        <div class="init-progress" aria-hidden="true"><div class="init-progress-fill" id="init-progress-fill"></div></div>
+        <p class="init-progress-label" id="init-progress-label">0 of 4 vows complete</p>
+      </div>
+      <div class="init-steps">
+        <div class="init-step" data-step="0">
+          <div class="init-rail"><span class="init-dot"></span></div>
+          <div class="init-panel">
+            <span class="init-roman">I</span>
+            <span class="init-glyph">𓁹</span>
+            <div class="init-copy"><strong>Forge a Wallet</strong><p>Install Phantom or Solflare</p></div>
+            <span class="init-check" aria-hidden="true">✓</span>
+          </div>
+        </div>
+        <div class="init-step" data-step="1">
+          <div class="init-rail"><span class="init-dot"></span></div>
+          <div class="init-panel">
+            <span class="init-roman">II</span>
+            <span class="init-glyph">◎</span>
+            <div class="init-copy"><strong>Fund with SOL</strong><p>A small tribute for gas</p></div>
+            <span class="init-check" aria-hidden="true">✓</span>
+          </div>
+        </div>
+        <div class="init-step" data-step="2">
+          <div class="init-rail"><span class="init-dot"></span></div>
+          <div class="init-panel">
+            <span class="init-roman">III</span>
+            <span class="init-glyph">𓂀</span>
+            <div class="init-copy"><strong>Acquire $KEK</strong><p>Swap on Jupiter or Pump.fun</p></div>
+            <span class="init-check" aria-hidden="true">✓</span>
+          </div>
+        </div>
+        <div class="init-step" data-step="3">
+          <div class="init-rail"><span class="init-dot"></span></div>
+          <div class="init-panel">
+            <span class="init-roman">IV</span>
+            <span class="init-glyph">𓆏</span>
+            <div class="init-copy"><strong>Speak the Vow</strong><p>"The Kek is eternal. I add to it today."</p></div>
+            <span class="init-check" aria-hidden="true">✓</span>
+          </div>
+        </div>
+      </div>
+      <p class="init-hint">Tap each vow when complete · progress is saved in your browser</p>
     </div>
     <div class="init-card" id="init-card">
       <div class="sec-eyebrow">You Are Initiated</div>
       <div class="sigil">𓂀</div>
       <div class="title">Brother Kekthulhu</div>
-      <p style="color:var(--parchment-dim);margin-top:12px;">Share your title with the faithful. The Temple remembers.</p>
+      <p class="init-card-note">Share your title with the faithful. The Temple remembers.</p>
     </div>
   </div>
 </section>
