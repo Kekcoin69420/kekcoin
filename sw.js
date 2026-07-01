@@ -1,14 +1,13 @@
-const CACHE = 'kek-temple-v3';
+const CACHE = 'kek-temple-v5';
 const ASSETS = [
   './',
   './index.html',
-  './lore.html',
-  './sanctum.html',
-  './rituals.html',
-  './brotherhood.html',
-  './treasury.html',
-  './tools.html',
-  './memes.html',
+  './lore/',
+  './rituals/',
+  './brotherhood/',
+  './treasury/',
+  './memes/',
+  './codex/',
   './assets/temple.css',
   './assets/features.css',
   './assets/config.js',

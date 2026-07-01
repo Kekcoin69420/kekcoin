@@ -150,10 +150,17 @@ const scrim = document.getElementById('scrim');
 
 function esc(s){return (s||"").replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 
+function scriptureText(r){
+  if(r.scripture && r.scripture.trim()) return r.scripture.trim();
+  if(r.lore && r.lore.trim()) return r.lore.trim() + (r.description ? "\n\n" + r.description : "");
+  if(r.description && r.description.trim()) return r.description.trim();
+  return r.summary || "";
+}
+
 function relicHTML(r){
   const sub = [r.tier, r.year].filter(Boolean).join("  ·  ");
   const rating = r.kek ? "𓂀".repeat(r.kek) : "";
-  const paras = (r.scripture||r.summary||"").split(/\n\n+/).map((p,i)=>
+  const paras = scriptureText(r).split(/\n\n+/).filter(Boolean).map((p,i)=>
      `<p class="${i===0?'firstcap':''}">${esc(p)}</p>`).join("");
   const links = [];
   links.push(`<a href="/memes/#${r.id}">in the archive &#8594;</a>`);
@@ -217,11 +224,13 @@ scrim.addEventListener('click',closeMenu);
 
 async function load(){
   try{
-    const url = `${SUPABASE_URL}/rest/v1/memes?select=id,title,year,tier,cat,kek,summary,scripture,source_url&scripture=not.is.null&order=year.asc.nullsfirst`;
+    const url = `${SUPABASE_URL}/rest/v1/memes?select=id,title,year,tier,cat,kek,summary,scripture,source_url,lore,description&order=kek.desc&limit=200`;
     const res = await fetch(url,{headers:{apikey:SUPABASE_ANON_KEY,Authorization:`Bearer ${SUPABASE_ANON_KEY}`}});
     if(!res.ok) throw new Error("HTTP "+res.status);
-    const rows = await res.json();
-    if(!rows.length){content.innerHTML='<div class="state">the codex is empty. (no scripture rows found.)</div>';return;}
+    let rows = await res.json();
+    rows = rows.filter(r => scriptureText(r).length > 48);
+    if(!rows.length){content.innerHTML='<div class="state">the codex is empty. run backfill_codex.js in tools/ to consecrate scripture.</div>';return;}
+    rows.sort((a,b)=>(a.year||9999)-(b.year||9999));
     render(rows);
   }catch(err){
     content.innerHTML = `<div class="state">the vault did not answer.<br><br>check the SUPABASE_ANON_KEY at the top of this file.<br><span style="font-size:.8rem;opacity:.7">(${esc(String(err))})</span></div>`;

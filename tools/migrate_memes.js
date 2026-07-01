@@ -1,5 +1,5 @@
 /**
- * Migrate existing 48 memes from data.js → Supabase memes table.
+ * Upsert memes from memes_seed.json → Supabase memes table.
  * Run: node migrate_memes.js <SUPABASE_SERVICE_KEY>
  *
  * Get the service key from: Supabase dashboard → Project Settings → API → service_role key

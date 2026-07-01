@@ -13,8 +13,8 @@
 <meta property="og:site_name" content="Kekcoin Temple" />
 <meta property="og:title" content="The Treasury — Kekcoin Temple | $KEK Burns &amp; Offerings" />
 <meta property="og:description" content="Kekcoin treasury, burn records, and offering altar. $KEK token supply and live community burn tracking." />
-<meta property="og:url" content="https://kektemple.com/treasury.html" />
-<meta property="og:image" content="https://kektemple.com/favicon.jpg" />
+<meta property="og:url" content="https://www.kektemple.com/treasury/" />
+<meta property="og:image" content="https://www.kektemple.com/kek-banner.jpg" />
 <meta property="og:image:width" content="400" />
 <meta property="og:image:height" content="400" />
 <meta property="og:image:alt" content="Kekcoin Treasury — The Temple of Kek" />
@@ -22,8 +22,8 @@
 <meta name="twitter:site" content="@kekcoin69420" />
 <meta name="twitter:title" content="The Treasury — Kekcoin Temple | $KEK Burns" />
 <meta name="twitter:description" content="Kekcoin treasury, burn records, and offering altar for the $KEK Solana community." />
-<meta name="twitter:image" content="https://kektemple.com/favicon.jpg" />
-<link rel="canonical" href="https://kektemple.com/treasury.html" />
+<meta name="twitter:image" content="https://www.kektemple.com/kek-banner.jpg" />
+<link rel="canonical" href="https://www.kektemple.com/treasury/" />
 <link rel="manifest" href="../manifest.json" />
 <link rel="icon" type="image/png" sizes="64x64" href="../favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -207,10 +207,11 @@
     <div class="sec-eyebrow text-center reveal">Live Treasury Stats</div>
     <div class="treasury-grid reveal">
       <div class="treasury-stat"><div class="val" id="treasury-sol">—</div><div class="lbl">Treasury Balance (SOL)</div></div>
-      <div class="treasury-stat"><div class="val" id="burn-total">0 $KEK</div><div class="lbl">Total Burned (Canon)</div></div>
+      <div class="treasury-stat"><div class="val" id="treasury-kek">—</div><div class="lbl">Treasury $KEK Holdings</div></div>
+      <div class="treasury-stat"><div class="val" id="treasury-txs">—</div><div class="lbl">On-Chain Transactions</div></div>
       <div class="treasury-stat"><div class="val">973.8M</div><div class="lbl">Total Supply</div></div>
-      <div class="treasury-stat"><div class="val">0% / 0%</div><div class="lbl">Buy / Sell Tax</div></div>
     </div>
+    <p id="treasury-updated" class="treasury-updated reveal" style="text-align:center;font-size:12px;color:var(--parchment-dim);font-style:italic;margin-top:-16px;margin-bottom:24px;"></p>
 
     <!-- WALLET ADDRESS -->
     <div class="treasury-wallet-box reveal">
@@ -232,9 +233,8 @@
 
     <div class="contribute-box reveal">
       <h3>Send SOL to Treasury</h3>
-      <p class="contrib-sub">Opens in your Solana wallet (Phantom or compatible). You control the amount — this just pre-fills the address.</p>
-      <textarea id="offering-memo" placeholder="Optional: leave a message for the Canon (e.g. 'For the next raid')"></textarea>
-      <div class="text-center"><button class="btn btn-gold" id="offering-btn">Open in Wallet</button></div>
+      <p class="contrib-sub">Copies the treasury address and opens Solscan. Send SOL from Phantom or any wallet.</p>
+      <div class="text-center"><button class="btn btn-gold" id="offering-btn">Copy Address &amp; View on Solscan</button></div>
     </div>
 
     <p style="text-align:center;font-size:12px;color:var(--parchment-dim);margin-top:20px;font-style:italic;" class="reveal">No Phantom? Copy the wallet address above and send directly from any Solana wallet.</p>
@@ -250,10 +250,10 @@
     <h2 style="font-family:Cinzel,serif;color:var(--gold-bright);text-align:center;margin-bottom:16px;" class="reveal">The Burn Altar</h2>
     <div class="burn-explain reveal">
       <p>Burning $KEK means sending tokens to a permanently inaccessible address — they are gone from the supply forever. A smaller supply means each remaining token represents a larger share of the total. The Temple records all burns in the Canon.</p>
-      <p>During Great Burn rituals, the community coordinates mass burns. The altar below tracks the cumulative total.</p>
+      <p>During Great Burn rituals, the community coordinates mass burns. Verify supply changes on Solscan — the Temple does not invent numbers.</p>
     </div>
     <div class="burn-box reveal">
-      <div class="text-center mt-24"><button class="btn btn-ghost" id="burn-btn">The Altar Is Open 𓂀</button></div>
+      <div class="text-center mt-24"><button class="btn btn-ghost" id="burn-btn">View $KEK On-Chain History 𓂀</button></div>
       <div class="burn-log text-center" id="burn-log"></div>
     </div>
   </div>
@@ -268,7 +268,7 @@
     <h2 style="font-family:Cinzel,serif;color:var(--gold-bright);text-align:center;margin-bottom:16px;" class="reveal">Relic Status</h2>
     <p style="text-align:center;font-size:14px;color:var(--parchment-dim);max-width:480px;margin:0 auto 32px;line-height:1.7;" class="reveal">Connect your Phantom wallet to see your hold tier. The Temple ranks the faithful by conviction. No wallet wall — this is optional and read-only.</p>
     <div class="hodl-box reveal">
-      <div class="text-center"><button class="btn btn-gold" id="hodl-btn">Check Relic Status</button></div>
+      <div class="text-center"><button class="btn btn-gold" id="hodl-btn" data-hodl-check data-hodl-result="hodl-result">Check Relic Status</button></div>
       <div class="hodl-result" id="hodl-result"></div>
     </div>
   </div>

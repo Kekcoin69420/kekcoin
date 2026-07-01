@@ -1484,5 +1484,152 @@
       "emote"
     ],
     "img": "https://i.kym-cdn.com/entries/icons/mobile/000/023/711/monkaS.jpg"
+  },
+  {
+    "id": "shrek",
+    "title": "Shrek",
+    "year": 2010,
+    "creator": "DreamWorks / internet",
+    "origin": "Tumblr / 4chan",
+    "cat": "reaction",
+    "icon": "🧅",
+    "tier": "Legendary",
+    "kek": 4,
+    "summary": "Shrek is love. Shrek is life. An ogre became scripture.",
+    "desc": "Green ogre worship memes, remixes, and copypasta elevated Shrek from children's film to ironic internet religion.",
+    "lore": "The Temple respects the onion layers. Shrek is the patron saint of unlikely heroes who refuse to leave the swamp.",
+    "tags": [
+      "shrek",
+      "classic",
+      "wholesome",
+      "ogre"
+    ],
+    "img": "https://i.kym-cdn.com/entries/icons/mobile/000/005/287/shrek.jpg"
+  },
+  {
+    "id": "success-kid",
+    "title": "Success Kid",
+    "year": 2007,
+    "creator": "Laney Griner photo",
+    "origin": "Flickr / Reddit",
+    "cat": "reaction",
+    "icon": "👊",
+    "tier": "Legendary",
+    "kek": 4,
+    "summary": "Fist clenched. Sand in hand. Victory before the pump.",
+    "desc": "Sammy Griner's fist-pump baby photo became the universal symbol of small wins and vindication.",
+    "lore": "Success Kid is how you feel when the candle turns green after you held through the dip.",
+    "tags": [
+      "reaction",
+      "wholesome",
+      "victory",
+      "classic"
+    ],
+    "img": "https://i.kym-cdn.com/entries/icons/mobile/000/002/273/success.jpg"
+  },
+  {
+    "id": "philosoraptor",
+    "title": "Philosoraptor",
+    "year": 2008,
+    "creator": "Sam Smith / Squirells",
+    "origin": "Reddit",
+    "cat": "classic",
+    "icon": "🦖",
+    "tier": "Sacred",
+    "kek": 3,
+    "summary": "If you hold and everyone holds, who pumps whom?",
+    "desc": "A stoned velociraptor pondering deep questions — the template for pseudo-profound memecoin thoughts at 2am.",
+    "lore": "Philosoraptor asks the questions the whitepaper avoids. The Temple answers with laughter.",
+    "tags": [
+      "classic",
+      "philosophy",
+      "dinosaur",
+      "4chan"
+    ],
+    "img": "https://i.kym-cdn.com/entries/icons/mobile/000/002/791/philosoraptor.jpg"
+  },
+  {
+    "id": "sigma-male",
+    "title": "Sigma Male",
+    "year": 2021,
+    "creator": "internet / TikTok",
+    "origin": "YouTube edits",
+    "cat": "modern",
+    "icon": "🐺",
+    "tier": "Modern",
+    "kek": 3,
+    "summary": "Grindset wolf energy. Holds in silence.",
+    "desc": "Ironic 'sigma male' edits glorify lone-wolf behavior — walking alone, ignoring the herd, posting through the bear market.",
+    "lore": "The sigma holds $KEK and does not announce it. The Temple finds this suspiciously Chad.",
+    "tags": [
+      "modern",
+      "grindset",
+      "wolf",
+      "irony"
+    ],
+    "img": "https://i.kym-cdn.com/entries/icons/mobile/000/034/933/sigma.jpg"
+  },
+  {
+    "id": "zoomer-boomer",
+    "title": "Zoomer vs Boomer / 30 Year Old Boomer",
+    "year": 2018,
+    "creator": "4chan / Wojak edits",
+    "origin": "4chan",
+    "cat": "wojak",
+    "icon": "👴",
+    "tier": "Modern",
+    "kek": 3,
+    "summary": "Generational warfare in MS Paint.",
+    "desc": "Wojak variants pit clueless boomers against zoomer irony poisoned by years of posting. Crypto Twitter runs on this axis.",
+    "lore": "Boomer sold at 2x. Zoomer aped at ATH. The Temple priest mediates between them with lore.",
+    "tags": [
+      "wojak",
+      "generations",
+      "4chan",
+      "crypto"
+    ],
+    "img": null
+  },
+  {
+    "id": "this-is-fine-fire",
+    "title": "This Is Fine (extended)",
+    "year": 2013,
+    "creator": "KC Green",
+    "origin": "Gunshow comic",
+    "cat": "wojak",
+    "icon": "🔥",
+    "tier": "Eternal",
+    "kek": 5,
+    "summary": "The dog sits in flames. The chart is red. This is fine.",
+    "desc": "KC Green's dog sipping coffee while the room burns — the definitive metaphor for coping while everything collapses.",
+    "lore": "Every red day is This Is Fine day. The Temple does not leave the burning room. The Temple holds.",
+    "tags": [
+      "wojak",
+      "cope",
+      "fire",
+      "classic"
+    ],
+    "img": "https://i.kym-cdn.com/entries/icons/mobile/000/018/012/this_is_fine.jpeg"
+  },
+  {
+    "id": "expanding-brain",
+    "title": "Expanding Brain",
+    "year": 2017,
+    "creator": "4chan",
+    "origin": "4chan",
+    "cat": "reaction",
+    "icon": "🧠",
+    "tier": "Legendary",
+    "kek": 4,
+    "summary": "Four-panel enlightenment from normie take to galaxy brain.",
+    "desc": "Tiered brain images ranking takes from basic to enlightened — often the dumbest take wins the final panel.",
+    "lore": "Galaxy brain: KEK is not a memecoin, it is a religion. The Temple agrees.",
+    "tags": [
+      "reaction",
+      "brain",
+      "4chan",
+      "tiers"
+    ],
+    "img": "https://i.kym-cdn.com/entries/icons/mobile/000/023/581/expanding_brain.jpg"
   }
 ]

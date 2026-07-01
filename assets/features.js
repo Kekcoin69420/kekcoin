@@ -205,36 +205,85 @@
     }, 100);
   }
 
-  /* ---- Presence ---- */
-  function heartbeat() {
-    const pilgrims = load('kek_pilgrims', {});
+  function sbHeaders() {
+    return {
+      apikey: C.SUPABASE_ANON_KEY,
+      Authorization: 'Bearer ' + C.SUPABASE_ANON_KEY,
+      'Content-Type': 'application/json',
+      Prefer: 'resolution=merge-duplicates,return=minimal',
+    };
+  }
+
+  function escHtml(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  /* ---- Global presence (Supabase) ---- */
+  function presencePage() {
+    const p = (location.pathname || '/').replace(/\/$/, '') || '/';
+    if (p === '/' || p === '/index.html') return 'gates';
+    return p.replace(/^\//, '').split('/')[0] || 'temple';
+  }
+
+  async function presencePing() {
+    if (!C.SUPABASE_URL || !C.SUPABASE_ANON_KEY) return;
     const id = pilgrimId();
-    const name = localStorage.getItem('kek_pilgrim_name') || 'Anonymous Pilgrim';
     const sigil = localStorage.getItem('kek_pilgrim_sigil') || randomSigil();
     localStorage.setItem('kek_pilgrim_sigil', sigil);
-    pilgrims[id] = { name, sigil, ts: Date.now() };
-    const cutoff = Date.now() - C.PRESENCE_TTL_MS;
-    Object.keys(pilgrims).forEach(k => { if (pilgrims[k].ts < cutoff) delete pilgrims[k]; });
-    store('kek_pilgrims', pilgrims);
-    return pilgrims;
+    const row = {
+      pilgrim_id: id,
+      display_name: localStorage.getItem('kek_pilgrim_name') || 'Anonymous Pilgrim',
+      sigil: sigil,
+      page: presencePage(),
+      last_seen: new Date().toISOString(),
+    };
+    try {
+      await fetch(C.SUPABASE_URL + '/rest/v1/temple_presence', {
+        method: 'POST',
+        headers: sbHeaders(),
+        body: JSON.stringify(row),
+      });
+    } catch (e) { /* table may not exist yet */ }
+  }
+
+  async function presenceFetch() {
+    if (!C.SUPABASE_URL || !C.SUPABASE_ANON_KEY) return [];
+    const cutoff = new Date(Date.now() - C.PRESENCE_TTL_MS).toISOString();
+    const url = C.SUPABASE_URL + '/rest/v1/temple_presence?select=pilgrim_id,display_name,sigil,page,last_seen'
+      + '&last_seen=gte.' + encodeURIComponent(cutoff)
+      + '&order=last_seen.desc&limit=48';
+    try {
+      const r = await fetch(url, { headers: { apikey: C.SUPABASE_ANON_KEY, Authorization: 'Bearer ' + C.SUPABASE_ANON_KEY } });
+      if (!r.ok) return [];
+      return await r.json();
+    } catch (e) { return []; }
   }
 
   function initPresence() {
     const countEl = document.getElementById('presence-count');
     const gridEl = document.getElementById('pilgrim-grid');
-    if (!countEl) return;
+    const chamberEl = document.getElementById('presence-chambers');
+    if (!countEl && !gridEl) return;
 
-    function render() {
-      const pilgrims = heartbeat();
-      const list = Object.values(pilgrims);
-      const base = 7;
-      const count = Math.max(base, list.length + base - 1);
+    async function render() {
+      await presencePing();
+      const rows = await presenceFetch();
+      const count = rows.length;
       if (countEl) countEl.textContent = count;
-      const siCount = document.getElementById('si-presence-count');
-      if (siCount) siCount.textContent = count;
       if (gridEl) {
-        gridEl.innerHTML = list.slice(0, 24).map(p =>
-          `<span class="pilgrim-chip"><span class="sigil">${p.sigil}</span>${p.name}</span>`
+        if (!rows.length) {
+          gridEl.innerHTML = '<p style="color:var(--parchment-dim);font-style:italic;text-align:center;">The halls are quiet. You are early.</p>';
+        } else {
+          gridEl.innerHTML = rows.slice(0, 24).map(p =>
+            `<span class="pilgrim-chip" title="${escHtml(p.page || 'temple')}"><span class="sigil">${escHtml(p.sigil || '𓂀')}</span>${escHtml(p.display_name)}</span>`
+          ).join('');
+        }
+      }
+      if (chamberEl && rows.length) {
+        const pages = {};
+        rows.forEach(r => { const pg = r.page || 'temple'; pages[pg] = (pages[pg] || 0) + 1; });
+        chamberEl.innerHTML = Object.keys(pages).sort().map(pg =>
+          `<span class="presence-chamber-chip">${escHtml(pg)} <b>${pages[pg]}</b></span>`
         ).join('');
       }
     }
@@ -369,8 +418,8 @@
     const list = document.getElementById('praise-list');
     if (!list) return;
 
-    const SB_URL = 'https://vyrxqrqfznbpxyzhpmyw.supabase.co';
-    const SB_KEY = 'sb_publishable_dCr2XwJ6ZVP2UYuXwYKmzQ_qcJiBOft';
+    const SB_URL = C.SUPABASE_URL;
+    const SB_KEY = C.SUPABASE_ANON_KEY;
 
     /* Show static seed while we fetch */
     renderPraiseBoard(list, D.praiseBoard);
@@ -393,8 +442,8 @@
     const grid = document.getElementById('meme-db-grid');
     if (!grid) return;
 
-    const SB_URL  = 'https://vyrxqrqfznbpxyzhpmyw.supabase.co';
-    const SB_KEY  = 'sb_publishable_dCr2XwJ6ZVP2UYuXwYKmzQ_qcJiBOft';
+    const SB_URL = C.SUPABASE_URL;
+    const SB_KEY = C.SUPABASE_ANON_KEY;
     const PAGE    = 48;
 
     let activeCat   = 'all';
@@ -496,7 +545,7 @@
             <div class="mc-meta">${esc(String(m.year||''))}${m.creator?' · '+esc(m.creator):''}</div>
             <p class="mc-summary">${esc(m.summary)}</p>
             <div class="mc-kek-row">${kekDots(m.kek)}<span class="kek-lbl">KEK</span></div>
-            ${m.scripture ? `<a class="mc-scripture-link" href="/codex/#${esc(m.id)}" onclick="event.stopPropagation()">📜 read the scripture</a>` : ''}
+            ${(m.scripture || m.lore) ? `<a class="mc-scripture-link" href="/codex/#${esc(m.id)}" onclick="event.stopPropagation()">📜 read the scripture</a>` : ''}
           </div>`;
         div.addEventListener('click', () => openModal(m.id));
         div.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') openModal(m.id); });
@@ -732,103 +781,139 @@
     }
   }
 
-  /* ---- Treasury ---- */
-  async function fetchBalance(address) {
+  /* ---- Treasury (on-chain) ---- */
+  async function rpcCall(method, params) {
+    const r = await fetch(C.RPC, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: method, params: params }),
+    });
+    const d = await r.json();
+    return d.result;
+  }
+
+  async function fetchSolBalance(address) {
     try {
-      const r = await fetch(C.RPC, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'getBalance', params: [address] })
-      });
-      const d = await r.json();
-      return d.result ? d.result.value / 1e9 : null;
+      const v = await rpcCall('getBalance', [address]);
+      return v != null ? v / 1e9 : null;
     } catch (e) { return null; }
   }
 
+  async function fetchTokenBalance(owner, mint) {
+    try {
+      const res = await rpcCall('getTokenAccountsByOwner', [owner, { mint: mint }, { encoding: 'jsonParsed' }]);
+      const accounts = (res && res.value) || [];
+      let total = 0;
+      accounts.forEach(a => {
+        const info = a.account.data.parsed.info;
+        total += parseFloat(info.tokenAmount.uiAmount || 0);
+      });
+      return total;
+    } catch (e) { return null; }
+  }
+
+  async function fetchTxCount(address) {
+    try {
+      const sigs = await rpcCall('getSignaturesForAddress', [address, { limit: 1000 }]);
+      return Array.isArray(sigs) ? sigs.length : 0;
+    } catch (e) { return null; }
+  }
+
+  function fmtNum(n) {
+    if (n == null || isNaN(n)) return '—';
+    if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+    if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+    return n.toLocaleString(undefined, { maximumFractionDigits: 2 });
+  }
+
   async function initTreasury() {
-    const treasEl = document.getElementById('treasury-sol');
-    const burnEl = document.getElementById('burn-total');
-    if (!treasEl && !burnEl) return;
+    const treasSol = document.getElementById('treasury-sol');
+    const treasKek = document.getElementById('treasury-kek');
+    const treasTxs = document.getElementById('treasury-txs');
+    const treasUpdated = document.getElementById('treasury-updated');
+    if (!treasSol && !treasKek) return;
 
-    const burns = load('kek_burns', { total: 0, events: [] });
-    if (burnEl) burnEl.textContent = burns.total.toLocaleString() + ' $KEK';
-
-    if (treasEl && C.TREASURY !== 'TBD_SET_TREASURY_WALLET') {
-      const bal = await fetchBalance(C.TREASURY);
-      treasEl.textContent = bal !== null ? bal.toFixed(4) + ' SOL' : '—';
-    } else if (treasEl) {
-      treasEl.textContent = 'Awaiting consecration';
+    if (C.TREASURY && C.TREASURY !== 'TBD_SET_TREASURY_WALLET') {
+      const [sol, kek, txs] = await Promise.all([
+        fetchSolBalance(C.TREASURY),
+        fetchTokenBalance(C.TREASURY, C.CA),
+        fetchTxCount(C.TREASURY),
+      ]);
+      if (treasSol) treasSol.textContent = sol != null ? sol.toFixed(4) + ' SOL' : '—';
+      if (treasKek) treasKek.textContent = kek != null ? fmtNum(kek) + ' $KEK' : '—';
+      if (treasTxs) treasTxs.textContent = txs != null ? txs + '+' : '—';
+      if (treasUpdated) treasUpdated.textContent = 'Last read: ' + new Date().toLocaleString();
+    } else if (treasSol) {
+      treasSol.textContent = 'Awaiting consecration';
     }
 
     const offerBtn = document.getElementById('offering-btn');
     if (offerBtn) offerBtn.addEventListener('click', () => {
-      const memo = (document.getElementById('offering-memo') || {}).value || 'For the Kek';
-      if (C.TREASURY === 'TBD_SET_TREASURY_WALLET') {
+      if (!C.TREASURY || C.TREASURY === 'TBD_SET_TREASURY_WALLET') {
         if (window.KEK) KEK.toast('Treasury wallet not yet consecrated');
         return;
       }
-      const url = 'https://solana.com/developers/cookbook/transactions/send-sol';
-      window.open('solana:' + C.TREASURY + '?amount=0.01&label=Kekcoin%20Temple&message=' + encodeURIComponent(memo), '_blank');
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(C.TREASURY);
+        if (window.KEK) KEK.toast('Treasury address copied — paste in Phantom');
+      }
+      window.open('https://solscan.io/account/' + C.TREASURY, '_blank', 'noopener');
     });
 
     const burnBtn = document.getElementById('burn-btn');
     if (burnBtn) burnBtn.addEventListener('click', () => {
-      if (window.KEK) KEK.setRitualMode(true, 4);
-      burns.total += Math.floor(Math.random() * 50000) + 10000;
-      burns.events.unshift({ ts: Date.now(), amount: burns.total });
-      store('kek_burns', burns);
-      if (burnEl) burnEl.textContent = burns.total.toLocaleString() + ' $KEK';
+      window.open('https://solscan.io/token/' + C.CA, '_blank', 'noopener');
       const log = document.getElementById('burn-log');
-      if (log) log.innerHTML = '<p>Latest offering recorded in the Canon. The altar burns.</p>';
-      if (window.KEK) KEK.toast('Burn ritual initiated 𓂀');
+      if (log) log.innerHTML = '<p>Community burns are verified on-chain. Coordinate Great Burn rituals in Telegram.</p>';
+      if (window.KEK) KEK.toast('Opening token history on Solscan');
     });
   }
 
-  /* ---- Hodl check ---- */
-  function initHodl() {
-    const btn = document.getElementById('hodl-btn');
-    const result = document.getElementById('hodl-result');
-    if (!btn) return;
+  function hodlTier(amount) {
+    const tiers = C.HODL_TIERS || [];
+    for (let i = 0; i < tiers.length; i++) {
+      if (amount >= tiers[i].min) return tiers[i];
+    }
+    return tiers[tiers.length - 1] || { name: 'Visitor', glyph: '·', blurb: '' };
+  }
 
-    btn.addEventListener('click', async () => {
-      const provider = window.solana || window.phantom?.solana;
-      if (!provider) {
-        if (window.KEK) KEK.toast('Install Phantom to check your relic status');
-        return;
+  async function checkRelicStatus(resultEl, btnEl) {
+    const provider = window.solana || window.phantom?.solana;
+    if (!provider) {
+      if (window.KEK) KEK.toast('Install Phantom to check relic status');
+      window.open('https://phantom.app/', '_blank', 'noopener');
+      return;
+    }
+    if (btnEl) { btnEl.disabled = true; btnEl.textContent = 'Reading the chain…'; }
+    try {
+      const resp = await provider.connect({ onlyIfTrusted: false });
+      const pubkey = resp.publicKey.toString();
+      const amount = await fetchTokenBalance(pubkey, C.CA) || 0;
+      const tier = hodlTier(amount);
+      const pct = C.TOTAL_SUPPLY ? ((amount / C.TOTAL_SUPPLY) * 100).toFixed(4) : '0';
+      if (resultEl) {
+        resultEl.classList.add('show');
+        resultEl.innerHTML =
+          `<div class="hodl-tier">${escHtml(tier.glyph)} <strong>${escHtml(tier.name)}</strong></div>` +
+          `<div class="hodl-stat"><span>Holdings</span><b>${amount.toLocaleString()} $KEK</b></div>` +
+          `<div class="hodl-stat"><span>Share of supply</span><b>${pct}%</b></div>` +
+          `<div class="hodl-stat"><span>Wallet</span><code>${escHtml(pubkey.slice(0, 4))}…${escHtml(pubkey.slice(-4))}</code></div>` +
+          `<p class="hodl-blurb">${escHtml(tier.blurb)}</p>` +
+          `<p class="hodl-note"><em>Read-only check. The Temple never signs transactions.</em></p>`;
       }
-      try {
-        const resp = await provider.connect();
-        const pubkey = resp.publicKey.toString();
-        const r = await fetch(C.RPC, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            jsonrpc: '2.0', id: 1,
-            method: 'getTokenAccountsByOwner',
-            params: [pubkey, { mint: C.CA }, { encoding: 'jsonParsed' }]
-          })
-        });
-        const d = await r.json();
-        const accounts = d.result && d.result.value || [];
-        let amount = 0;
-        accounts.forEach(a => {
-          const info = a.account.data.parsed.info;
-          amount += parseFloat(info.tokenAmount.uiAmount || 0);
-        });
-        let tier = 'Initiate';
-        if (amount >= 1000000) tier = 'High Apostle';
-        else if (amount >= 100000) tier = 'Frog Templar';
-        else if (amount >= 10000) tier = 'Degen Acolyte';
-        else if (amount > 0) tier = 'Pilgrim';
-        if (result) {
-          result.classList.add('show');
-          result.innerHTML = `<strong>Relic Status:</strong> ${tier}<br>
-            <strong>Holdings:</strong> ${amount.toLocaleString()} $KEK<br>
-            <em>The Temple acknowledges your conviction.</em>`;
-        }
-      } catch (e) {
-        if (window.KEK) KEK.toast('Wallet connection declined');
-      }
+    } catch (e) {
+      if (window.KEK) KEK.toast('Wallet connection declined');
+    } finally {
+      if (btnEl) { btnEl.disabled = false; btnEl.textContent = 'Check Relic Status'; }
+    }
+  }
+
+  function initHodl() {
+    document.querySelectorAll('[data-hodl-check]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-hodl-result') || 'hodl-result';
+        checkRelicStatus(document.getElementById(target), btn);
+      });
     });
   }
 
@@ -895,8 +980,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    initSanctumImmersive();
-    initSanctumRoom();
     initPresence();
     initCandles();
     initOracle();
