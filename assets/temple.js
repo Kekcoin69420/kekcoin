@@ -139,12 +139,38 @@
     track.classList.add('running');
   };
 
+  async function fetchPairStats() {
+    const opts = { cache: 'no-store' };
+    const pairUrl = 'https://api.dexscreener.com/latest/dex/pairs/solana/' + C.PAIR;
+    let r = await fetch(pairUrl, opts);
+    if (!r.ok) throw new Error('pair HTTP ' + r.status);
+    let d = await r.json();
+    let p = d.pairs && d.pairs[0] ? d.pairs[0] : (d.pair || null);
+    if (p) return p;
+    const tokenUrl = 'https://api.dexscreener.com/latest/dex/tokens/solana/' + C.CA;
+    r = await fetch(tokenUrl, opts);
+    if (!r.ok) throw new Error('token HTTP ' + r.status);
+    d = await r.json();
+    p = d.pairs && d.pairs[0] ? d.pairs[0] : null;
+    if (!p) throw new Error('no pair data');
+    return p;
+  }
+
+  KEK.initChart = function () {
+    const frame = document.getElementById('dex-chart') || document.querySelector('.chart-frame iframe');
+    if (!frame) return;
+    const src = C.chartEmbed
+      || frame.dataset.src
+      || ((C.SOCIAL && C.SOCIAL.chart) ? C.SOCIAL.chart + '?embed=1&theme=dark&chartOnly=1' : '');
+    if (!src) return;
+    frame.src = src;
+    frame.loading = 'eager';
+    frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+  };
+
   KEK.loadStats = async function () {
     try {
-      const r = await fetch('https://api.dexscreener.com/latest/dex/pairs/solana/' + C.PAIR);
-      const d = await r.json();
-      const p = d.pairs && d.pairs[0] ? d.pairs[0] : (d.pair || null);
-      if (!p) throw 0;
+      const p = await fetchPairStats();
       const price = parseFloat(p.priceUsd);
       const chg = p.priceChange && p.priceChange.h24 != null ? parseFloat(p.priceChange.h24) : null;
       const txns = p.txns && p.txns.h24 ? (p.txns.h24.buys + p.txns.h24.sells) : null;
@@ -280,6 +306,7 @@
     KEK.initNav();
     KEK.initReveal();
     KEK.initRitualMode();
+    KEK.initChart();
     KEK.loadStats();
     setInterval(KEK.loadStats, 30000);
     KEK.buildCoinEdge();

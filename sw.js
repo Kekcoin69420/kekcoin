@@ -1,4 +1,4 @@
-const CACHE = 'kek-temple-v19';
+const CACHE = 'kek-temple-v20';
 const ASSETS = [
   './assets/temple.css',
   './assets/features.css',
@@ -30,6 +30,11 @@ function isHtmlRequest(req) {
 
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
+
+  /* Cross-origin (DexScreener API, Supabase, etc.) — never intercept */
+  try {
+    if (new URL(e.request.url).origin !== self.location.origin) return;
+  } catch (_) { return; }
 
   if (isHtmlRequest(e.request)) {
     e.respondWith(

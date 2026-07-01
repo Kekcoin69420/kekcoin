@@ -352,4 +352,7 @@ footer .ft{font-family:'Cinzel',serif;letter-spacing:3px;color:var(--gold);font-
 .chart-frame{border:1px solid rgba(227,179,74,.32);border-radius:10px;overflow:hidden;
   box-shadow:0 24px 70px rgba(0,0,0,.65),0 0 40px rgba(255,138,61,.08);}
 .chart-frame iframe{display:block;width:100%;height:540px;border:none;background:var(--stone-900);}
+.chart-fallback{margin:0;padding:10px 14px;text-align:center;font-size:13px;background:rgba(0,0,0,.25);border-top:1px solid rgba(227,179,74,.15);}
+.chart-fallback a{color:var(--gold-bright);text-decoration:none;font-family:Cinzel,serif;letter-spacing:.06em;}
+.chart-fallback a:hover{text-decoration:underline;}
 @media(max-width:640px){.chart-frame iframe{height:380px;}}

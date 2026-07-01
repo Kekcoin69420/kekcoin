@@ -17,6 +17,7 @@ window.KEK_CONFIG = {
     { min: 1, name: 'Initiate', glyph: '𓁹', blurb: 'The Temple sees you. Every journey starts with one hold.' },
     { min: 0, name: 'Visitor', glyph: '·', blurb: 'No $KEK detected in this wallet — yet.' }
   ],
+  chartEmbed: 'https://dexscreener.com/solana/cbw8ozuhbjsbmiggihc5lh5g7nqegxvtz1ikvjh1hbt9?embed=1&theme=dark&chartOnly=1',
   SOCIAL: {
     twitter: 'https://x.com/kekcoin69420',
     telegram: 'https://t.me/kekcoincto_tg',
