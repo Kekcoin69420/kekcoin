@@ -72,6 +72,15 @@
 .entry-pager button{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .7rem;border:1px solid rgba(227,179,74,.25);border-radius:4px;background:rgba(0,0,0,.25);color:var(--parchment-dim);cursor:pointer}
 .entry-pager button:disabled{opacity:.35;cursor:default}
 
+.codex-history .codex-block.lore{border-left:3px solid var(--gold)}
+.codex-nav-link.story{font-size:.88rem}
+.codex-witnesses{margin:1.4rem 0 0;padding-top:1rem;border-top:1px solid rgba(227,179,74,.18)}
+.codex-witnesses h4{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin:0 0 .6rem}
+.codex-witness-list{display:flex;flex-wrap:wrap;gap:.4rem}
+.codex-witness-link{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.08em;padding:.25rem .6rem;border:1px solid rgba(227,179,74,.25);border-radius:4px;color:var(--parchment-dim);text-decoration:none;cursor:pointer}
+.codex-witness-link:hover{color:var(--gold-bright);border-color:var(--gold)}
+.codex-crumb{margin:0 0 1rem;font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase}
+.codex-crumb a{color:var(--gold-deep)}
 .codex-loading,.codex-error{text-align:center;padding:3rem 1rem;color:var(--parchment-dim);font-style:italic}
 .codex-menu-btn{display:none}
 @media(max-width:900px){
@@ -89,7 +98,7 @@
 </head>
 <body>
 <div id="temple-nav"></div>
-<button class="codex-menu-btn" id="codex-menu-btn" type="button">☰ RELICS</button>
+<button class="codex-menu-btn" id="codex-menu-btn" type="button">☰ CODEX</button>
 <div class="codex-scrim" id="codex-scrim"></div>
 
 <div class="codex-wrap">
@@ -102,7 +111,7 @@
 
   <div class="codex-grid">
     <nav class="codex-side" id="codex-side">
-      <input type="search" id="codex-search" placeholder="Search relics…" autocomplete="off" />
+      <input type="search" id="codex-search" placeholder="Search codex…" autocomplete="off" />
       <div id="codex-nav"></div>
     </nav>
     <main class="codex-body" id="codex-body">
@@ -115,6 +124,7 @@
 
 <script src="../assets/config.js"></script>
 <script src="../assets/temple.js"></script>
+<script src="../assets/codex_history.js"></script>
 <script>
 (function () {
   'use strict';
@@ -134,12 +144,14 @@
   ];
   var CAT = { frog: 'KEK/Frog', classic: 'Classic', wojak: 'Wojak', reaction: 'Reaction', crypto: 'Crypto', '4chan': '4chan', modern: 'Modern' };
 
+  var HISTORY = window.CODEX_HISTORY || [];
   var body = document.getElementById('codex-body');
   var navBox = document.getElementById('codex-nav');
   var search = document.getElementById('codex-search');
   var side = document.getElementById('codex-side');
   var rows = [];
   var order = [];
+  var rowMap = {};
 
   function esc(s) {
     return String(s || '').replace(/[&<>"']/g, function (c) {
@@ -159,6 +171,47 @@
     return '<div class="codex-block ' + cls + '"><h4>' + title + '</h4>' + paras(text.trim(), drop) + '</div>';
   }
 
+  function chapterLabel(idx) {
+    if (idx === 0) return 'prologue';
+    var roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+    return roman[idx - 1] || String(idx);
+  }
+
+  function historyHtml(ch, idx) {
+    var prev = idx > 0 ? HISTORY[idx - 1] : null;
+    var next = idx < HISTORY.length - 1 ? HISTORY[idx + 1] : null;
+    var witnessHtml = '';
+    if (ch.witnesses && ch.witnesses.length) {
+      var links = ch.witnesses.map(function (wid) {
+        var r = rowMap[wid];
+        if (!r) return '';
+        return '<a class="codex-witness-link" href="#' + esc(wid) + '" data-id="' + esc(wid) + '">' + esc(r.title) + '</a>';
+      }).filter(Boolean);
+      if (links.length) {
+        witnessHtml = '<div class="codex-witnesses"><h4>Witness Relics</h4><div class="codex-witness-list">' + links.join('') + '</div></div>';
+      }
+    }
+    return '<article class="codex-entry codex-history" id="' + esc(ch.id) + '">' +
+      '<div class="entry-top">' +
+        '<div class="entry-img"><span class="glyph">𓂀</span></div>' +
+        '<div>' +
+          '<div class="entry-eyebrow">chapter ' + chapterLabel(idx) + ' · the great story</div>' +
+          '<h2 class="entry-title">' + esc(ch.title) + '</h2>' +
+          '<div class="entry-chips">' + (ch.era ? '<span>' + esc(ch.era) + '</span>' : '') + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="codex-block lore">' + paras(ch.body, true) + '</div>' +
+      witnessHtml +
+      '<div class="entry-foot">' +
+        '<div><a href="#history">the great story</a></div>' +
+        '<div class="entry-pager">' +
+          '<button type="button" data-goto="' + (prev ? esc(prev.id) : '') + '" ' + (prev ? '' : 'disabled') + '>← prior</button>' +
+          '<button type="button" data-goto="' + (next ? esc(next.id) : '') + '" ' + (next ? '' : 'disabled') + '>next →</button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
   function entryHtml(r, idx) {
     var prev = idx > 0 ? order[idx - 1] : null;
     var next = idx < order.length - 1 ? order[idx + 1] : null;
@@ -167,6 +220,7 @@
       : '<span class="glyph">' + esc(r.icon || '𓂀') + '</span>';
     var tags = (r.tags || []).filter(Boolean);
     return '<article class="codex-entry" id="' + esc(r.id) + '">' +
+      '<p class="codex-crumb"><a href="#history">← The Great Story</a></p>' +
       '<div class="entry-top">' +
         '<div class="entry-img">' + img + '</div>' +
         '<div>' +
@@ -207,27 +261,39 @@
       el.classList.toggle('show', on);
       if (on) found = true;
     });
-    if (!found && entries[0]) {
-      id = entries[0].id;
-      entries[0].classList.add('show');
+    if (!found) {
+      var fallback = document.getElementById('history') || entries[0];
+      if (fallback) {
+        id = fallback.id;
+        fallback.classList.add('show');
+      }
     }
     links.forEach(function (l) { l.classList.toggle('active', l.dataset.id === id); });
-    var pre = document.getElementById('codex-preface');
-    if (pre) pre.style.display = id ? 'none' : 'block';
     if (history.replaceState) history.replaceState(null, '', '#' + id);
     closeSide();
   }
 
   function render() {
     try {
+      rowMap = {};
+      rows.forEach(function (r) { rowMap[r.id] = r; });
+
       document.getElementById('codex-stats').textContent =
-        rows.length + ' relics inscribed · ' + rows.filter(function (r) { return r.img; }).length + ' with images';
+        HISTORY.length + ' chapters · ' + rows.length + ' relics inscribed · ' +
+        rows.filter(function (r) { return r.img; }).length + ' with images';
 
       var used = {};
       var navHtml = '';
-      var bodyHtml = '<div class="codex-preface" id="codex-preface">' +
-        '<p class="lead">The Codex is the Meme Bible — Temple lore, historical record, and scripture for every relic in the archive.</p>' +
-        '<p style="color:var(--parchment-dim);margin-top:.6rem">Select a relic from the sidebar. Each entry shows the witness image, temple interpretation, origin notes, and canon text.</p></div>';
+      var bodyHtml = '';
+
+      if (HISTORY.length) {
+        navHtml += '<span class="codex-nav-title">The Great Story (' + HISTORY.length + ')</span>';
+        HISTORY.forEach(function (ch, i) {
+          navHtml += '<a class="codex-nav-link story" href="#' + esc(ch.id) + '" data-id="' + esc(ch.id) + '" data-q="' +
+            esc((ch.title + ' ' + (ch.era || '') + ' great story history').toLowerCase()) + '">' + esc(ch.title) + '</a>';
+          bodyHtml += historyHtml(ch, i);
+        });
+      }
 
       GROUPS.forEach(function (g) {
         var cat = g[0], label = g[1];
@@ -250,7 +316,7 @@
       navBox.innerHTML = navHtml;
       body.innerHTML = bodyHtml;
 
-      show((location.hash || '').replace('#', '') || (order[0] && order[0].id));
+      show((location.hash || '').replace('#', '') || 'history');
     } catch (err) {
       body.innerHTML = '<div class="codex-error">Render error: ' + esc(err.message) + '</div>';
     }
@@ -265,6 +331,8 @@
   document.addEventListener('click', function (e) {
     var link = e.target.closest('.codex-nav-link');
     if (link) { e.preventDefault(); show(link.dataset.id); return; }
+    var wit = e.target.closest('.codex-witness-link');
+    if (wit) { e.preventDefault(); show(wit.dataset.id); return; }
     var btn = e.target.closest('[data-goto]');
     if (btn && btn.dataset.goto) { e.preventDefault(); show(btn.dataset.goto); }
   });
@@ -273,6 +341,15 @@
     var q = search.value.trim().toLowerCase();
     side.querySelectorAll('.codex-nav-link').forEach(function (l) {
       l.classList.toggle('hidden', q && l.dataset.q.indexOf(q) === -1 && l.dataset.id.indexOf(q) === -1);
+    });
+    side.querySelectorAll('.codex-nav-title').forEach(function (t) {
+      var next = t.nextElementSibling;
+      var any = false;
+      while (next && !next.classList.contains('codex-nav-title')) {
+        if (next.classList.contains('codex-nav-link') && !next.classList.contains('hidden')) any = true;
+        next = next.nextElementSibling;
+      }
+      t.classList.toggle('hidden', q && !any);
     });
   });
 

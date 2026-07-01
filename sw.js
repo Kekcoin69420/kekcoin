@@ -1,4 +1,4 @@
-const CACHE = 'kek-temple-v10';
+const CACHE = 'kek-temple-v11';
 const ASSETS = [
   './assets/temple.css',
   './assets/features.css',
@@ -6,6 +6,7 @@ const ASSETS = [
   './assets/data.js',
   './assets/temple.js',
   './assets/features.js',
+  './assets/codex_history.js',
   './manifest.json',
   './favicon.png',
   './kek-banner.jpg'
